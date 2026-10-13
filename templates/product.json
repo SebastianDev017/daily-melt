@@ -56,7 +56,7 @@
             "dm_temp_gallery": true,
             "dm_slots": 7,
             "dm_captions": "Main: Daily Melt package with drink and frother on white background\nAngle 2: % stat of increase benefits\nAngle 3: Ingredient label / Supplement Facts\nAngle 4: Lifestyle shot (person enjoying)\nAngle 5: Before & after\nAngle 6: Delicious drink shot with benefits\nAngle 7: Subscription gifts",
-            "padding-block-start": 10,
+            "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
