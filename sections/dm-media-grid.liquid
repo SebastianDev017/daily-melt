@@ -1,0 +1,317 @@
+{%- comment -%}
+  Daily Melt — content panel + image grid (1–4 images). Panel content is built with native blocks
+  (text, button) plus the DM checklist. Used for the product description on the PDP.
+{%- endcomment -%}
+
+{%- liquid
+  assign ss = section.settings
+  assign image_count = ss.image_count
+-%}
+
+<div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
+<div
+  class="dm-media-grid section section--page-width dm-media-grid--{{ ss.panel_style }} dm-media-grid--content-{{ ss.content_position }} dm-media-grid--mobile-{{ ss.mobile_order }} dm-media-grid--count-{{ image_count }}"
+  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-radius: {{ ss.radius }}px;{% if ss.panel_background != blank %} --dm-panel-bg: {{ ss.panel_background }};{% endif %}"
+>
+  <div class="dm-media-grid__inner">
+    <div
+      class="dm-media-grid__panel"
+      {% if ss.panel_text_color != blank %}
+        style="--color-foreground: {{ ss.panel_text_color }}; --color-foreground-rgb: {{ ss.panel_text_color.rgb }}; color: {{ ss.panel_text_color }};"
+      {% endif %}
+    >
+      <div class="dm-media-grid__content">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+    <div class="dm-media-grid__media">
+      {%- for i in (1..image_count) -%}
+        {%- liquid
+          assign key = 'image_' | append: i
+          assign image = ss[key]
+          assign placeholder_names = 'lifestyle-1,lifestyle-2,image,product-1' | split: ','
+          assign placeholder_name = placeholder_names[forloop.index0]
+        -%}
+        <div class="dm-media-grid__item">
+          {%- if image != blank -%}
+            {{ image | image_url: width: 1400 | image_tag: widths: '400, 600, 800, 1000, 1400', sizes: '(min-width: 750px) 25vw, 50vw', loading: 'lazy', class: 'dm-media-grid__image' }}
+          {%- else -%}
+            {{ placeholder_name | placeholder_svg_tag: 'dm-media-grid__image dm-media-grid__image--placeholder' }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .dm-media-grid {
+    padding-block: var(--dm-pt) var(--dm-pb);
+  }
+
+  .dm-media-grid__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dm-media-grid__panel {
+    display: flex;
+    align-items: center;
+    padding: 36px 24px;
+    border-radius: var(--dm-radius);
+  }
+
+  .dm-media-grid--panel .dm-media-grid__panel {
+    background: var(--dm-panel-bg, transparent);
+  }
+
+  .dm-media-grid--plain .dm-media-grid__panel {
+    padding-inline: 0;
+  }
+
+  .dm-media-grid__content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 34rem;
+  }
+
+  .dm-media-grid__content .button,
+  .dm-media-grid__content .button-secondary {
+    align-self: flex-start;
+  }
+
+  .dm-media-grid__media {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .dm-media-grid--count-1 .dm-media-grid__media {
+    grid-template-columns: 1fr;
+  }
+
+  .dm-media-grid--count-2 .dm-media-grid__media {
+    grid-template-columns: 1fr;
+  }
+
+  .dm-media-grid--count-3 .dm-media-grid__item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .dm-media-grid__item {
+    position: relative;
+    min-height: 180px;
+    overflow: hidden;
+    border-radius: var(--dm-radius);
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .dm-media-grid--count-1 .dm-media-grid__item {
+    aspect-ratio: 4 / 5;
+  }
+
+  .dm-media-grid--count-4 .dm-media-grid__item,
+  .dm-media-grid--count-3 .dm-media-grid__item:not(:first-child) {
+    aspect-ratio: 1;
+  }
+
+  .dm-media-grid__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dm-media-grid__image--placeholder {
+    fill: rgb(var(--color-foreground-rgb) / 0.3);
+  }
+
+  .dm-media-grid--mobile-media .dm-media-grid__media {
+    order: -1;
+  }
+
+  @media screen and (min-width: 750px) {
+    .dm-media-grid__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .dm-media-grid--mobile-media .dm-media-grid__media {
+      order: 0;
+    }
+
+    .dm-media-grid--content-right .dm-media-grid__panel {
+      order: 2;
+    }
+
+    .dm-media-grid__panel {
+      padding: 56px 48px;
+    }
+
+    .dm-media-grid--plain .dm-media-grid__panel {
+      padding-inline: 0 32px;
+    }
+
+    .dm-media-grid--count-1 .dm-media-grid__item,
+    .dm-media-grid--count-2 .dm-media-grid__item {
+      aspect-ratio: auto;
+      min-height: 280px;
+    }
+
+    .dm-media-grid--count-4 .dm-media-grid__item,
+    .dm-media-grid--count-3 .dm-media-grid__item:not(:first-child) {
+      aspect-ratio: auto;
+      min-height: 240px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Content + images",
+  "tag": "section",
+  "class": "dm-section",
+  "blocks": [
+    { "type": "text" },
+    { "type": "button" },
+    { "type": "dm-checklist" },
+    { "type": "dm-rating" },
+    { "type": "spacer" },
+    { "type": "@app" }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position (desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_order",
+      "label": "Mobile order",
+      "options": [
+        { "value": "content", "label": "Content first" },
+        { "value": "media", "label": "Images first" }
+      ],
+      "default": "content"
+    },
+    {
+      "type": "select",
+      "id": "panel_style",
+      "label": "Content panel",
+      "options": [
+        { "value": "panel", "label": "Panel" },
+        { "value": "plain", "label": "No panel" }
+      ],
+      "default": "panel"
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Panel background",
+      "default": "{{ settings.color_palette.cream_light }}",
+      "visible_if": "{{ section.settings.panel_style == 'panel' }}"
+    },
+    {
+      "type": "color",
+      "id": "panel_text_color",
+      "label": "Panel text color",
+      "visible_if": "{{ section.settings.panel_style == 'panel' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_count",
+      "label": "Number of images",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Section background"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Content + images",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Heading</h2>",
+            "type_preset": "h2"
+          }
+        },
+        "body": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share the story behind the product.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "body"]
+    }
+  ]
+}
+{% endschema %}
