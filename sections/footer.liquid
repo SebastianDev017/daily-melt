@@ -98,6 +98,11 @@
     margin-block-start: 12px;
   }
 
+  .footer-content--dm-grid input::placeholder {
+    color: color-mix(in srgb, var(--color-input-text, var(--color-foreground)) 85%, transparent);
+    opacity: 1;
+  }
+
   .footer-content--dm-grid :is(.menu__item, .text-block.paragraph) {
     font-size: clamp(1rem, 1.2vw, 1.1875rem);
     line-height: 1.5;
