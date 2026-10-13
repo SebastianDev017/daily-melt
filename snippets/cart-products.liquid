@@ -241,6 +241,16 @@
                     {%- endif -%}
                   </div>
 
+                  {%- liquid
+                    assign plan_saving = 0
+                    assign plan_compare = 0
+                    if item.selling_plan_allocation and settings.dm_cart_show_savings
+                      assign plan_compare = item.selling_plan_allocation.compare_at_price
+                      if plan_compare > item.original_price
+                        assign plan_saving = plan_compare | minus: item.original_price
+                      endif
+                    endif
+                  -%}
                   <div class="cart-items__variants-wrapper">
                     {%- if item.product.has_only_default_variant == false
                       or item.properties.size != 0
@@ -295,19 +305,7 @@
                           <span class="cart-items__plan-icon" aria-hidden="true">{% render 'dm-icon', icon: 'repeat' %}</span>
                           <span>{{ item.selling_plan_allocation.selling_plan.name }}</span>
                         </p>
-                        {%- liquid
-                          assign plan_compare = item.selling_plan_allocation.compare_at_price
-                          assign plan_saving = 0
-                          if plan_compare > item.original_price
-                            assign plan_saving = plan_compare | minus: item.original_price
-                          endif
-                        -%}
-                        {%- if settings.dm_cart_show_savings and plan_saving > 0 -%}
-                          <p class="cart-items__plan-saving">
-                            <s>{{ plan_compare | money }}</s>
-                            {{ 'content.price_sale' | t }} · {{ plan_saving | money }}
-                          </p>
-                        {%- endif -%}
+
                       {%- endif -%}
 
                       {%- if item.line_level_discount_allocations.size > 0 -%}
@@ -326,6 +324,16 @@
                   </div>
 
                   <div class="cart-items__unit-price-wrapper">
+                    {%- if plan_saving > 0 -%}
+                    <div class="cart-items__plan-price">
+                      <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
+                      <s class="compare-at-price"><bdi>{{ plan_compare | money }}</bdi></s>
+                      <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
+                      <span class="cart-items__plan-price-now"><bdi>{{ item.original_price | money }}</bdi></span>
+                      {%- assign plan_saving_money = plan_saving | money -%}
+                      <span class="cart-items__plan-saving">{{ 'dm.cart.save' | t: amount: plan_saving_money }}</span>
+                    </div>
+                    {%- else -%}
                     <div>
                       {% if item.original_price != item.final_price %}
                         <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
@@ -359,6 +367,7 @@
                         {% endif %}
                       {% endif %}
                     </div>
+                    {%- endif -%}
                   </div>
                 </td>
                 <td
@@ -492,15 +501,24 @@
     height: 100%;
   }
 
-  .cart-items__plan-saving {
-    margin: 2px 0 0;
-    font-size: 0.8125rem;
-    color: var(--dm-cart-accent, currentColor);
+  .cart-items__plan-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.45em;
   }
 
-  .cart-items__plan-saving s {
-    margin-inline-end: 0.35em;
+  .cart-items__plan-price .compare-at-price {
     color: rgb(var(--color-foreground-rgb) / 0.6);
+  }
+
+  .cart-items__plan-price-now {
+    color: var(--color-foreground);
+  }
+
+  .cart-items__plan-saving {
+    font-weight: 600;
+    color: var(--dm-cart-accent, currentColor);
   }
 
   .cart-items__empty-text {

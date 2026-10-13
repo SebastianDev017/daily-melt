@@ -9,6 +9,9 @@
 {% render 'cart-typography-styles' %}
 
 <div class="cart-totals">
+  {%- if section_id != 'cart-drawer-section' -%}
+    {% render 'dm-cart-trust', class: 'cart-totals__trust' %}
+  {%- endif -%}
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
     {%- if cart.cart_level_discount_applications.size > 0 -%}
@@ -222,10 +225,6 @@
     endif
   -%}
 
-  {%- if section_id != 'cart-drawer-section' -%}
-    {% render 'dm-cart-trust', class: 'cart-totals__trust' %}
-  {%- endif -%}
-
   <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
     {%- if settings.dm_cart_shipping_label != blank -%}
       <span class="cart-totals__item cart-totals__shipping">
@@ -297,8 +296,19 @@
     gap: 1rem;
   }
 
-  .cart-totals__trust {
+  .cart-totals .cart-totals__trust {
     margin-block-end: var(--margin-md, 16px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .cart-totals .cart-totals__trust {
+      grid-auto-flow: row;
+    }
+
+    .cart-totals .cart-totals__trust .dm-cart-trust__item + .dm-cart-trust__item {
+      border-inline-start: 0;
+      border-block-start: 1px solid rgb(var(--color-foreground-rgb) / 0.3);
+    }
   }
 
   .cart-actions {

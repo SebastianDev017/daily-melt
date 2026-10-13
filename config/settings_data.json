@@ -147,7 +147,7 @@
     },
     "dm_cart_title": "Your Bag",
     "dm_cart_trust": "Free shipping on subscriptions\n60-Day Money-Back Guarantee",
-    "dm_cart_shipping_label": "Shipping",
+    "dm_cart_shipping_label": "",
     "dm_cart_shipping_value": "Calculated at checkout",
     "dm_cart_empty_text": "Your daily chocolate ritual is one click away.",
     "dm_cart_empty_button": "Shop Daily Melt",

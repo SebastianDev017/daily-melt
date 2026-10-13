@@ -399,6 +399,9 @@
     },
     "tabs": {
       "label": "Ingredients"
+    },
+    "cart": {
+      "save": "Save {{ amount }}"
     }
   }
 }
