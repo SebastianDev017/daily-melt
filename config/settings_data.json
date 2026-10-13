@@ -144,7 +144,18 @@
       "cream_light": "#F3ECDD",
       "white": "#FFFFFF",
       "caramel": "#E7B98C"
-    }
+    },
+    "dm_cart_title": "Your Bag",
+    "dm_cart_trust": "Free shipping on subscriptions\n60-Day Money-Back Guarantee",
+    "dm_cart_shipping_label": "Shipping",
+    "dm_cart_shipping_value": "Calculated at checkout",
+    "dm_cart_empty_text": "Your daily chocolate ritual is one click away.",
+    "dm_cart_empty_button": "Shop Daily Melt",
+    "dm_cart_show_savings": true,
+    "dm_cart_accent": "{{ settings.color_palette.accent }}",
+    "empty_cart_button_link": "/products/daily-melt",
+    "product_title_case": "uppercase",
+    "show_accelerated_checkout_buttons": false
   },
   "presets": {
     "Horizon": {

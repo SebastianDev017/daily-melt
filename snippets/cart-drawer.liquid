@@ -94,6 +94,7 @@
               {% endif %}
             {% endcapture %}
             {% assign cart_drawer_title = 'content.cart_title' | t %}
+            {% if settings.dm_cart_title != blank %}{% assign cart_drawer_title = settings.dm_cart_title %}{% endif %}
             {% render 'theme-drawer-header',
               title: cart_drawer_title,
               drawer_id: 'cart-drawer',
@@ -110,6 +111,7 @@
                 class="cart-drawer__content"
                 aria-label="{{ 'accessibility.cart' | t }}"
               >
+                {% render 'dm-cart-trust', class: 'cart-drawer__trust' %}
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>

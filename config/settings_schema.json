@@ -1625,6 +1625,56 @@
         "step": 1,
         "unit": "px",
         "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Daily Melt cart"
+      },
+      {
+        "type": "text",
+        "id": "dm_cart_title",
+        "label": "Cart title",
+        "info": "Drawer title. Leave empty for the default."
+      },
+      {
+        "type": "textarea",
+        "id": "dm_cart_trust",
+        "label": "Trust items",
+        "info": "One per line, shown under the cart title (drawer) and above the totals (cart page)."
+      },
+      {
+        "type": "text",
+        "id": "dm_cart_shipping_label",
+        "label": "Shipping row label"
+      },
+      {
+        "type": "text",
+        "id": "dm_cart_shipping_value",
+        "label": "Shipping row value",
+        "info": "Leave the label empty to hide the row."
+      },
+      {
+        "type": "text",
+        "id": "dm_cart_empty_text",
+        "label": "Empty cart text"
+      },
+      {
+        "type": "text",
+        "id": "dm_cart_empty_button",
+        "label": "Empty cart button label",
+        "info": "Leave empty for the default label."
+      },
+      {
+        "type": "checkbox",
+        "id": "dm_cart_show_savings",
+        "label": "Show subscription savings on cart lines",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "dm_cart_accent",
+        "label": "Cart accent color",
+        "default": "{{ settings.color_palette.accent }}"
       }
     ]
   },

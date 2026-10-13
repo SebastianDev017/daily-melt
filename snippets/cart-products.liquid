@@ -64,12 +64,21 @@
       </p>
     {%- endif -%}
 
+    {%- if settings.dm_cart_empty_text != blank -%}
+      <p class="cart-items__empty-text">{{ settings.dm_cart_empty_text }}</p>
+    {%- endif -%}
+    {%- liquid
+      assign empty_button_label = 'actions.continue_shopping' | t
+      if settings.dm_cart_empty_button != blank
+        assign empty_button_label = settings.dm_cart_empty_button
+      endif
+    -%}
     <a
       class="button cart-items__empty-button"
       href="{{ settings.empty_cart_button_link | default: routes.all_products_collection_url }}"
     >
       <span class="button-text">
-        {{ 'actions.continue_shopping' | t }}
+        {{ empty_button_label }}
       </span>
     </a>
   {%- else -%}
@@ -241,7 +250,7 @@
                         <dl class="cart-items__variants">
                           {%- for option in item.options_with_values -%}
                             <div class="cart-items__variant">
-                              <dt class="visually-hidden">{{ option.name }}:</dt>
+                              <dt class="cart-items__option-name">{{ option.name }}:</dt>
                               <dd>
                                 {{- option.value -}}
                                 {%- if forloop.last != true %},&nbsp;{% endif -%}
@@ -282,7 +291,23 @@
                       {%- endif -%}
 
                       {%- if item.selling_plan_allocation -%}
-                        <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                        <p class="cart-items__plan">
+                          <span class="cart-items__plan-icon" aria-hidden="true">{% render 'dm-icon', icon: 'repeat' %}</span>
+                          <span>{{ item.selling_plan_allocation.selling_plan.name }}</span>
+                        </p>
+                        {%- liquid
+                          assign plan_compare = item.selling_plan_allocation.compare_at_price
+                          assign plan_saving = 0
+                          if plan_compare > item.original_price
+                            assign plan_saving = plan_compare | minus: item.original_price
+                          endif
+                        -%}
+                        {%- if settings.dm_cart_show_savings and plan_saving > 0 -%}
+                          <p class="cart-items__plan-saving">
+                            <s>{{ plan_compare | money }}</s>
+                            {{ 'content.price_sale' | t }} · {{ plan_saving | money }}
+                          </p>
+                        {%- endif -%}
                       {%- endif -%}
 
                       {%- if item.line_level_discount_allocations.size > 0 -%}
@@ -441,6 +466,48 @@
 </div>
 
 {% stylesheet %}
+  /* Daily Melt cart lines */
+  .cart-items__option-name {
+    display: inline;
+    margin-inline-end: 0.25em;
+  }
+
+  .cart-items__plan {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 0 0;
+    color: var(--dm-cart-accent, currentColor);
+    font-weight: 600;
+  }
+
+  .cart-items__plan-icon {
+    display: inline-flex;
+    width: 15px;
+    height: 15px;
+  }
+
+  .cart-items__plan-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .cart-items__plan-saving {
+    margin: 2px 0 0;
+    font-size: 0.8125rem;
+    color: var(--dm-cart-accent, currentColor);
+  }
+
+  .cart-items__plan-saving s {
+    margin-inline-end: 0.35em;
+    color: rgb(var(--color-foreground-rgb) / 0.6);
+  }
+
+  .cart-items__empty-text {
+    margin: 0 0 var(--margin-md, 16px);
+    text-align: center;
+  }
+
   .cart-items {
     --cart-item-media-width-min: 2.5rem;
     --cart-item-media-width-max: 7.5rem;

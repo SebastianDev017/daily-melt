@@ -1,0 +1,63 @@
+{%- doc -%}
+  Daily Melt — cart trust strip (Theme settings > Cart > Trust items). One item per line; the first
+  item gets a truck icon, the rest a shield.
+
+  @param {string} [class] - Extra class
+
+  @example
+  {% render 'dm-cart-trust' %}
+{%- enddoc -%}
+
+{%- assign items = settings.dm_cart_trust | newline_to_br | split: '<br />' -%}
+{%- if settings.dm_cart_trust != blank -%}
+  <ul class="dm-cart-trust {{ class }}" role="list">
+    {%- for item in items -%}
+      {%- assign label = item | strip -%}
+      {%- if label != blank -%}
+        <li class="dm-cart-trust__item">
+          <span class="dm-cart-trust__icon" aria-hidden="true">
+            {%- if forloop.first -%}{% render 'dm-icon', icon: 'truck' %}{%- else -%}{% render 'dm-icon', icon: 'shield' %}{%- endif -%}
+          </span>
+          <span>{{ label }}</span>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+{% stylesheet %}
+  .dm-cart-trust {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block: 1px solid rgb(var(--color-foreground-rgb) / 0.3);
+  }
+
+  .dm-cart-trust__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+  }
+
+  .dm-cart-trust__item + .dm-cart-trust__item {
+    border-inline-start: 1px solid rgb(var(--color-foreground-rgb) / 0.3);
+  }
+
+  .dm-cart-trust__icon {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    color: var(--dm-cart-accent, currentColor);
+  }
+
+  .dm-cart-trust__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+{% endstylesheet %}

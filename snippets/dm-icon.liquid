@@ -1,7 +1,7 @@
 {%- doc -%}
   Daily Melt — inline SVG icons (stroke/fill use currentColor).
 
-  @param {string} icon - circle_check | check | arrow | return | dot | star | lock | plus | chevron_down | shield | leaf | flask | badge
+  @param {string} icon - circle_check | check | arrow | return | dot | star | lock | plus | chevron_down | shield | leaf | flask | badge | truck | repeat
   @param {string} [class] - Optional class on the svg
 
   @example
@@ -35,4 +35,8 @@
     <svg class="{{ class }}" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M9.5 3h5M10.3 3v6.2L4.8 18.4A1.8 1.8 0 0 0 6.4 21h11.2a1.8 1.8 0 0 0 1.6-2.6l-5.5-9.2V3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.2 15h9.6" stroke="currentColor" stroke-width="1.5"/></svg>
   {%- when 'badge' -%}
     <svg class="{{ class }}" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="10" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M8.6 15.4 7.5 21.5l4.5-2.3 4.5 2.3-1.1-6.1" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.4 10.1l1.8 1.8 3.5-3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'truck' -%}
+    <svg class="{{ class }}" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3.5 3.5v2.5h-7.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="6.5" cy="17" r="1.8" fill="var(--color-background, #fff)" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="17" r="1.8" fill="var(--color-background, #fff)" stroke="currentColor" stroke-width="1.5"/></svg>
+  {%- when 'repeat' -%}
+    <svg class="{{ class }}" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 8.5a6 6 0 0 1 10.3-3.6L16 6.6M16 3v3.6h-3.6M16 11.5a6 6 0 0 1-10.3 3.6L4 13.4M4 17v-3.6h3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 {%- endcase -%}
