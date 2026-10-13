@@ -646,10 +646,11 @@
         "columns": 3,
         "button_label": "Get Your Daily Melt",
         "button_link": "",
-        "background": "linear-gradient(180deg, {{ settings.color_palette.cream_light }} 0%, {{ settings.color_palette.caramel }} 100%)",
         "accent_color": "{{ settings.color_palette.accent }}",
         "padding_top": 72,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "background_start": "{{ settings.color_palette.cream_light }}",
+        "background_end": "{{ settings.color_palette.caramel }}"
       },
       "blocks": {
         "step_1": {

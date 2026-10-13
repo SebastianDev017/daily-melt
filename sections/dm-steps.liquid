@@ -5,7 +5,15 @@
 
 {%- assign ss = section.settings -%}
 
-<div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
+{%- liquid
+  assign section_bg = ''
+  if ss.background_start != blank and ss.background_end != blank
+    assign section_bg = 'linear-gradient(180deg, ' | append: ss.background_start | append: ' 0%, ' | append: ss.background_end | append: ' 100%)'
+  elsif ss.background_start != blank
+    assign section_bg = ss.background_start
+  endif
+-%}
+<div class="section-background"{% if section_bg != blank %} style="background: {{ section_bg }};"{% endif %}></div>
 <div
   class="dm-steps section section--page-width"
   style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-cols: {{ ss.columns }};{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
@@ -133,10 +141,17 @@
       "info": "Leave empty to scroll to the purchase options."
     },
     {
-      "type": "color_background",
-      "id": "background",
-      "label": "Background",
-      "default": "linear-gradient(180deg, {{ settings.color_palette.cream_light }} 0%, {{ settings.color_palette.caramel }} 100%)"
+      "type": "color",
+      "id": "background_start",
+      "label": "Background (top)",
+      "default": "{{ settings.color_palette.cream_light }}"
+    },
+    {
+      "type": "color",
+      "id": "background_end",
+      "label": "Background (bottom)",
+      "info": "Use the same color as the top for a solid background.",
+      "default": "{{ settings.color_palette.caramel }}"
     },
     {
       "type": "color",
