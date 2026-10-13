@@ -1,0 +1,153 @@
+{%- comment -%}
+  Daily Melt — trust & certifications: heading, copy and a row of badges.
+{%- endcomment -%}
+
+{%- assign ss = section.settings -%}
+
+<div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
+<div
+  class="dm-badges section section--page-width"
+  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-accent: {{ ss.accent_color }};{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
+>
+  <div class="dm-badges__inner">
+    {%- if ss.heading != blank or ss.text != blank -%}
+      <header class="dm-badges__header">
+        {%- if ss.heading != blank -%}
+          <h2 class="dm-badges__heading h2">{{ ss.heading }}</h2>
+        {%- endif -%}
+        {%- if ss.text != blank -%}
+          <div class="dm-badges__text">{{ ss.text }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+    <ul class="dm-badges__list" role="list">
+      {% content_for 'blocks' %}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .dm-badges {
+    padding-block: var(--dm-pt) var(--dm-pb);
+  }
+
+  .dm-badges__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .dm-badges__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .dm-badges__heading {
+    margin: 0;
+  }
+
+  .dm-badges__text {
+    max-width: 44rem;
+  }
+
+  .dm-badges__text p {
+    margin: 0;
+  }
+
+  .dm-badges__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .dm-badges__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px 56px;
+    }
+
+    .dm-badges__list > * {
+      flex: 0 0 140px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Badges",
+  "tag": "section",
+  "class": "dm-section",
+  "blocks": [{ "type": "_dm-badge" }],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Quality Promise"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "Section background"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Placeholder icon color",
+      "default": "{{ settings.color_palette.accent }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Badges",
+      "blocks": {
+        "badge_1": { "type": "_dm-badge" },
+        "badge_2": { "type": "_dm-badge" },
+        "badge_3": { "type": "_dm-badge" }
+      },
+      "block_order": ["badge_1", "badge_2", "badge_3"]
+    }
+  ]
+}
+{% endschema %}

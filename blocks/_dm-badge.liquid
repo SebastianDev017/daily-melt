@@ -1,0 +1,100 @@
+{%- doc -%}
+  Daily Melt — one certification badge of DM · Badges (uploaded icon or a placeholder line icon + label).
+{%- enddoc -%}
+
+{%- assign bs = block.settings -%}
+<li class="dm-badge" {{ block.shopify_attributes }}>
+  <span class="dm-badge__icon{% if bs.image == blank %} dm-badge__icon--placeholder{% endif %}">
+    {%- if bs.image != blank -%}
+      {{ bs.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: '', class: 'dm-badge__image' }}
+    {%- else -%}
+      {% render 'dm-icon', icon: bs.icon %}
+    {%- endif -%}
+  </span>
+  {%- if bs.label != blank -%}
+    <span class="dm-badge__label">{{ bs.label }}</span>
+  {%- endif -%}
+</li>
+
+{% stylesheet %}
+  .dm-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .dm-badge__icon {
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .dm-badge__icon--placeholder {
+    border: 1.5px solid var(--dm-accent, currentColor);
+    color: var(--dm-accent, currentColor);
+  }
+
+  .dm-badge__icon--placeholder svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .dm-badge__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .dm-badge__label {
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+    font-size: 0.875rem;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Badge image",
+      "info": "Upload the designed badge. Until then a placeholder icon is shown."
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Placeholder icon",
+      "options": [
+        { "value": "shield", "label": "Shield" },
+        { "value": "leaf", "label": "Leaf" },
+        { "value": "flask", "label": "Flask" },
+        { "value": "badge", "label": "Badge" },
+        { "value": "circle_check", "label": "Check" }
+      ],
+      "default": "badge"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Certified"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Badge"
+    }
+  ]
+}
+{% endschema %}
