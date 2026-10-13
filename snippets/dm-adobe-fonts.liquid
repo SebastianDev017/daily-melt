@@ -1,0 +1,73 @@
+{%- doc -%}
+  Daily Melt — loads the Adobe Fonts (Typekit) kit set in Theme settings > Typography and maps its
+  families onto Horizon's font variables, so every heading, subheading and body style follows it.
+  Horizon's font pickers stay as the fallback stack (system fonts, nothing extra to download).
+  Render once in the <head>, after 'theme-styles-variables'.
+
+  @example
+  {% render 'dm-adobe-fonts' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign kit_id = settings.dm_adobe_kit_id | strip
+  assign heading_family = settings.dm_adobe_heading_family | strip | remove: '"' | remove: "'"
+  assign body_family = settings.dm_adobe_body_family | strip | remove: '"' | remove: "'"
+
+  # Metric-matched local fallback (measured against Arial) so text keeps its size and wrapping while
+  # the kit font loads. Only defined for families we have measured.
+  assign fallback = ''
+  if heading_family == 'forma-djr-micro' or body_family == 'forma-djr-micro'
+    assign fallback = '"dm-forma-fallback", '
+  endif
+-%}
+
+{%- if kit_id != blank -%}
+  {%- # theme-check-disable RemoteAsset -%}
+  {%- # Adobe Fonts kits must be served from Adobe's CDN (license), they cannot be uploaded to the theme. -%}
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  <link rel="preconnect" href="https://p.typekit.net">
+  <link rel="stylesheet" href="https://use.typekit.net/{{ kit_id | url_encode }}.css">
+  {%- # theme-check-enable RemoteAsset -%}
+
+  {%- if heading_family != blank or body_family != blank -%}
+    {% style %}
+      {%- if fallback != blank %}
+        @font-face {
+          font-family: "dm-forma-fallback";
+          src: local("Arial"), local("ArialMT"), local("Helvetica Neue"), local("Helvetica");
+          font-weight: 400;
+          size-adjust: 96.46%;
+          ascent-override: 110.56%;
+          descent-override: 23.48%;
+          line-gap-override: 0%;
+        }
+
+        @font-face {
+          font-family: "dm-forma-fallback";
+          src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Neue Bold"), local("Helvetica Bold");
+          font-weight: 700;
+          size-adjust: 95.75%;
+          ascent-override: 117.29%;
+          descent-override: 26.11%;
+          line-gap-override: 0%;
+        }
+      {%- endif %}
+
+      :root {
+        {%- if heading_family != blank %}
+          --font-heading--family: "{{ heading_family }}", {{ fallback }}{{ settings.type_heading_font.fallback_families }};
+          --font-heading--style: normal;
+          --font-heading--weight: {{ settings.dm_adobe_heading_weight }};
+          --font-subheading--family: "{{ heading_family }}", {{ fallback }}{{ settings.type_subheading_font.fallback_families }};
+          --font-subheading--style: normal;
+          --font-subheading--weight: {{ settings.dm_adobe_subheading_weight }};
+        {%- endif %}
+        {%- if body_family != blank %}
+          --font-body--family: "{{ body_family }}", {{ fallback }}{{ settings.type_body_font.fallback_families }};
+          --font-body--style: normal;
+          --font-body--weight: {{ settings.dm_adobe_body_weight }};
+        {%- endif %}
+      }
+    {% endstyle %}
+  {%- endif -%}
+{%- endif -%}

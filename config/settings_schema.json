@@ -124,6 +124,80 @@
       },
       {
         "type": "header",
+        "content": "Adobe Fonts"
+      },
+      {
+        "type": "paragraph",
+        "content": "When a kit and family are set they replace the heading and body fonts above, which stay as the fallback. The accent font is not affected."
+      },
+      {
+        "type": "text",
+        "id": "dm_adobe_kit_id",
+        "label": "Kit ID",
+        "info": "The code in use.typekit.net/<kit>.css, e.g. nri2uvk. Leave empty to use the fonts above."
+      },
+      {
+        "type": "text",
+        "id": "dm_adobe_heading_family",
+        "label": "Heading font family",
+        "info": "CSS family name from the kit, e.g. forma-djr-micro. Also used for subheadings."
+      },
+      {
+        "type": "select",
+        "id": "dm_adobe_heading_weight",
+        "label": "Heading weight",
+        "options": [
+          {
+            "value": "400",
+            "label": "Regular (400)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          }
+        ],
+        "default": "700"
+      },
+      {
+        "type": "select",
+        "id": "dm_adobe_subheading_weight",
+        "label": "Subheading weight",
+        "options": [
+          {
+            "value": "400",
+            "label": "Regular (400)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          }
+        ],
+        "default": "700"
+      },
+      {
+        "type": "text",
+        "id": "dm_adobe_body_family",
+        "label": "Body font family",
+        "info": "CSS family name from the kit."
+      },
+      {
+        "type": "select",
+        "id": "dm_adobe_body_weight",
+        "label": "Body weight",
+        "options": [
+          {
+            "value": "400",
+            "label": "Regular (400)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "header",
         "content": "t:content.text_presets"
       },
       {
