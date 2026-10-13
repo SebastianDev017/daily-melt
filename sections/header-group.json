@@ -108,7 +108,7 @@
         "enable_transparent_header_product": false,
         "enable_transparent_header_collection": false,
         "dm_always_drawer": true,
-        "dm_menu_icon": "classic",
+        "dm_menu_icon": "icon-menu-classic",
         "actions_display_style": "icon",
         "text_color_top": "{{ settings.color_palette.cream_light }}",
         "bubble_style": "custom",

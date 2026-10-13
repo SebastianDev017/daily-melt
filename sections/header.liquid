@@ -541,8 +541,8 @@
     color: inherit;
   }
 
-  #header-component[data-dm-always-drawer] .header-drawer-icon--classic,
-  #header-component[data-dm-always-drawer] .header-drawer-icon--classic > svg {
+  #header-component[data-dm-always-drawer] .header-drawer-icon--icon-menu-classic,
+  #header-component[data-dm-always-drawer] .header-drawer-icon--icon-menu-classic > svg {
     width: 32px;
     height: 20px;
   }
@@ -551,13 +551,19 @@
     --icon-size-md: 1.5rem;
   }
 
+  /* Side menu: calmer type scale than Horizon's full-screen drawer */
+  #header-component[data-dm-always-drawer] .menu-drawer__menu-item--mainlist {
+    font-size: var(--menu-font-xl--size);
+    letter-spacing: 0.02em;
+  }
+
   @media screen and (max-width: 749px) {
     #header-component[data-dm-always-drawer] .header__columns {
       min-height: var(--dm-header-min-height-mobile, 52px);
     }
 
-    #header-component[data-dm-always-drawer] .header-drawer-icon--classic,
-    #header-component[data-dm-always-drawer] .header-drawer-icon--classic > svg {
+    #header-component[data-dm-always-drawer] .header-drawer-icon--icon-menu-classic,
+    #header-component[data-dm-always-drawer] .header-drawer-icon--icon-menu-classic > svg {
       width: 26px;
       height: 17px;
     }
@@ -1373,15 +1379,15 @@
       "label": "Hamburger icon",
       "options": [
         {
-          "value": "default",
+          "value": "icon-menu",
           "label": "Two lines"
         },
         {
-          "value": "classic",
+          "value": "icon-menu-classic",
           "label": "Three lines"
         }
       ],
-      "default": "default"
+      "default": "icon-menu"
     },
     {
       "type": "header",

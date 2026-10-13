@@ -65,12 +65,8 @@
       aria-label="{{ 'accessibility.menu' | t }}"
       on:click="/toggle"
     >
-      <span class="svg-wrapper header-drawer-icon header-drawer-icon--open{% if section.settings.dm_menu_icon == 'classic' %} header-drawer-icon--classic{% endif %}">
-        {%- if section.settings.dm_menu_icon == 'classic' -%}
-          {{- 'icon-menu-classic.svg' | inline_asset_content -}}
-        {%- else -%}
-          {{- 'icon-menu.svg' | inline_asset_content -}}
-        {%- endif -%}
+      <span class="svg-wrapper header-drawer-icon header-drawer-icon--open header-drawer-icon--{{ section.settings.dm_menu_icon | default: 'icon-menu' }}">
+        {{- section.settings.dm_menu_icon | default: 'icon-menu' | append: '.svg' | inline_asset_content -}}
       </span>
       <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
         {{- 'icon-close-menu.svg' | inline_asset_content -}}
