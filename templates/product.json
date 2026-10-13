@@ -252,7 +252,7 @@
                 "per_serving_suffix": "/serving",
                 "sub_subtitle": "",
                 "sub_perks": "Free frother ($25 value)\nFree shipping delivered every 30 days\nCancel anytime, no commitment\n60-Day Money Back Guarantee",
-                "plan_display": "single",
+                "plan_display": "cards",
                 "auto_badges": true,
                 "auto_badge_format": "[percent]% off",
                 "frequency_label": "Deliver every",
