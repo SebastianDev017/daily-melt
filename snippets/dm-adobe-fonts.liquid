@@ -66,6 +66,14 @@
           --font-body--family: "{{ body_family }}", {{ fallback }}{{ settings.type_body_font.fallback_families }};
           --font-body--style: normal;
           --font-body--weight: {{ settings.dm_adobe_body_weight }};
+          {%- unless settings.dm_adobe_body_buttons %}
+            {%- if settings.type_font_button_primary == 'body' %}
+              --button-font-family-primary: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+            {%- endif %}
+            {%- if settings.type_font_button_secondary == 'body' %}
+              --button-font-family-secondary: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+            {%- endif %}
+          {%- endunless %}
         {%- endif %}
       }
     {% endstyle %}

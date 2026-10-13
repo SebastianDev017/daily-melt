@@ -52,7 +52,7 @@
           "static": true,
           "settings": {
             "dm_wordmark": "NO TAKE BACKS®",
-            "dm_wordmark_font": "body",
+            "dm_wordmark_font": "subheading",
             "dm_wordmark_weight": "400",
             "dm_wordmark_size": 22,
             "dm_wordmark_size_mobile": 16,

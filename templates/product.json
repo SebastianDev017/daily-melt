@@ -134,12 +134,12 @@
             "subtitle": {
               "type": "text",
               "settings": {
-                "text": "<p>Mother Nature’s pathway to calm cravings, control appetite without needles, stimulants or lab-made chemicals</p>",
+                "text": "<p><strong>Mother Nature’s pathway to calm cravings, control appetite without needles, stimulants or lab-made chemicals</strong></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
-                "font": "var(--font-subheading--family)",
+                "font": "var(--font-body--family)",
                 "font_size": "1.125rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",

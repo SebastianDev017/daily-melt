@@ -128,7 +128,7 @@
       },
       {
         "type": "paragraph",
-        "content": "When a kit and family are set they replace the heading and body fonts above, which stay as the fallback. The accent font is not affected."
+        "content": "Families set here replace the matching font above (which stays as the fallback). Leave a family empty to keep the font above. The accent font is not affected."
       },
       {
         "type": "text",
@@ -140,7 +140,7 @@
         "type": "text",
         "id": "dm_adobe_heading_family",
         "label": "Heading font family",
-        "info": "CSS family name from the kit, e.g. forma-djr-micro. Also used for subheadings."
+        "info": "CSS family name from the kit, e.g. forma-djr-micro. Also used for subheadings. Leave empty to keep the heading fonts above."
       },
       {
         "type": "select",
@@ -195,6 +195,13 @@
           }
         ],
         "default": "400"
+      },
+      {
+        "type": "checkbox",
+        "id": "dm_adobe_body_buttons",
+        "label": "Use the body family for buttons too",
+        "info": "Off: buttons keep the body font picked above.",
+        "default": false
       },
       {
         "type": "header",
