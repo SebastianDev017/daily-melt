@@ -569,9 +569,127 @@
         "padding-block-start": 16,
         "padding-block-end": 40
       }
+    },
+    "dm_description": {
+      "type": "dm-media-grid",
+      "settings": {
+        "content_position": "left",
+        "mobile_order": "content",
+        "panel_style": "panel",
+        "panel_background": "{{ settings.color_palette.cream_light }}",
+        "panel_text_color": "",
+        "image_count": 4,
+        "radius": 0,
+        "background": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>The Chocolate Ritual That Works With Your Biology</h2>",
+            "width": "100%",
+            "alignment": "left",
+            "type_preset": "h2"
+          },
+          "blocks": {}
+        },
+        "body": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Modern life makes it nearly impossible to ignore cravings.</strong></p><p>Sugar is everywhere. Stress is constant. Convenient snacks are always within reach. And when your body’s natural fullness and metabolic signals aren’t working in your favor, even your best intentions can feel like a daily battle.</p><p>Daily Melt works with your body’s natural pathways to support satiety, metabolism, and healthy weight – without needles, stimulants, or extreme restriction.</p><p>And because it tastes like an indulgent chocolate treat, supporting your goals finally feels like something you’ll want to do every day.</p>",
+            "width": "100%",
+            "alignment": "left",
+            "type_preset": "rte"
+          },
+          "blocks": {}
+        },
+        "perfect_for": {
+          "type": "dm-checklist",
+          "settings": {
+            "heading": "Perfect for:",
+            "items": "Feeling satisfied for longer\nCalmer cravings between meals\nNatural GLP-1 production\nA healthy, active metabolism\nSustainable weight management\nA more satisfying alternative to sugary treats",
+            "layout": "stacked",
+            "icon": "check",
+            "text_size": "base",
+            "alignment": "left",
+            "icon_color": "{{ settings.color_palette.accent }}"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "label": "Get Your Daily Melt",
+            "link": "#dm-buy",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "width_mobile": "custom",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "body",
+        "perfect_for",
+        "button"
+      ]
+    },
+    "dm_how_to_use": {
+      "type": "dm-steps",
+      "settings": {
+        "heading": "Your Daily Ritual in Three Simple Steps",
+        "text": "",
+        "columns": 3,
+        "button_label": "Get Your Daily Melt",
+        "button_link": "",
+        "background": "linear-gradient(180deg, {{ settings.color_palette.cream_light }} 0%, {{ settings.color_palette.caramel }} 100%)",
+        "accent_color": "{{ settings.color_palette.accent }}",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "step_1": {
+          "type": "_dm-step",
+          "settings": {
+            "show_image": true,
+            "number": "1",
+            "title": "Scoop Daily Melt into your favorite mug or glass.",
+            "text": ""
+          }
+        },
+        "step_2": {
+          "type": "_dm-step",
+          "settings": {
+            "show_image": true,
+            "number": "2",
+            "title": "Mix with hot or cold liquid until smooth and creamy.",
+            "text": ""
+          }
+        },
+        "step_3": {
+          "type": "_dm-step",
+          "settings": {
+            "show_image": true,
+            "number": "3",
+            "title": "Sip, savor, and make it part of your daily routine.",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
     }
   },
   "order": [
-    "main"
+    "main",
+    "dm_description",
+    "dm_how_to_use"
   ]
 }

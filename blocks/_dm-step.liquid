@@ -1,0 +1,160 @@
+{%- doc -%}
+  Daily Melt — one step / column of DM · Steps: optional image, top rule, number, title and text.
+{%- enddoc -%}
+
+{%- assign bs = block.settings -%}
+<li class="dm-step" {{ block.shopify_attributes }}>
+  {%- if bs.show_image -%}
+    <div class="dm-step__media">
+      {%- if bs.image != blank -%}
+        {{ bs.image | image_url: width: 900 | image_tag: widths: '400, 600, 900', sizes: '(min-width: 750px) 33vw, 100vw', loading: 'lazy', class: 'dm-step__image' }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'dm-step__image dm-step__image--placeholder' }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="dm-step__body">
+    {%- if bs.number != blank -%}
+      <span class="dm-step__number" aria-hidden="true">{{ bs.number }}</span>
+    {%- endif -%}
+    {%- if bs.title != blank -%}
+      <h3 class="dm-step__title">{{ bs.title }}</h3>
+    {%- endif -%}
+    {%- if bs.text != blank -%}
+      <div class="dm-step__text">{{ bs.text }}</div>
+    {%- endif -%}
+  </div>
+</li>
+
+{% stylesheet %}
+  .dm-step {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-block: 0 32px;
+  }
+
+  .dm-step__media {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .dm-step__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .dm-step__image--placeholder {
+    fill: rgb(var(--color-foreground-rgb) / 0.3);
+  }
+
+  .dm-step__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-foreground);
+  }
+
+  .dm-step__number {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 2.75rem;
+    line-height: 1;
+    color: var(--dm-accent, var(--color-foreground));
+  }
+
+  .dm-step__title {
+    margin: 0;
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+    font-size: 1.375rem;
+    line-height: 1.25;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .dm-step__text p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .dm-step:has(.dm-step__media) {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      column-gap: 16px;
+      align-items: start;
+    }
+
+    .dm-step__media {
+      align-self: stretch;
+      aspect-ratio: auto;
+      min-height: 104px;
+    }
+
+    .dm-step__number {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .dm-step {
+      padding-block: 0;
+    }
+
+    .dm-step__media {
+      aspect-ratio: 4 / 3;
+    }
+
+    .dm-step__title {
+      font-size: 1.625rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Step",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "visible_if": "{{ block.settings.show_image }}"
+    },
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Number",
+      "default": "1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Step title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Step"
+    }
+  ]
+}
+{% endschema %}

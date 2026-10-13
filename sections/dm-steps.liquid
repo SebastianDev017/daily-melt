@@ -1,0 +1,180 @@
+{%- comment -%}
+  Daily Melt — centered heading + columns separated by a top rule (one per step) + optional CTA.
+  Used for "How to use" on the PDP.
+{%- endcomment -%}
+
+{%- assign ss = section.settings -%}
+
+<div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
+<div
+  class="dm-steps section section--page-width"
+  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-cols: {{ ss.columns }};{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
+>
+  <div class="dm-steps__inner">
+    {%- if ss.heading != blank or ss.text != blank -%}
+      <header class="dm-steps__header">
+        {%- if ss.heading != blank -%}
+          <h2 class="dm-steps__heading h2">{{ ss.heading }}</h2>
+        {%- endif -%}
+        {%- if ss.text != blank -%}
+          <div class="dm-steps__text">{{ ss.text }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <ol class="dm-steps__list" role="list">
+      {% content_for 'blocks' %}
+    </ol>
+
+    {%- if ss.button_label != blank -%}
+      <div class="dm-steps__cta">
+        <a class="button" href="{{ ss.button_link | default: '#dm-buy' }}">{{ ss.button_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .dm-steps {
+    padding-block: var(--dm-pt) var(--dm-pb);
+  }
+
+  .dm-steps__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .dm-steps__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .dm-steps__heading {
+    margin: 0;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  .dm-steps__text {
+    max-width: 40rem;
+  }
+
+  .dm-steps__text p {
+    margin: 0;
+  }
+
+  .dm-steps__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dm-steps__cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .dm-steps__inner {
+      gap: 56px;
+    }
+
+    .dm-steps__list {
+      grid-template-columns: repeat(var(--dm-cols, 3), minmax(0, 1fr));
+      column-gap: 24px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Steps",
+  "tag": "section",
+  "class": "dm-section",
+  "blocks": [{ "type": "_dm-step" }],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Daily Ritual in Three Simple Steps"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Get Your Daily Melt"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Leave empty to scroll to the purchase options."
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "Background",
+      "default": "linear-gradient(180deg, {{ settings.color_palette.cream_light }} 0%, {{ settings.color_palette.caramel }} 100%)"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Step number color",
+      "default": "{{ settings.color_palette.accent }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Steps",
+      "blocks": {
+        "step_1": { "type": "_dm-step", "settings": { "number": "1" } },
+        "step_2": { "type": "_dm-step", "settings": { "number": "2" } },
+        "step_3": { "type": "_dm-step", "settings": { "number": "3" } }
+      },
+      "block_order": ["step_1", "step_2", "step_3"]
+    }
+  ]
+}
+{% endschema %}
