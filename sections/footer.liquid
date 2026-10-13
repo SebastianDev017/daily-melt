@@ -84,14 +84,18 @@
   .footer-content--dm-grid :is(.menu__heading, .text-block.h5, .text-block.h5 > *) {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
-    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    font-size: clamp(1rem, 1.15vw, 1.0625rem);
     line-height: 1.2;
-    letter-spacing: 0.01em;
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 
   .footer-content--dm-grid .menu__heading {
     padding-block: 0;
+  }
+
+  .footer-content.footer-content--dm-grid .menu .details-content {
+    margin-block-start: 12px;
   }
 
   .footer-content--dm-grid :is(.menu__item, .text-block.paragraph) {
