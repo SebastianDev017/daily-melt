@@ -49,7 +49,7 @@
             "constrain_to_viewport": false,
             "media_fit": "cover",
             "media_radius": 0,
-            "extend_media": true,
+            "extend_media": false,
             "zoom": false,
             "video_loop": false,
             "hide_variants": true,
@@ -335,6 +335,7 @@
                 },
                 "supplement_facts": {
                   "type": "popup-link",
+                  "disabled": true,
                   "settings": {
                     "behavior": "default",
                     "heading": "View Supplement Facts",
@@ -365,13 +366,13 @@
                         "ink_color": "",
                         "padding-block-start": 0,
                         "padding-block-end": 0
-                      }
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
                     "sfp_panel"
-                  ],
-                  "disabled": true
+                  ]
                 }
               },
               "block_order": [
