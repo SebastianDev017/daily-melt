@@ -1,0 +1,87 @@
+{%- doc -%}
+  Daily Melt — one purchase option card (radio) for the DM · Purchase options block.
+
+  @param {string} option - 'subscription' | 'onetime'
+  @param {string} group_name - Radio group name
+  @param {boolean} checked - Whether this card starts selected
+  @param {string} [plan_id] - Selling plan id (subscription cards)
+  @param {string} [badge] - Badge text
+  @param {string} title - Card title
+  @param {number} price - Price in cents
+  @param {number} [compare] - Compare-at price in cents
+  @param {string} [price_suffix] - Text after the price (e.g. /month)
+  @param {number} [servings] - Servings per pouch, for price per serving
+  @param {string} [per_serving_suffix] - Text after the price per serving
+  @param {string} [subtitle] - Subtitle text
+  @param {string} [perks] - Perks, one per line
+  @param {string} [select_html] - Pre-rendered frequency selector
+
+  @example
+  {% render 'dm-purchase-card', option: 'onetime', group_name: 'g', checked: false, title: 'One-Time Purchase', price: 9300 %}
+{%- enddoc -%}
+
+{%- liquid
+  assign perk_list = perks | newline_to_br | split: '<br />'
+  if compare == price
+    assign compare = nil
+  endif
+-%}
+<label
+  class="dm-option{% if badge != blank %} dm-option--badge{% endif %}"
+  data-option="{{ option }}"
+  data-plan-id="{{ plan_id }}"
+  data-price="{{ price | money }}"
+  data-compare="{% if compare %}{{ compare | money }}{% endif %}"
+  data-label="{{ title | escape }}"
+>
+  {%- if badge != blank -%}
+    <span class="dm-option__badge">{{ badge }}</span>
+  {%- endif -%}
+  <input
+    class="dm-option__input"
+    type="radio"
+    name="{{ group_name }}"
+    value="{{ option }}{% if plan_id != blank %}-{{ plan_id }}{% endif %}"
+    {% if checked %}
+      checked
+    {% endif %}
+  >
+  <span class="dm-option__radio" aria-hidden="true"></span>
+  <span class="dm-option__body">
+    <span class="dm-option__top">
+      <span class="dm-option__title">{{ title }}</span>
+      <span class="dm-option__price">
+        <span class="dm-option__amount" data-dm-price>{{ price | money }}</span>
+        {%- if price_suffix != blank -%}
+          <span class="dm-option__suffix">{{ price_suffix }}</span>
+        {%- endif -%}
+      </span>
+    </span>
+    {%- if servings > 0 or subtitle != blank or compare -%}
+      <span class="dm-option__meta">
+        <span class="dm-option__subtitle">
+          {%- if servings > 0 -%}
+            {%- assign per_serving = price | divided_by: servings -%}
+            <span data-dm-per-serving>{{ per_serving | money }}</span>{{ per_serving_suffix }}
+          {%- endif -%}
+          {%- if subtitle != blank -%}
+            {%- if servings > 0 %} · {% endif -%}
+            {{ subtitle }}
+          {%- endif -%}
+        </span>
+        <s class="dm-option__compare" data-dm-compare>{%- if compare -%}{{ compare | money }}{%- endif -%}</s>
+      </span>
+    {%- endif -%}
+    {{ select_html }}
+    {%- if perk_list.size > 0 -%}
+      <span class="dm-option__perks">
+        {%- for perk in perk_list -%}
+          {%- assign perk_text = perk | strip -%}
+          {%- if perk_text != blank -%}
+            <span class="dm-option__perk">{{ perk_text }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </span>
+    {%- endif -%}
+  </span>
+</label>

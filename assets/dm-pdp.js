@@ -21,6 +21,24 @@ class DmPurchaseOptions extends HTMLElement {
     }
 
     this.update();
+    this.#syncTempImage();
+  }
+
+  /** While the temporary gallery is on, use its first image for the sticky bar and fly-to-cart. */
+  #syncTempImage() {
+    const img = document.querySelector('.dm-temp-gallery slideshow-slide img');
+    if (!img) return;
+    const src = img.currentSrc || img.src;
+    if (!src) return;
+    const stickyImg = document.querySelector('sticky-add-to-cart .sticky-add-to-cart__image-img');
+    if (stickyImg) {
+      stickyImg.removeAttribute('srcset');
+      stickyImg.src = src;
+    }
+    this.form
+      ?.closest('product-form-component')
+      ?.querySelectorAll('add-to-cart-component')
+      .forEach((el) => el.setAttribute('data-product-variant-media', src));
   }
 
   disconnectedCallback() {
@@ -31,17 +49,25 @@ class DmPurchaseOptions extends HTMLElement {
 
   #onChange = (event) => {
     if (event.target.matches('[data-dm-plan-select]')) {
-      const sub = this.querySelector('.dm-option__input[value="subscription"]');
-      if (sub && !sub.checked) sub.checked = true;
+      const input = event.target.closest('.dm-option')?.querySelector('.dm-option__input');
+      if (input && !input.checked) input.checked = true;
     }
     this.update();
   };
+
+  #defaultSubscriptionInput() {
+    const planId = this.planInput?.defaultValue;
+    const cards = [...this.querySelectorAll('.dm-option[data-option="subscription"]')];
+    const card = cards.find((c) => planId && c.dataset.planId === planId) ?? cards[0];
+    return card?.querySelector('.dm-option__input') ?? null;
+  }
 
   #onCtaClick = (event) => {
     const cta = event.target.closest('[data-dm-subscribe-cta]');
     if (!cta) return;
     event.preventDefault();
-    const sub = this.querySelector('.dm-option__input[value="subscription"]');
+    const current = this.selectedCard;
+    const sub = current?.dataset.option === 'subscription' ? null : this.#defaultSubscriptionInput();
     if (sub) {
       sub.checked = true;
       this.update();
@@ -66,12 +92,13 @@ class DmPurchaseOptions extends HTMLElement {
 
     if (this.planSelect) {
       const option = this.planSelect.selectedOptions[0];
-      if (option) {
-        const subCard = this.querySelector('.dm-option[data-option="subscription"]');
+      const subCard = this.planSelect.closest('.dm-option');
+      if (option && subCard) {
+        subCard.dataset.planId = option.value;
         subCard.dataset.price = option.dataset.price;
         subCard.dataset.compare = option.dataset.compare || '';
-        const priceEl = subCard.querySelector('[data-dm-sub-price]');
-        const compareEl = subCard.querySelector('[data-dm-sub-compare]');
+        const priceEl = subCard.querySelector('[data-dm-price]');
+        const compareEl = subCard.querySelector('[data-dm-compare]');
         const perServingEl = subCard.querySelector('[data-dm-per-serving]');
         if (priceEl) priceEl.textContent = option.dataset.price;
         if (compareEl) compareEl.textContent = option.dataset.compare || '';
@@ -80,9 +107,9 @@ class DmPurchaseOptions extends HTMLElement {
     }
 
     if (this.planInput) {
-      if (isSubscription && this.hasPlans) {
+      if (isSubscription && this.hasPlans && card.dataset.planId) {
         this.planInput.disabled = false;
-        if (this.planSelect) this.planInput.value = this.planSelect.value;
+        this.planInput.value = card.dataset.planId;
       } else {
         this.planInput.disabled = true;
       }

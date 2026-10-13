@@ -24,26 +24,19 @@
     assign show_one_time = false
   endif
 
-  assign servings = bs.servings | default: 0
-  assign one_time_price = variant.price
+  assign servings = 0
+  if bs.show_per_serving and bs.servings > 0
+    assign servings = bs.servings
+  endif
 
+  assign default_plan_id = ''
   if has_plans
     assign default_index = bs.default_plan_position | minus: 1
     if default_index >= allocations.size
       assign default_index = 0
     endif
     assign default_allocation = allocations[default_index]
-    assign sub_price = default_allocation.price
-    assign sub_compare = default_allocation.compare_at_price
     assign default_plan_id = default_allocation.selling_plan.id
-  else
-    assign keep = 100 | minus: bs.demo_discount
-    assign sub_price = variant.price | times: keep | divided_by: 100
-    assign sub_compare = variant.price
-    assign default_plan_id = ''
-  endif
-  if sub_compare == sub_price
-    assign sub_compare = nil
   endif
 
   assign selected = bs.default_option
@@ -58,6 +51,7 @@
   <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
 
   <dm-purchase-options
+    id="dm-buy"
     class="dm-purchase{% if bs.mobile_buttons_first %} dm-purchase--buttons-first{% endif %} dm-purchase--perks-{{ bs.perks_style }} spacing-style"
     style="{% render 'spacing-style', settings: bs %} --dm-card-radius: {{ bs.card_radius }}px; --dm-accent: {{ bs.accent_color }}; --dm-selected-bg: {{ bs.selected_background }};"
     data-form-id="{{ form_id }}"
@@ -77,54 +71,85 @@
     {%- endif -%}
 
     <div class="dm-purchase__options" role="radiogroup" aria-label="{{ 'dm.purchase.options_label' | t }}">
-      {%- capture subscription_card -%}
-        {%- assign perks = bs.sub_perks | newline_to_br | split: '<br />' -%}
-        <label
-          class="dm-option{% if bs.sub_badge != blank %} dm-option--badge{% endif %}"
-          data-option="subscription"
-          data-price="{{ sub_price | money }}"
-          data-compare="{% if sub_compare %}{{ sub_compare | money }}{% endif %}"
-          data-label="{{ bs.sub_title | escape }}"
-        >
-          {%- if bs.sub_badge != blank -%}
-            <span class="dm-option__badge">{{ bs.sub_badge }}</span>
-          {%- endif -%}
-          <input
-            class="dm-option__input"
-            type="radio"
-            name="{{ group_name }}"
-            value="subscription"
-            {% if selected == 'subscription' %}
-              checked
-            {% endif %}
-          >
-          <span class="dm-option__radio" aria-hidden="true"></span>
-          <span class="dm-option__body">
-            <span class="dm-option__top">
-              <span class="dm-option__title">{{ bs.sub_title }}</span>
-              <span class="dm-option__price">
-                <span class="dm-option__amount" data-dm-sub-price>{{ sub_price | money }}</span>
-                {%- if bs.sub_price_suffix != blank -%}
-                  <span class="dm-option__suffix">{{ bs.sub_price_suffix }}</span>
-                {%- endif -%}
-              </span>
-            </span>
-            <span class="dm-option__meta">
-              <span class="dm-option__subtitle">
-                {%- if bs.show_per_serving and servings > 0 -%}
-                  {%- assign per_serving = sub_price | divided_by: servings -%}
-                  <span data-dm-per-serving>{{ per_serving | money }}</span>{{ bs.per_serving_suffix }}
-                {%- endif -%}
-                {%- if bs.sub_subtitle != blank -%}
-                  {%- if bs.show_per_serving and servings > 0 %} · {% endif -%}
-                  {{ bs.sub_subtitle }}
-                {%- endif -%}
-              </span>
-              <s class="dm-option__compare" data-dm-sub-compare>{%- if sub_compare -%}{{ sub_compare | money }}{%- endif -%}</s>
-            </span>
-            {%- if has_plans and allocations.size > 1 -%}
+      {%- capture subscription_cards -%}
+        {%- if has_plans == false -%}
+          {%- liquid
+            assign keep = 100 | minus: bs.demo_discount
+            assign demo_price = variant.price | times: keep | divided_by: 100
+            assign is_checked = false
+            if selected == 'subscription'
+              assign is_checked = true
+            endif
+          -%}
+          {% render 'dm-purchase-card',
+            option: 'subscription',
+            group_name: group_name,
+            checked: is_checked,
+            badge: bs.sub_badge,
+            title: bs.sub_title,
+            price: demo_price,
+            compare: variant.price,
+            price_suffix: bs.sub_price_suffix,
+            servings: servings,
+            per_serving_suffix: bs.per_serving_suffix,
+            subtitle: bs.sub_subtitle,
+            perks: bs.sub_perks
+          %}
+        {%- elsif bs.plan_display == 'cards' -%}
+          {%- for allocation in allocations -%}
+            {%- liquid
+              assign is_default = false
+              if allocation.selling_plan.id == default_plan_id
+                assign is_default = true
+              endif
+              assign is_checked = false
+              if is_default and selected == 'subscription'
+                assign is_checked = true
+              endif
+              assign adjustment = allocation.selling_plan.price_adjustments.first
+              assign card_badge = ''
+              if bs.auto_badges and adjustment.value_type == 'percentage' and adjustment.value > 0
+                assign card_badge = bs.auto_badge_format | replace: '[percent]', adjustment.value
+              endif
+              assign card_title = allocation.selling_plan.name
+              if is_default
+                if bs.sub_badge != blank
+                  assign card_badge = bs.sub_badge
+                endif
+                if bs.sub_title != blank
+                  assign card_title = bs.sub_title
+                endif
+              endif
+            -%}
+            {% render 'dm-purchase-card',
+              option: 'subscription',
+              group_name: group_name,
+              checked: is_checked,
+              plan_id: allocation.selling_plan.id,
+              badge: card_badge,
+              title: card_title,
+              price: allocation.price,
+              compare: allocation.compare_at_price,
+              price_suffix: bs.sub_price_suffix,
+              servings: servings,
+              per_serving_suffix: bs.per_serving_suffix,
+              subtitle: bs.sub_subtitle,
+              perks: bs.sub_perks
+            %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- liquid
+            assign is_checked = false
+            if selected == 'subscription'
+              assign is_checked = true
+            endif
+          -%}
+          {%- capture select_html -%}
+            {%- if bs.plan_display == 'selector' and allocations.size > 1 -%}
               <span class="dm-option__frequency">
-                <span class="dm-option__frequency-label">{{ bs.frequency_label }}</span>
+                {%- if bs.frequency_label != blank -%}
+                  <span class="dm-option__frequency-label">{{ bs.frequency_label }}</span>
+                {%- endif -%}
                 <select
                   class="dm-option__select"
                   aria-label="{{ bs.frequency_label | default: bs.sub_title | escape }}"
@@ -132,94 +157,75 @@
                 >
                   {%- for allocation in allocations -%}
                     {%- liquid
+                      assign plan_per_serving = ''
                       if servings > 0
                         assign plan_per_serving = allocation.price | divided_by: servings | money
-                      else
-                        assign plan_per_serving = ''
+                      endif
+                      assign plan_compare = ''
+                      if allocation.compare_at_price != allocation.price
+                        assign plan_compare = allocation.compare_at_price | money
                       endif
                     -%}
                     <option
                       value="{{ allocation.selling_plan.id }}"
                       data-price="{{ allocation.price | money }}"
-                      data-compare="{% if allocation.compare_at_price != allocation.price %}{{ allocation.compare_at_price | money }}{% endif %}"
+                      data-compare="{{ plan_compare }}"
                       data-per-serving="{{ plan_per_serving }}"
                       {% if allocation.selling_plan.id == default_plan_id %}
                         selected
                       {% endif %}
                     >
-                      {{ allocation.selling_plan.name }}
+                      {{- allocation.selling_plan.name -}}
                     </option>
                   {%- endfor -%}
                 </select>
               </span>
             {%- endif -%}
-            {%- if perks.size > 0 -%}
-              <span class="dm-option__perks">
-                {%- for perk in perks -%}
-                  {%- assign perk_text = perk | strip -%}
-                  {%- if perk_text != blank -%}
-                    <span class="dm-option__perk">{{ perk_text }}</span>
-                  {%- endif -%}
-                {%- endfor -%}
-              </span>
-            {%- endif -%}
-          </span>
-        </label>
+          {%- endcapture -%}
+          {% render 'dm-purchase-card',
+            option: 'subscription',
+            group_name: group_name,
+            checked: is_checked,
+            plan_id: default_plan_id,
+            badge: bs.sub_badge,
+            title: bs.sub_title,
+            price: default_allocation.price,
+            compare: default_allocation.compare_at_price,
+            price_suffix: bs.sub_price_suffix,
+            servings: servings,
+            per_serving_suffix: bs.per_serving_suffix,
+            subtitle: bs.sub_subtitle,
+            perks: bs.sub_perks,
+            select_html: select_html
+          %}
+        {%- endif -%}
       {%- endcapture -%}
 
       {%- capture one_time_card -%}
-        {%- assign perks = bs.one_perks | newline_to_br | split: '<br />' -%}
-        <label
-          class="dm-option{% if bs.one_badge != blank %} dm-option--badge{% endif %}"
-          data-option="onetime"
-          data-price="{{ one_time_price | money }}"
-          data-compare=""
-          data-label="{{ bs.one_title | escape }}"
-        >
-          {%- if bs.one_badge != blank -%}
-            <span class="dm-option__badge">{{ bs.one_badge }}</span>
-          {%- endif -%}
-          <input
-            class="dm-option__input"
-            type="radio"
-            name="{{ group_name }}"
-            value="onetime"
-            {% if selected == 'onetime' %}
-              checked
-            {% endif %}
-          >
-          <span class="dm-option__radio" aria-hidden="true"></span>
-          <span class="dm-option__body">
-            <span class="dm-option__top">
-              <span class="dm-option__title">{{ bs.one_title }}</span>
-              <span class="dm-option__price">
-                <span class="dm-option__amount">{{ one_time_price | money }}</span>
-              </span>
-            </span>
-            {%- if bs.one_subtitle != blank -%}
-              <span class="dm-option__meta">
-                <span class="dm-option__subtitle">{{ bs.one_subtitle }}</span>
-              </span>
-            {%- endif -%}
-            {%- if perks.size > 0 -%}
-              <span class="dm-option__perks">
-                {%- for perk in perks -%}
-                  {%- assign perk_text = perk | strip -%}
-                  {%- if perk_text != blank -%}
-                    <span class="dm-option__perk">{{ perk_text }}</span>
-                  {%- endif -%}
-                {%- endfor -%}
-              </span>
-            {%- endif -%}
-          </span>
-        </label>
+        {%- liquid
+          assign is_checked = false
+          if selected == 'onetime'
+            assign is_checked = true
+          endif
+        -%}
+        {% render 'dm-purchase-card',
+          option: 'onetime',
+          group_name: group_name,
+          checked: is_checked,
+          badge: bs.one_badge,
+          title: bs.one_title,
+          price: variant.price,
+          compare: variant.compare_at_price,
+          subtitle: bs.one_subtitle,
+          perks: bs.one_perks
+        %}
       {%- endcapture -%}
 
       {%- if bs.one_time_first and show_one_time -%}
         {{ one_time_card }}
-        {{ subscription_card }}
+        {{ subscription_cards }}
       {%- else -%}
-        {{ subscription_card }}
+        {{ subscription_cards }}
         {%- if show_one_time -%}
           {{ one_time_card }}
         {%- endif -%}
@@ -665,10 +671,36 @@
       "default": "Free frother ($25 value)\nFree shipping delivered every 30 days\nCancel anytime, no commitment\n60-Day Money Back Guarantee"
     },
     {
+      "type": "select",
+      "id": "plan_display",
+      "label": "Selling plans shown",
+      "options": [
+        { "value": "single", "label": "Default plan only" },
+        { "value": "selector", "label": "One card with a frequency selector" },
+        { "value": "cards", "label": "One card per plan" }
+      ],
+      "default": "single"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_badges",
+      "label": "Cards per plan: automatic discount badge",
+      "default": true,
+      "visible_if": "{{ block.settings.plan_display == 'cards' }}"
+    },
+    {
+      "type": "text",
+      "id": "auto_badge_format",
+      "label": "Automatic badge text",
+      "info": "[percent] is replaced by the plan discount.",
+      "default": "[percent]% off",
+      "visible_if": "{{ block.settings.plan_display == 'cards' }}"
+    },
+    {
       "type": "text",
       "id": "frequency_label",
       "label": "Frequency label",
-      "info": "Shown only when the product has more than one selling plan.",
+      "info": "Used by the frequency selector.",
       "default": "Deliver every"
     },
     {
