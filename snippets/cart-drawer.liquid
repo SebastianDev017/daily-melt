@@ -31,7 +31,7 @@
         class="theme-drawer__title h4"
         id="cart-drawer-heading"
       >
-        {{ 'content.your_cart_is_empty' | t }}
+        {%- assign dm_empty_title = 'content.your_cart_is_empty' | t -%}{%- if settings.dm_cart_empty_title != blank -%}{%- assign dm_empty_title = settings.dm_cart_empty_title -%}{%- endif -%}{{ dm_empty_title }}
       </h2>
 
       <div class="cart-drawer__items">

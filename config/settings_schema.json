@@ -1655,6 +1655,12 @@
       },
       {
         "type": "text",
+        "id": "dm_cart_empty_title",
+        "label": "Empty cart heading",
+        "info": "Leave empty for the default."
+      },
+      {
+        "type": "text",
         "id": "dm_cart_empty_text",
         "label": "Empty cart text"
       },

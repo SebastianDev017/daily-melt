@@ -25,7 +25,7 @@
 >
   <h1 class="{{ block_settings.type_preset | default: 'h2' }}">
     {%- if cart.empty? or force_empty -%}
-      {{ 'content.your_cart_is_empty' | t }}
+      {%- assign dm_empty_title = 'content.your_cart_is_empty' | t -%}{%- if settings.dm_cart_empty_title != blank -%}{%- assign dm_empty_title = settings.dm_cart_empty_title -%}{%- endif -%}{{ dm_empty_title }}
     {%- else -%}
       {{ block_settings.title }}
       {%- if block_settings.show_count -%}{% render 'cart-bubble' %}{%- endif -%}

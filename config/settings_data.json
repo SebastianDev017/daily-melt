@@ -155,7 +155,8 @@
     "dm_cart_accent": "{{ settings.color_palette.accent }}",
     "empty_cart_button_link": "/products/daily-melt",
     "product_title_case": "uppercase",
-    "show_accelerated_checkout_buttons": false
+    "show_accelerated_checkout_buttons": false,
+    "dm_cart_empty_title": "Your bag is empty"
   },
   "presets": {
     "Horizon": {

@@ -475,7 +475,13 @@
 </div>
 
 {% stylesheet %}
-  /* Daily Melt cart lines */
+  /* Daily Melt cart lines. Cocoa on cream is ~4.8:1, so secondary text keeps full
+     strength and hierarchy comes from size and weight; orange stays on icons. */
+  cart-items-component .cart-items__details,
+  cart-items-component .cart-totals__tax-note,
+  cart-items-component .cart-totals__tax-note a {
+    color: var(--color-foreground);
+  }
   .cart-items__option-name {
     display: inline;
     margin-inline-end: 0.25em;
@@ -486,7 +492,7 @@
     align-items: center;
     gap: 6px;
     margin: 4px 0 0;
-    color: var(--dm-cart-accent, currentColor);
+    color: var(--color-foreground);
     font-weight: 600;
   }
 
@@ -494,6 +500,7 @@
     display: inline-flex;
     width: 15px;
     height: 15px;
+    color: var(--dm-cart-accent, currentColor);
   }
 
   .cart-items__plan-icon svg {
@@ -509,7 +516,8 @@
   }
 
   .cart-items__plan-price .compare-at-price {
-    color: rgb(var(--color-foreground-rgb) / 0.6);
+    color: var(--color-foreground);
+    font-size: 0.9em;
   }
 
   .cart-items__plan-price-now {
@@ -517,8 +525,8 @@
   }
 
   .cart-items__plan-saving {
-    font-weight: 600;
-    color: var(--dm-cart-accent, currentColor);
+    font-weight: 700;
+    color: var(--color-foreground);
   }
 
   .cart-items__empty-text {
