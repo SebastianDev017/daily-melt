@@ -109,7 +109,7 @@
             "title": {
               "type": "text",
               "settings": {
-                "text": "<h1>Daily Melt™</h1>",
+                "text": "<p>{{ closest.product.title }}</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
