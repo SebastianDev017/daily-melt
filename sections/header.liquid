@@ -350,6 +350,10 @@
   {% endif %}
   data-skip-node-update
   data-scroll-direction="none"
+  {% if section.settings.dm_always_drawer %}
+    data-dm-always-drawer
+    data-menu-style="drawer"
+  {% endif %}
   {% if section.settings.menu_row == 'top' and bottom_row_blocks.size > 0 %}
     data-submenu-overlap-bottom-row
   {% endif %}
@@ -524,6 +528,39 @@
 
   #header-component[data-menu-style='drawer'] .header__column {
     display: contents;
+  }
+
+  /* Daily Melt: hamburger + centered wordmark on every breakpoint (mockup proportions) */
+  #header-component[data-dm-always-drawer] .header__columns {
+    padding-inline: clamp(var(--page-margin), 6.9vw, 100px) clamp(var(--page-margin), 3.6vw, 52px);
+    min-height: var(--dm-header-min-height, 56px);
+  }
+
+  #header-component[data-dm-always-drawer] .header__icon--summary,
+  #header-component[data-dm-always-drawer] .header-actions__action {
+    color: inherit;
+  }
+
+  #header-component[data-dm-always-drawer] .header-drawer-icon--classic,
+  #header-component[data-dm-always-drawer] .header-drawer-icon--classic > svg {
+    width: 32px;
+    height: 20px;
+  }
+
+  #header-component[data-dm-always-drawer] header-actions {
+    --icon-size-md: 1.5rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    #header-component[data-dm-always-drawer] .header__columns {
+      min-height: var(--dm-header-min-height-mobile, 52px);
+    }
+
+    #header-component[data-dm-always-drawer] .header-drawer-icon--classic,
+    #header-component[data-dm-always-drawer] .header-drawer-icon--classic > svg {
+      width: 26px;
+      height: 17px;
+    }
   }
 
   @media screen and (min-width: 750px) {
@@ -1322,6 +1359,29 @@
         }
       ],
       "default": "top"
+    },
+    {
+      "type": "checkbox",
+      "id": "dm_always_drawer",
+      "label": "Always show the menu as a drawer (hamburger)",
+      "info": "Hamburger on the left, logo centered, actions on the right on every screen size.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "dm_menu_icon",
+      "label": "Hamburger icon",
+      "options": [
+        {
+          "value": "default",
+          "label": "Two lines"
+        },
+        {
+          "value": "classic",
+          "label": "Three lines"
+        }
+      ],
+      "default": "default"
     },
     {
       "type": "header",

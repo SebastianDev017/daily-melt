@@ -21,6 +21,8 @@
   endif
 
   assign alt_text_fallback = 'accessibility.home_logo_alt' | t: store_name: shop.name
+  assign wordmark = block_settings.dm_wordmark | default: shop.name
+  assign wordmark_font = block_settings.dm_wordmark_font | default: 'body'
 %}
 
 {% comment %}
@@ -36,9 +38,12 @@
   style="
     {% render 'size-style', settings: block_settings %}
     {% render 'spacing-style', settings: block_settings %}
-    --font-family: var(--font-body--family);
-    --font-style: var(--font-body--style);
-    --font-weight: 600;
+    --font-family: var(--font-{{ wordmark_font }}--family);
+    --font-style: var(--font-{{ wordmark_font }}--style);
+    --font-weight: {{ block_settings.dm_wordmark_weight | default: 600 }};
+    --dm-wordmark-size: {{ block_settings.dm_wordmark_size | default: 18 }}px;
+    --dm-wordmark-size-mobile: {{ block_settings.dm_wordmark_size_mobile | default: 16 }}px;
+    --dm-wordmark-tracking: {{ block_settings.dm_wordmark_tracking | default: 0 | divided_by: 100.0 }}em;
   "
   {{ block.shopify_attributes }}
 >
@@ -62,7 +67,7 @@
       class: 'header-logo__image',
       height: settings.logo_height,
       alt_text_fallback: alt_text_fallback,
-      text_fallback: shop.name,
+      text_fallback: wordmark,
       style: logo_style
     %}
   </span>
@@ -77,7 +82,7 @@
         class: 'header-logo__image',
         height: settings.logo_height,
         alt_text_fallback: alt_text_fallback,
-        text_fallback: shop.name,
+        text_fallback: wordmark,
         style: inverse_logo_style
       %}
     </span>
@@ -88,7 +93,9 @@
   .header-logo {
     display: flex;
     height: 100%;
-    font-size: var(--font-size--md);
+    font-size: var(--dm-wordmark-size-mobile, var(--font-size--md));
+    letter-spacing: var(--dm-wordmark-tracking, normal);
+    white-space: nowrap;
     font-family: var(--font-family);
     font-weight: var(--font-weight);
     font-style: var(--font-style);
@@ -115,6 +122,7 @@
 
     @media screen and (min-width: 750px) {
       flex-shrink: 0;
+      font-size: var(--dm-wordmark-size, var(--font-size--md));
     }
 
     &:hover {
@@ -151,6 +159,98 @@
     {
       "type": "paragraph",
       "content": "t:content.edit_logo_in_theme_settings"
+    },
+    {
+      "type": "header",
+      "content": "Text logo (wordmark)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shown when no logo image is set in Theme settings > Logo and favicon."
+    },
+    {
+      "type": "text",
+      "id": "dm_wordmark",
+      "label": "Wordmark text",
+      "info": "Leave empty to use the store name."
+    },
+    {
+      "type": "select",
+      "id": "dm_wordmark_font",
+      "label": "Font",
+      "options": [
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "select",
+      "id": "dm_wordmark_weight",
+      "label": "Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "dm_wordmark_size",
+      "label": "Size (desktop)",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "dm_wordmark_size_mobile",
+      "label": "Size (mobile)",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "dm_wordmark_tracking",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "default": 0
     },
     {
       "type": "header",
