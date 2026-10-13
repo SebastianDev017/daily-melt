@@ -138,6 +138,11 @@
 {%- endif -%}
 
 {% stylesheet %}
+  /* Daily Melt: breathing room between the trust strip and the first cart line */
+  .dm-cart-trust.cart-drawer__trust {
+    margin-block-end: var(--padding-xl, 24px);
+  }
+
   cart-drawer-component {
     --cart-drawer-padding: var(--theme-drawer-padding);
     --font-paragraph--line-height: 1;
