@@ -538,7 +538,43 @@
     font-weight: 400;
   }
 
+  .sticky-add-to-cart__variant {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dm-sticky-price s {
+    margin-inline-start: 0.35em;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
   @media screen and (max-width: 749px) {
+    sticky-add-to-cart .sticky-add-to-cart__bar {
+      gap: 10px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar .sticky-add-to-cart__price {
+      display: none;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar .sticky-add-to-cart__button {
+      flex: 0 0 auto;
+      width: auto;
+      padding-inline: 18px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar .sticky-add-to-cart__button .svg-wrapper {
+      display: none;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar .add-to-cart-text__content {
+      display: inline;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+
     .dm-purchase--buttons-first .dm-purchase__actions {
       display: contents;
     }

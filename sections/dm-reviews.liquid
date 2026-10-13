@@ -118,6 +118,7 @@
   }
 
   .dm-reviews__inner {
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -133,6 +134,7 @@
   }
 
   .dm-reviews__body {
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -243,10 +245,13 @@
   @media screen and (max-width: 749px) {
     .dm-reviews__toolbar {
       flex-direction: column;
+      flex-wrap: nowrap;
       align-items: stretch;
+      min-width: 0;
     }
 
     .dm-reviews__filters {
+      min-width: 0;
       flex-wrap: nowrap;
       overflow-x: auto;
       margin-inline: calc(var(--page-margin, 16px) * -1);
