@@ -685,11 +685,153 @@
         "step_2",
         "step_3"
       ]
+    },
+    "dm_consistency": {
+      "type": "dm-cards",
+      "settings": {
+        "heading": "Consistency Creates Change. Feel The Results Over Time.",
+        "text": "<p>Daily Melt isn’t an overnight fix. Its clinically studied ingredients are designed to support satiety, metabolic health, and healthy weight management with consistent daily use.</p><p>As the ritual becomes part of your routine, you may notice that cravings feel calmer, energy feels steadier, and healthy choices become easier to maintain.*</p>",
+        "columns": 3,
+        "button_label": "Shop Daily Melt",
+        "button_link": "",
+        "background": "{{ settings.color_palette.foreground }}",
+        "text_color": "{{ settings.color_palette.cream_light }}",
+        "card_background": "{{ settings.color_palette.cream_light }}",
+        "card_text_color": "{{ settings.color_palette.foreground }}",
+        "accent_color": "{{ settings.color_palette.accent }}",
+        "radius": 0,
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "month_1": {
+          "type": "_dm-card",
+          "settings": {
+            "show_image": true,
+            "tag": "Month 1",
+            "title": "Build the Ritual",
+            "subtitle": "Give your body consistent daily support.",
+            "items": "Begin establishing more balanced daily habits*\nFeel more satisfied after meals*\nSupport steadier energy throughout the day*\nStart satisfying chocolate cravings more mindfully*",
+            "more_label": "Learn More",
+            "more_text": ""
+          }
+        },
+        "month_2": {
+          "type": "_dm-card",
+          "settings": {
+            "show_image": true,
+            "tag": "Month 2",
+            "title": "Find Your Rhythm",
+            "subtitle": "Consistency begins to feel more natural.",
+            "items": "Fullness and appetite cues may feel easier to recognize*\nCravings between meals may feel more manageable*\nSupport healthy blood sugar levels already within a normal range*\nFeel more consistent in the habits that support your goals*",
+            "more_label": "Learn More",
+            "more_text": ""
+          }
+        },
+        "month_3": {
+          "type": "_dm-card",
+          "settings": {
+            "show_image": true,
+            "tag": "Month 3",
+            "title": "Keep the Momentum Going",
+            "subtitle": "Let small, repeatable choices add up over time.",
+            "items": "Support a healthy, active metabolism*\nMaintain steadier energy and greater satisfaction*\nMake healthy weight management feel more sustainable*\nFeel more confident and consistent in your daily routine*",
+            "more_label": "Learn More",
+            "more_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "month_1",
+        "month_2",
+        "month_3"
+      ]
+    },
+    "dm_ingredients": {
+      "type": "dm-tabs",
+      "settings": {
+        "heading": "Science-Backed Ingredients for Metabolic Support",
+        "text": "",
+        "button_label": "View Full Ingredient List",
+        "button_link": "",
+        "background": "",
+        "panel_background": "{{ settings.color_palette.cream_light }}",
+        "accent_color": "{{ settings.color_palette.accent }}",
+        "radius": 0,
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "african_spice_fruit": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "African Spice Fruit",
+            "heading": "African Spice Fruit",
+            "text": "",
+            "items": "Supports natural GLP-1 activity*\nPromotes satiety*\nSupports healthy weight management*"
+          }
+        },
+        "resistant_potato_starch": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Resistant Potato Starch",
+            "heading": "Resistant Potato Starch",
+            "text": "",
+            "items": "Feeds beneficial gut bacteria*\nSupports natural fullness*\nPromotes digestive wellness*"
+          }
+        },
+        "ceylon_cinnamon": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Ceylon Cinnamon",
+            "heading": "Ceylon Cinnamon",
+            "text": "",
+            "items": "Supports healthy glucose metabolism*\nProvides antioxidant protection*\nPromotes balanced blood sugar levels*"
+          }
+        },
+        "chromium_picolinate": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Chromium Picolinate",
+            "heading": "Chromium Picolinate",
+            "text": "",
+            "items": "Supports carbohydrate and fat metabolism*\nPromotes healthy blood sugar regulation*\nSupports balanced energy*"
+          }
+        },
+        "organic_cacao": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Organic Cacao",
+            "heading": "Organic Cacao",
+            "text": "",
+            "items": "Rich in flavonoid antioxidants\nSatisfies chocolate cravings\nDelivers deep, indulgent flavor"
+          }
+        },
+        "mct_oil_powder": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "MCT Oil Powder",
+            "heading": "MCT Oil Powder",
+            "text": "",
+            "items": "Provides a quick source of energy*\nHelps you feel satisfied*\nCreates a smooth, creamy texture"
+          }
+        }
+      },
+      "block_order": [
+        "african_spice_fruit",
+        "resistant_potato_starch",
+        "ceylon_cinnamon",
+        "chromium_picolinate",
+        "organic_cacao",
+        "mct_oil_powder"
+      ]
     }
   },
   "order": [
     "main",
     "dm_description",
-    "dm_how_to_use"
+    "dm_how_to_use",
+    "dm_consistency",
+    "dm_ingredients"
   ]
 }

@@ -29,14 +29,12 @@
         {%- liquid
           assign key = 'image_' | append: i
           assign image = ss[key]
-          assign placeholder_names = 'lifestyle-1,lifestyle-2,image,product-1' | split: ','
-          assign placeholder_name = placeholder_names[forloop.index0]
         -%}
         <div class="dm-media-grid__item">
           {%- if image != blank -%}
             {{ image | image_url: width: 1400 | image_tag: widths: '400, 600, 800, 1000, 1400', sizes: '(min-width: 750px) 25vw, 50vw', loading: 'lazy', class: 'dm-media-grid__image' }}
           {%- else -%}
-            {{ placeholder_name | placeholder_svg_tag: 'dm-media-grid__image dm-media-grid__image--placeholder' }}
+            {{ 'image' | placeholder_svg_tag: 'dm-media-grid__image dm-media-grid__image--placeholder' }}
           {%- endif -%}
         </div>
       {%- endfor -%}

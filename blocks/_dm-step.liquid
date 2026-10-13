@@ -9,7 +9,7 @@
       {%- if bs.image != blank -%}
         {{ bs.image | image_url: width: 900 | image_tag: widths: '400, 600, 900', sizes: '(min-width: 750px) 33vw, 100vw', loading: 'lazy', class: 'dm-step__image' }}
       {%- else -%}
-        {{ 'lifestyle-1' | placeholder_svg_tag: 'dm-step__image dm-step__image--placeholder' }}
+        {{ 'image' | placeholder_svg_tag: 'dm-step__image dm-step__image--placeholder' }}
       {%- endif -%}
     </div>
   {%- endif -%}

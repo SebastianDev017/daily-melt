@@ -169,13 +169,30 @@ if (!customElements.get('dm-purchase-options')) {
  */
 class DmTabs extends HTMLElement {
   connectedCallback() {
+    const tablist = this.querySelector('[data-dm-tablist]');
+    if (tablist) {
+      this.querySelectorAll('.dm-tab > [role="tab"]').forEach((tab) => tablist.appendChild(tab));
+    }
     this.tabs = [...this.querySelectorAll('[role="tab"]')];
     this.panels = [...this.querySelectorAll('[role="tabpanel"]')];
     this.tabs.forEach((tab, index) => {
       tab.addEventListener('click', () => this.select(index, true));
       tab.addEventListener('keydown', (event) => this.#onKeydown(event, index));
     });
+    const initial = Math.max(0, this.tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true'));
+    this.select(initial);
+    this.dataset.ready = '';
+    document.addEventListener('shopify:block:select', this.#onBlockSelect);
   }
+
+  disconnectedCallback() {
+    document.removeEventListener('shopify:block:select', this.#onBlockSelect);
+  }
+
+  #onBlockSelect = (event) => {
+    const index = this.panels.findIndex((panel) => panel.dataset.blockId === event.detail?.blockId);
+    if (index > -1) this.select(index);
+  };
 
   #onKeydown(event, index) {
     const last = this.tabs.length - 1;
@@ -208,6 +225,19 @@ class DmTabs extends HTMLElement {
 if (!customElements.get('dm-tabs')) {
   customElements.define('dm-tabs', DmTabs);
 }
+
+/* "View full ingredient list" opens the Supplement Facts popup of the purchase block. */
+document.addEventListener('click', (event) => {
+  const trigger = event.target.closest('[data-dm-open-sfp]');
+  if (!trigger) return;
+  const popup = document.querySelector('.dm-purchase .popup-link');
+  if (popup && typeof popup.showDialog === 'function') {
+    event.preventDefault();
+    popup.showDialog();
+  } else {
+    document.getElementById('dm-buy')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
 
 /**
  * Placeholder reviews list: rating filter, verified filter, sort and "load more".

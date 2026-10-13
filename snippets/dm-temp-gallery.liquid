@@ -82,7 +82,7 @@
           >
         {%- else -%}
           <div class="dm-temp-media__placeholder">
-            {{ 'product-' | append: forloop.index0 | placeholder_svg_tag: 'dm-temp-media__svg' }}
+            {{ 'image' | placeholder_svg_tag: 'dm-temp-media__svg' }}
             {%- if caption != blank -%}
               <span class="dm-temp-media__caption">{{ caption }}</span>
             {%- endif -%}
@@ -121,7 +121,7 @@
       {%- elsif forloop.first -%}
         <img src="{{ 'dm-pouch-600.jpg' | asset_url }}" alt="" loading="lazy" width="144" height="192">
       {%- else -%}
-        <span class="dm-temp-thumb">{{ 'product-' | append: forloop.index0 | placeholder_svg_tag }}</span>
+        <span class="dm-temp-thumb">{{ 'image' | placeholder_svg_tag }}</span>
       {%- endif -%}
     </button>
   {%- endfor -%}

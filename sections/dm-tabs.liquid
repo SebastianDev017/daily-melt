@@ -1,0 +1,260 @@
+{%- comment -%}
+  Daily Melt — heading + pill tabs + panel (image | text card) + CTA. Used for the ingredients
+  breakdown on the PDP. Each tab is a "DM · Tab" block; the pills are built from the blocks list.
+{%- endcomment -%}
+
+{%- liquid
+  assign ss = section.settings
+  assign tablist_label = ss.heading
+  if tablist_label == blank
+    assign tablist_label = 'dm.tabs.label' | t
+  endif
+-%}
+
+<div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
+<div
+  class="dm-tabs section section--page-width"
+  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-radius: {{ ss.radius }}px; --dm-panel-bg: {{ ss.panel_background }}; --dm-accent: {{ ss.accent_color }};"
+>
+  <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
+  <dm-tabs class="dm-tabs__inner">
+    {%- if ss.heading != blank or ss.text != blank -%}
+      <header class="dm-tabs__header">
+        {%- if ss.heading != blank -%}
+          <h2 class="dm-tabs__heading h2">{{ ss.heading }}</h2>
+        {%- endif -%}
+        {%- if ss.text != blank -%}
+          <div class="dm-tabs__text">{{ ss.text }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="dm-tabs__list" role="tablist" aria-label="{{ tablist_label | escape }}" data-dm-tablist></div>
+
+    <div class="dm-tabs__panels">
+      {% content_for 'blocks' %}
+    </div>
+
+    {%- if ss.button_label != blank -%}
+      <div class="dm-tabs__cta">
+        {%- if ss.button_link != blank -%}
+          <a class="button button-secondary" href="{{ ss.button_link }}">{{ ss.button_label }}</a>
+        {%- else -%}
+          <button type="button" class="button button-secondary" data-dm-open-sfp>{{ ss.button_label }}</button>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </dm-tabs>
+</div>
+
+{% stylesheet %}
+  .dm-tabs {
+    padding-block: var(--dm-pt) var(--dm-pb);
+  }
+
+  .dm-tabs__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .dm-tabs__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .dm-tabs__heading {
+    margin: 0;
+    max-width: 26ch;
+    text-wrap: balance;
+  }
+
+  .dm-tabs__text {
+    max-width: 40rem;
+  }
+
+  .dm-tabs__text p {
+    margin: 0;
+  }
+
+  .dm-tabs__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .dm-tabs__tab {
+    padding: 9px 18px;
+    border: 1px solid var(--color-foreground);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-foreground);
+    font-family: var(--font-body--family);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .dm-tabs__tab:hover {
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .dm-tabs__tab[aria-selected='true'] {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .dm-tabs__tab:focus-visible {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 3px;
+  }
+
+  dm-tabs:not([data-ready]) .dm-tabs__panels > :not(:first-child) {
+    display: none;
+  }
+
+  dm-tabs:not([data-ready]) .dm-tab > .dm-tabs__tab {
+    display: block;
+    margin: 0 auto 20px;
+  }
+
+  dm-tabs[data-ready] .dm-tabs__list:empty {
+    display: none;
+  }
+
+  .dm-tabs__cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    .dm-tabs__list {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      margin-inline: calc(var(--page-margin, 16px) * -1);
+      padding: 2px var(--page-margin, 16px) 6px;
+      scrollbar-width: none;
+      scroll-snap-type: x proximity;
+    }
+
+    .dm-tabs__list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dm-tabs__tab {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      white-space: nowrap;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .dm-tabs__inner {
+      gap: 36px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Tabs",
+  "tag": "section",
+  "class": "dm-section",
+  "blocks": [{ "type": "_dm-tab" }],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Science-Backed Ingredients for Metabolic Support"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View Full Ingredient List"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Leave empty to open the Supplement Facts popup of the product."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "Section background"
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Text card background",
+      "default": "{{ settings.color_palette.cream_light }}"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (image border, checks)",
+      "default": "{{ settings.color_palette.accent }}"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Tabs",
+      "blocks": {
+        "tab_1": { "type": "_dm-tab" },
+        "tab_2": { "type": "_dm-tab" }
+      },
+      "block_order": ["tab_1", "tab_2"]
+    }
+  ]
+}
+{% endschema %}
