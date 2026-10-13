@@ -147,3 +147,10 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Daily Melt theme
+referencias daily melt/
+referencias*/
+.shopify/
+.DS_Store
+Thumbs.db
