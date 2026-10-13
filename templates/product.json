@@ -49,7 +49,7 @@
             "constrain_to_viewport": false,
             "media_fit": "cover",
             "media_radius": 0,
-            "extend_media": false,
+            "extend_media": true,
             "zoom": false,
             "video_loop": false,
             "hide_variants": true,
@@ -348,7 +348,7 @@
                     "sfp_heading": {
                       "type": "text",
                       "settings": {
-                        "text": "<h3>Supplement Facts</h3>",
+                        "text": "<h3>Supplement Facts</h3><ul><li>Feeling fuller for longer</li><li>Calming cravings between meals</li><li>Satisfying your sweet tooth</li><li>Supporting natural appetite control</li><li>25 servings per pouch</li></ul>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -373,6 +373,7 @@
                     "sfp_image": {
                       "type": "image",
                       "settings": {
+                        "image": "shopify://shop_images/Screenshot2026-08-26at12.23.37PM.png",
                         "link": "",
                         "image_ratio": "adapt",
                         "width": "fill",
