@@ -1,12 +1,16 @@
 
-{% render 'product-media-gallery-content',
-  media_presentation: block.settings.media_presentation,
-  block_settings: block.settings,
-  block_id: block.id,
-  block_shopify_attributes: block.shopify_attributes,
-  block: block,
-  section: section
-%}
+{% if block.settings.dm_temp_gallery %}
+  {% render 'dm-temp-gallery', block_settings: block.settings, block_shopify_attributes: block.shopify_attributes %}
+{% else %}
+  {% render 'product-media-gallery-content',
+    media_presentation: block.settings.media_presentation,
+    block_settings: block.settings,
+    block_id: block.id,
+    block_shopify_attributes: block.shopify_attributes,
+    block: block,
+    section: section
+  %}
+{% endif %}
 
 {% schema %}
 {
@@ -275,6 +279,77 @@
       "id": "hide_variants",
       "default": false,
       "label": "t:settings.hide_unselected_variant_media"
+    },
+    {
+      "type": "header",
+      "content": "Daily Melt · Temporary gallery"
+    },
+    {
+      "type": "checkbox",
+      "id": "dm_temp_gallery",
+      "label": "Use temporary gallery",
+      "info": "Shows the images below instead of the product media (carousel + thumbnails). Turn off once the final photos are uploaded to the product.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "dm_slots",
+      "label": "Number of images",
+      "min": 1,
+      "max": 7,
+      "step": 1,
+      "default": 7,
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dm_image_1",
+      "label": "Image 1 (empty = pouch packshot)",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dm_image_2",
+      "label": "Image 2",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dm_image_3",
+      "label": "Image 3",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dm_image_4",
+      "label": "Image 4",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dm_image_5",
+      "label": "Image 5",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dm_image_6",
+      "label": "Image 6",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dm_image_7",
+      "label": "Image 7",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
+    },
+    {
+      "type": "textarea",
+      "id": "dm_captions",
+      "label": "Placeholder captions",
+      "info": "One per line, in image order. Shown only on empty slots.",
+      "default": "Main: Daily Melt package with drink and frother on white background\nAngle 2: % stat of increase benefits\nAngle 3: Ingredient label / Supplement Facts\nAngle 4: Lifestyle shot (person enjoying)\nAngle 5: Before & after\nAngle 6: Delicious drink shot with benefits\nAngle 7: Subscription gifts",
+      "visible_if": "{{ block.settings.dm_temp_gallery }}"
     },
     {
       "type": "header",

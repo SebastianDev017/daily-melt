@@ -1,1 +1,577 @@
-{"sections":{"main":{"type":"product-information","blocks":{"disclosures_g9mWze":{"type":"disclosures","name":"t:names.disclosures","settings":{"heading":"Disclosures","heading_preset":"h5","open_by_default":false,"icon":"caret","disclosure_heading_preset":"h6","text_color":"","dividers":true,"divider_color":"{{ settings.color_palette.color2 }}","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"media-gallery":{"type":"_product-media-gallery","static":true,"settings":{"media_presentation":"grid","media_columns":"two","image_gap":4,"large_first_image":false,"icons_style":"arrow","slideshow_controls_style":"counter","slideshow_mobile_controls_style":"dots","thumbnail_position":"right","thumbnail_width":44,"thumbnail_radius":0,"aspect_ratio":"adapt","constrain_to_viewport":true,"media_fit":"contain","media_radius":0,"extend_media":false,"zoom":true,"video_loop":false,"hide_variants":true,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"product-details":{"type":"_product-details","static":true,"settings":{"width":"custom","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","details_position":"flex-start","gap":28,"sticky_details_desktop":true,"background_media":"none","background_color":"","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_color":"","border_radius":0,"padding-block-start":24,"padding-block-end":24,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"group_icgrde":{"type":"group","name":"t:names.header","settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":12,"width":"fill","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"background_media":"none","background_color":"","video_position":"cover","background_image_position":"cover","toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","border":"none","border_width":1,"border_opacity":100,"border_color":"","border_radius":0,"link":"","open_in_new_tab":false,"placeholder":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"text_xrnftG":{"type":"text","name":"t:names.product_title","settings":{"text":"<h1>{{ closest.product.title }}<\/h1>","width":"100%","max_width":"normal","alignment":"left","type_preset":"h3","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","text_color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"price_tVjtKg":{"type":"price","settings":{"show_sale_price_first":true,"show_installments":false,"show_tax_info":false,"type_preset":"paragraph","width":"100%","alignment":"left","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","text_color":"","padding-block-start":4,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["text_xrnftG","price_tVjtKg"]},"divider_VJhene":{"type":"_divider","name":"t:names.divider","settings":{"thickness":1,"corner_radius":"square","divider_color":"{{ settings.color_palette.color2 }}","width_percent":100,"padding-block-start":0,"padding-block-end":0},"blocks":{}},"variant_picker_R3rGDr":{"type":"variant-picker","settings":{"variant_style":"buttons","show_swatches":true,"option_label_text_color":"","variant_style_class":"default","custom_variant_background":"{{ settings.color_palette.background }}","custom_variant_text":"{{ settings.color_palette.foreground }}","custom_variant_border":"{{ settings.color_palette.foreground }}","selected_variant_style_class":"default","custom_selected_variant_background":"{{ settings.color_palette.foreground }}","custom_selected_variant_text":"{{ settings.color_palette.background }}","custom_selected_variant_border":"{{ settings.color_palette.foreground }}","alignment":"left","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"recharge_subscriptions_subscription_widget_v2_zR3Fxg":{"type":"shopify:\/\/apps\/recharge-subscriptions\/blocks\/subscription-widget-v2\/371eed76-0b44-4869-9813-730372ea378e","settings":{}},"buy_buttons_eYQEYi":{"type":"buy-buttons","settings":{"stacking":true,"text_color":"","show_pickup_availability":false,"gift_card_form":true,"recipient_button_style":"default","recipient_button_background":"{{ settings.color_palette.background }}","recipient_button_text":"{{ settings.color_palette.foreground }}","recipient_button_border":"{{ settings.color_palette.foreground }}","selected_recipient_button_style":"default","selected_recipient_button_background":"{{ settings.color_palette.foreground }}","selected_recipient_button_text":"{{ settings.color_palette.background }}","selected_recipient_button_border":"{{ settings.color_palette.foreground }}","input_style":"default","input_background_color":"{{ settings.color_palette.background }}","input_text_color":"{{ settings.color_palette.foreground }}","input_border_color":"{{ settings.color_palette.foreground }}","border_width":1,"border_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"quantity":{"type":"quantity","static":true,"settings":{"input_style":"default","input_background_color":"{{ settings.color_palette.background }}","input_text_color":"{{ settings.color_palette.foreground }}","input_border_color":"{{ settings.color_palette.foreground }}","border_width":1,"border_radius":0},"blocks":{}},"add-to-cart":{"type":"add-to-cart","static":true,"settings":{"style_class":"button","custom_button_background":"{{ settings.color_palette.foreground }}","custom_button_text":"{{ settings.color_palette.background }}","custom_button_border":"{{ settings.color_palette.background }}"},"blocks":{}},"accelerated-checkout":{"type":"accelerated-checkout","static":true,"settings":{},"blocks":{}}},"block_order":[]},"text_aEtTtq":{"type":"text","name":"t:names.product_description","settings":{"text":"{{ closest.product.description }}","width":"100%","max_width":"normal","alignment":"left","type_preset":"rte","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","text_color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["group_icgrde","divider_VJhene","variant_picker_R3rGDr","recharge_subscriptions_subscription_widget_v2_zR3Fxg","buy_buttons_eYQEYi","text_aEtTtq"]}},"block_order":["disclosures_g9mWze"],"settings":{"content_width":"content-center-aligned","desktop_media_position":"left","equal_columns":true,"limit_details_width":false,"gap":48,"enable_sticky_add_to_cart":true,"background_color":"{{ settings.color_palette.background }}","padding-block-start":0,"padding-block-end":0}},"product_recommendations_qggXJq":{"type":"product-recommendations","blocks":{"text_cbcgyb":{"type":"text","name":"t:names.header","settings":{"text":"<h3>You may also like <\/h3>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"h4","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","text_color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"static-product-card":{"type":"_product-card","name":"t:names.product_card","static":true,"settings":{"product_card_gap":8,"background_color":"","border":"none","border_width":1,"border_opacity":100,"border_color":"","border_radius":0,"padding-block-start":0,"padding-block-end":8,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"product_card_gallery_DNizbJ":{"type":"_product-card-gallery","name":"t:names.product_card_media","settings":{"image_ratio":"adapt","border":"none","border_width":1,"border_opacity":100,"border_color":"","border_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"product_title_M7MJkb":{"type":"product-title","name":"t:names.product_title","settings":{"width":"100%","max_width":"normal","alignment":"left","type_preset":"rte","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","text_color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":4,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"price_gLWgA6":{"type":"price","settings":{"show_sale_price_first":true,"show_installments":false,"show_tax_info":false,"type_preset":"h6","width":"100%","alignment":"left","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","text_color":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["product_card_gallery_DNizbJ","product_title_M7MJkb","price_gLWgA6"]}},"block_order":["text_cbcgyb"],"name":"t:names.product_recommendations","settings":{"product":"{{ closest.product }}","recommendation_type":"related","layout_type":"grid","carousel_on_mobile":false,"max_products":4,"columns":4,"mobile_columns":"2","columns_gap":12,"rows_gap":24,"icons_style":"arrow","icons_shape":"none","section_width":"page-width","gap":28,"background_color":"{{ settings.color_palette.background }}","padding-block-start":48,"padding-block-end":48}}},"order":["main","product_recommendations_qggXJq"]}
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "arrow",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "left",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "1/1.25",
+            "constrain_to_viewport": false,
+            "media_fit": "cover",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "dm_temp_gallery": true,
+            "dm_slots": 7
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 16,
+            "sticky_details_desktop": false,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 32,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "rating": {
+              "type": "dm-rating",
+              "settings": {
+                "show_placeholder": true,
+                "placeholder_rating": 4.5,
+                "placeholder_count": 2235,
+                "count_label": "Verified Reviews",
+                "link": "#reviews",
+                "show_number": false,
+                "star_color": "{{ settings.color_palette.accent }}",
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              }
+            },
+            "title": {
+              "type": "text",
+              "settings": {
+                "text": "<h1>Daily Melt™</h1>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "h1"
+              },
+              "blocks": {}
+            },
+            "subtitle": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Mother Nature’s pathway to calm cravings, control appetite without needles, stimulants or lab-made chemicals</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "flavor": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Classic Dark Chocolate</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-accent--family)",
+                "font_size": "1.5rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.accent }}"
+              },
+              "blocks": {}
+            },
+            "taste": {
+              "type": "text",
+              "settings": {
+                "text": "<p><em>Deep dark chocolate with a gently sweet, warm cinnamon finish.</em></p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "paragraph"
+              },
+              "blocks": {}
+            },
+            "benefits": {
+              "type": "dm-checklist",
+              "settings": {
+                "items": "Natural GLP-1 support*\nHelps manage cravings*\nPrebiotic gut support",
+                "layout": "inline",
+                "icon": "circle_check",
+                "text_size": "small",
+                "alignment": "left",
+                "padding-block-start": 4,
+                "padding-block-end": 0
+              }
+            },
+            "divider": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "{{ settings.color_palette.foreground }}",
+                "width_percent": 100,
+                "padding-block-start": 4,
+                "padding-block-end": 4
+              },
+              "blocks": {}
+            },
+            "purchase": {
+              "type": "dm-purchase-options",
+              "settings": {
+                "label": "",
+                "link_label": "",
+                "link": "",
+                "default_option": "subscription",
+                "one_time_first": false,
+                "show_button_price": true,
+                "mobile_buttons_first": true,
+                "servings": 25,
+                "sub_badge": "Most popular - Get 15% off for life",
+                "sub_title": "Delivered Monthly",
+                "sub_price_suffix": "/month",
+                "show_per_serving": true,
+                "per_serving_suffix": "/serving",
+                "sub_subtitle": "",
+                "sub_perks": "Free frother ($25 value)\nFree shipping delivered every 30 days\nCancel anytime, no commitment\n60-Day Money Back Guarantee",
+                "frequency_label": "Deliver every",
+                "default_plan_position": 1,
+                "demo_discount": 15,
+                "one_badge": "",
+                "one_title": "One-Time Purchase",
+                "one_subtitle": "",
+                "one_perks": "Delivered once\n60-Day Money Back Guarantee",
+                "perks_style": "inline",
+                "accent_color": "{{ settings.color_palette.accent }}",
+                "selected_background": "{{ settings.color_palette.cream_light }}",
+                "card_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0
+              },
+              "blocks": {
+                "buy_buttons": {
+                  "type": "buy-buttons",
+                  "settings": {
+                    "stacking": true,
+                    "text_color": "",
+                    "show_pickup_availability": false,
+                    "gift_card_form": true,
+                    "recipient_button_style": "default",
+                    "recipient_button_background": "{{ settings.color_palette.background }}",
+                    "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                    "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                    "selected_recipient_button_style": "default",
+                    "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                    "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                    "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "quantity": {
+                      "type": "quantity",
+                      "static": true,
+                      "settings": {
+                        "input_style": "default",
+                        "input_background_color": "{{ settings.color_palette.background }}",
+                        "input_text_color": "{{ settings.color_palette.foreground }}",
+                        "input_border_color": "{{ settings.color_palette.foreground }}",
+                        "border_width": 1,
+                        "border_radius": 0
+                      },
+                      "blocks": {},
+                      "disabled": true
+                    },
+                    "add-to-cart": {
+                      "type": "add-to-cart",
+                      "static": true,
+                      "settings": {
+                        "style_class": "button",
+                        "custom_button_background": "{{ settings.color_palette.foreground }}",
+                        "custom_button_text": "{{ settings.color_palette.background }}",
+                        "custom_button_border": "{{ settings.color_palette.background }}"
+                      },
+                      "blocks": {}
+                    },
+                    "accelerated-checkout": {
+                      "type": "accelerated-checkout",
+                      "static": true,
+                      "settings": {},
+                      "blocks": {},
+                      "disabled": true
+                    }
+                  }
+                },
+                "supplement_facts": {
+                  "type": "popup-link",
+                  "settings": {
+                    "behavior": "default",
+                    "heading": "View Supplement Facts",
+                    "type_preset": ""
+                  },
+                  "blocks": {
+                    "sfp_heading": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<h3>Supplement Facts</h3>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "h4"
+                      },
+                      "blocks": {}
+                    },
+                    "sfp_image": {
+                      "type": "image",
+                      "settings": {},
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "sfp_heading",
+                    "sfp_image"
+                  ]
+                }
+              },
+              "block_order": [
+                "buy_buttons",
+                "supplement_facts"
+              ]
+            },
+            "trust": {
+              "type": "dm-checklist",
+              "settings": {
+                "items": "60-Day Money-Back Guarantee\nThird-Party Tested for Purity\nMade in the USA in an FDA-reviewed, NSF and GMP certified facility",
+                "layout": "inline",
+                "icon": "check",
+                "text_size": "small",
+                "alignment": "center"
+              }
+            },
+            "gifts": {
+              "type": "dm-subscription-gifts",
+              "settings": {
+                "heading": "Subscribe & Save 15%",
+                "text": "<p>Build your complete Daily Melt ritual with a new subscriber gift in each of your first four deliveries.</p>",
+                "perks": "Free frother in your first box\nFree recipe guidebook/e-book\nFree fast shipping\nBonus gifts in deliveries 2, 3, and 4\nSkip or cancel anytime",
+                "cta_label": "Start My Daily Melt Ritual",
+                "cta_action": "subscribe",
+                "style": "lines",
+                "accent_color": "{{ settings.color_palette.accent }}",
+                "padding-block-start": 4,
+                "padding-block-end": 0
+              },
+              "blocks": {
+                "gift_1": {
+                  "type": "_dm-gift",
+                  "settings": {
+                    "label": "First delivery",
+                    "name": "Frother + digital extras",
+                    "locked": false
+                  }
+                },
+                "gift_2": {
+                  "type": "_dm-gift",
+                  "settings": {
+                    "label": "Second delivery",
+                    "name": "Metal scoop",
+                    "locked": true
+                  }
+                },
+                "gift_3": {
+                  "type": "_dm-gift",
+                  "settings": {
+                    "label": "Third delivery",
+                    "name": "Canister",
+                    "locked": true
+                  }
+                },
+                "gift_4": {
+                  "type": "_dm-gift",
+                  "settings": {
+                    "label": "Fourth delivery",
+                    "name": "Subscriber-exclusive cup",
+                    "locked": true
+                  }
+                }
+              },
+              "block_order": [
+                "gift_1",
+                "gift_2",
+                "gift_3",
+                "gift_4"
+              ]
+            },
+            "description_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Dark chocolate that does more than satisfy.*</h2>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "h4"
+              },
+              "blocks": {}
+            },
+            "description": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Daily Melt is a rich, creamy chocolate drink with clinically-studied ingredients that support natural GLP-1, satiety, healthy metabolism, and gut health.*</p>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "rte"
+              },
+              "blocks": {}
+            },
+            "key_benefits": {
+              "type": "dm-checklist",
+              "settings": {
+                "items": "Feeling fuller for longer\nCalming cravings between meals\nSatisfying your sweet tooth\nSupporting natural appetite control\n25 servings per pouch",
+                "layout": "stacked",
+                "icon": "check",
+                "text_size": "base",
+                "alignment": "left"
+              }
+            },
+            "accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "divider_color": "{{ settings.color_palette.foreground }}",
+                "type_preset": "h5",
+                "padding-block-start": 8,
+                "padding-block-end": 0
+              },
+              "blocks": {
+                "row_ingredients": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Key Ingredients",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>A doctor-formulated blend of functional ingredients that supports satiety, metabolism, and healthy weight management—without compromising on taste.</strong></p><ul><li>[Clinically studied active ingredient + primary benefit]</li><li>[Clinically studied active ingredient + primary benefit]</li><li>Organic cacao + cocoa for rich chocolate flavor</li><li>Carob for natural depth and sweetness</li><li>Ceylon cinnamon for a warm, balanced finish</li><li>Monk fruit for sweetness without added sugar</li></ul>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                },
+                "row_how_it_works": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "How Does It Work",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Daily Melt is a functional hot cacao designed to satisfy chocolate cravings while supporting your metabolism, satiety, and healthy blood sugar balance.</p><p>Powered by clinically studied ingredients, it works with your body’s natural pathways to help you feel satisfied and support healthy weight management—without pills, injections, or stimulants.</p><p>Enjoy it before or after a meal for a chocolate ritual that does more than satisfy your sweet tooth.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                },
+                "row_who": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Who It’s For",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Daily Melt is for anyone who wants to:</p><ul><li>Feel more satisfied between meals</li><li>Support a healthy, active metabolism</li><li>Satisfy chocolate cravings more mindfully</li><li>Support natural GLP-1 and fullness signals</li><li>Make healthy weight management feel more sustainable</li><li>Replace pills and restrictive routines with an enjoyable daily ritual</li></ul>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                },
+                "row_how_to_use": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "How To Use",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Blend one scoop with hot water or your favorite milk until smooth and creamy.</p><p>Enjoy it hot, poured over ice, blended into coffee, or prepared in your favorite way. Drink once daily, either before or after a meal, for best results.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                },
+                "row_taste": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Taste Profile",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Organic cacao and cocoa create a rich chocolate base, while carob, Ceylon cinnamon, and monk fruit round out every smooth, creamy cup. It’s indulgent without being overly sweet—like a grown-up hot chocolate made for your daily ritual.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_ingredients",
+                "row_how_it_works",
+                "row_who",
+                "row_how_to_use",
+                "row_taste"
+              ]
+            },
+            "recharge_subscriptions_subscription_widget_v2_zR3Fxg": {
+              "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+              "settings": {},
+              "disabled": true
+            }
+          },
+          "block_order": [
+            "rating",
+            "title",
+            "subtitle",
+            "flavor",
+            "taste",
+            "benefits",
+            "divider",
+            "purchase",
+            "trust",
+            "gifts",
+            "description_heading",
+            "description",
+            "key_benefits",
+            "accordion",
+            "recharge_subscriptions_subscription_widget_v2_zR3Fxg"
+          ]
+        },
+        "disclosures_g9mWze": {
+          "type": "disclosures",
+          "name": "t:names.disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h5",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h6",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "{{ settings.color_palette.color2 }}",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "disclosures_g9mWze"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 16,
+        "padding-block-end": 40
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

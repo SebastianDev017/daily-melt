@@ -1,0 +1,254 @@
+{%- doc -%}
+  Daily Melt — temporary product gallery driven by theme-editor image pickers instead of product media.
+  Reuses Horizon's slideshow, slide and thumbnail controls so it looks and behaves like the native
+  carousel. Slot 1 falls back to the pouch packshot (theme asset); empty slots show a captioned placeholder.
+  Turn it off in the Product media block once the real photos are uploaded to the product.
+
+  @param {object} block_settings - Settings of the _product-media-gallery block
+  @param {string} block_shopify_attributes - Block editor attributes
+
+  @example
+  {% render 'dm-temp-gallery', block_settings: block.settings, block_shopify_attributes: block.shopify_attributes %}
+{%- enddoc -%}
+
+{%- liquid
+  assign slot_count = block_settings.dm_slots | default: 7
+  assign captions = block_settings.dm_captions | newline_to_br | split: '<br />'
+  assign ratio = 0.8
+  if block_settings.aspect_ratio == '1'
+    assign ratio = 1
+  elsif block_settings.aspect_ratio == '2/1'
+    assign ratio = 2
+  endif
+  assign product_title = closest.product.title | default: shop.name | escape
+
+  if block_settings.slideshow_controls_style == 'thumbnails'
+    assign controls_on_media = false
+    assign pagination_position = block_settings.thumbnail_position
+  else
+    assign controls_on_media = true
+    assign pagination_position = 'center'
+  endif
+  if pagination_position == 'bottom'
+    assign pagination_position = 'center'
+  endif
+  if block_settings.slideshow_mobile_controls_style == 'thumbnails'
+    assign mobile_controls_on_media = false
+  else
+    assign mobile_controls_on_media = true
+  endif
+  assign desktop_style = block_settings.slideshow_controls_style | default: 'thumbnails'
+  assign mobile_style = block_settings.slideshow_mobile_controls_style | default: 'thumbnails'
+-%}
+
+{%- capture slides -%}
+  {%- for i in (1..slot_count) -%}
+    {%- liquid
+      assign key = 'dm_image_' | append: i
+      assign image = block_settings[key]
+      assign caption = captions[forloop.index0] | strip
+      assign alt = caption | default: product_title
+      if image != blank and image.alt != blank
+        assign alt = image.alt
+      endif
+      assign loading = 'lazy'
+      if forloop.first
+        assign loading = 'eager'
+      endif
+    -%}
+    {%- capture children -%}
+      <div class="product-media dm-temp-media" style="--ratio: {{ ratio }};">
+        {%- if image != blank -%}
+          {{
+            image
+            | image_url: width: 1920
+            | image_tag:
+              widths: '352, 640, 832, 1200, 1600, 1920',
+              sizes: '(min-width: 750px) 50vw, 100vw',
+              alt: alt,
+              class: 'product-media__image',
+              loading: loading
+          }}
+        {%- elsif forloop.first -%}
+          <img
+            class="product-media__image"
+            src="{{ 'dm-pouch-1200.jpg' | asset_url }}"
+            srcset="{{ 'dm-pouch-600.jpg' | asset_url }} 600w, {{ 'dm-pouch-1200.jpg' | asset_url }} 1200w"
+            sizes="(min-width: 750px) 50vw, 100vw"
+            width="1200"
+            height="1604"
+            alt="{{ product_title }}"
+            fetchpriority="high"
+          >
+        {%- else -%}
+          <div class="dm-temp-media__placeholder">
+            {{ 'product-' | append: forloop.index0 | placeholder_svg_tag: 'dm-temp-media__svg' }}
+            {%- if caption != blank -%}
+              <span class="dm-temp-media__caption">{{ caption }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endcapture -%}
+    {% render 'slideshow-slide',
+      index: forloop.index0,
+      children: children,
+      class: 'product-media-container media-fit-cover product-media-container--image',
+      style: '--media-preview-ratio: 0.8;',
+      media_fit: 'cover'
+    %}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture thumbnails_html -%}
+  {%- for i in (1..slot_count) -%}
+    {%- liquid
+      assign key = 'dm_image_' | append: i
+      assign image = block_settings[key]
+    -%}
+    <button
+      class="slideshow-control button button-unstyled slideshow-controls__thumbnail"
+      aria-label="{{ 'accessibility.slide_status' | t: index: forloop.index, length: forloop.length }}"
+      on:click="/select/{{ forloop.index0 }}"
+      style="--aspect-ratio: {{ ratio }};"
+      ref="thumbnails[]"
+      {% if forloop.first %}
+        aria-selected="true"
+      {% endif %}
+    >
+      {%- if image != blank -%}
+        {{ image | image_url: width: 144 | image_tag: loading: 'lazy', alt: '' }}
+      {%- elsif forloop.first -%}
+        <img src="{{ 'dm-pouch-600.jpg' | asset_url }}" alt="" loading="lazy" width="144" height="192">
+      {%- else -%}
+        <span class="dm-temp-thumb">{{ 'product-' | append: forloop.index0 | placeholder_svg_tag }}</span>
+      {%- endif -%}
+    </button>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture controls -%}
+  {%- if desktop_style == mobile_style -%}
+    {%- render 'slideshow-controls',
+      style: desktop_style,
+      item_count: slot_count,
+      thumbnails_html: thumbnails_html,
+      controls_on_media: controls_on_media,
+      pagination_position: pagination_position,
+      aspect_ratio: ratio,
+      thumbnail_radius: block_settings.thumbnail_radius
+    -%}
+  {%- else -%}
+    {%- render 'slideshow-controls',
+      class: 'mobile:hidden',
+      style: desktop_style,
+      item_count: slot_count,
+      thumbnails_html: thumbnails_html,
+      controls_on_media: controls_on_media,
+      pagination_position: pagination_position,
+      aspect_ratio: ratio,
+      thumbnail_radius: block_settings.thumbnail_radius
+    -%}
+    {%- unless mobile_style == 'hint' -%}
+      {%- render 'slideshow-controls',
+        class: 'desktop:hidden media-gallery__mobile-controls',
+        style: mobile_style,
+        item_count: slot_count,
+        thumbnails_html: thumbnails_html,
+        controls_on_media: mobile_controls_on_media,
+        pagination_position: 'center',
+        aspect_ratio: ratio,
+        thumbnail_radius: block_settings.thumbnail_radius
+      -%}
+    {%- endunless -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture slideshow_arrows -%}
+  {% render 'slideshow-arrows', class: 'desktop:hidden', icon_style: block_settings.icons_style %}
+{%- endcapture -%}
+
+<media-gallery
+  class="spacing-style sticky-content media-gallery--carousel dm-temp-gallery{% if block_settings.extend_media %} media-gallery--extend{% endif %}"
+  style="{% render 'spacing-style', settings: block_settings %} --thumbnail-width: {{ block_settings.thumbnail_width }}px; --media-radius: {{ block_settings.media_radius }}px; --gallery-aspect-ratio: {{ ratio }};"
+  data-presentation="carousel"
+  {{ block_shopify_attributes }}
+>
+  {% render 'slideshow',
+    ref: 'slideshow',
+    slides: slides,
+    slide_count: slot_count,
+    slideshow_arrows: slideshow_arrows,
+    arrows_position: 'center',
+    animate_arrows: false,
+    controls: controls
+  %}
+  {%- if request.design_mode -%}
+    <p class="dm-temp-gallery__notice">
+      {% render 'dm-placeholder-flag' %}
+      {{ 'dm.gallery.temp_notice' | t }}
+    </p>
+  {%- endif -%}
+</media-gallery>
+
+{% render 'product-media-container-styles' %}
+{% render 'product-media-gallery-content-styles' %}
+
+{% stylesheet %}
+  .dm-temp-gallery .product-media-container {
+    aspect-ratio: var(--gallery-aspect-ratio, 0.8);
+    overflow: hidden;
+    border-radius: var(--media-radius, 0);
+  }
+
+  .dm-temp-media,
+  .dm-temp-media .product-media__image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .dm-temp-media .product-media__image {
+    object-fit: cover;
+  }
+
+  .dm-temp-media__placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .dm-temp-media__svg {
+    width: 100%;
+    height: 100%;
+    fill: rgb(var(--color-foreground-rgb) / 0.25);
+  }
+
+  .dm-temp-media__caption {
+    position: absolute;
+    inset: auto 16px 16px;
+    padding: 10px 12px;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    text-align: center;
+    background: rgb(var(--color-background-rgb) / 0.9);
+  }
+
+  .dm-temp-thumb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .dm-temp-thumb svg {
+    width: 100%;
+    height: 100%;
+    fill: rgb(var(--color-foreground-rgb) / 0.3);
+  }
+
+  .dm-temp-gallery__notice {
+    margin: 8px 0 0;
+    font-size: 0.75rem;
+  }
+{% endstylesheet %}

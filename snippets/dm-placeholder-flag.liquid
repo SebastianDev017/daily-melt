@@ -1,0 +1,20 @@
+{%- doc -%}
+  Daily Melt — red "Placeholder" tag used to mark sample content (only rendered in the theme editor by callers).
+
+  @example
+  {% render 'dm-placeholder-flag' %}
+{%- enddoc -%}
+<span class="dm-placeholder-flag">{{ 'dm.general.placeholder' | t }}</span>
+
+{% stylesheet %}
+  .dm-placeholder-flag {
+    display: inline-block;
+    padding: 0.15em 0.5em;
+    font: 600 10px/1.4 var(--font-body--family);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #b42318;
+    vertical-align: middle;
+  }
+{% endstylesheet %}

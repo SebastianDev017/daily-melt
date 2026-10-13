@@ -13,6 +13,7 @@
   @param {string} [shape] - The shape of the control, defaults to 'square'
   @param {string} [aspect_ratio] - The aspect ratio of thumbnails, if applicable. defaults to 'adapt'
   @param {number} [thumbnail_radius] - The border radius for thumbnails in pixels
+  @param {string} [thumbnails_html] - Pre-rendered thumbnail buttons (Daily Melt temporary gallery); replaces the media loop
   @param {string} [class] - Additional classes to apply to the controls
   @param {boolean} [secondary] - Whether the controls are secondary
 
@@ -106,6 +107,9 @@
           class="slideshow-controls__thumbnails-container"
         >
           <div class="slideshow-controls__thumbnails">
+            {%- if thumbnails_html != blank -%}
+              {{ thumbnails_html }}
+            {%- endif -%}
             {% for media in thumbnails %}
               <button
                 class="slideshow-control button button-unstyled slideshow-controls__thumbnail"

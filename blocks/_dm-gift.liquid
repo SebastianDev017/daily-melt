@@ -1,0 +1,127 @@
+{%- doc -%}
+  Daily Melt — one subscription gift (delivery label, image, gift name). Child of DM · Subscription gifts.
+{%- enddoc -%}
+
+{%- assign bs = block.settings -%}
+<li class="dm-gift{% if bs.locked %} dm-gift--locked{% endif %}" {{ block.shopify_attributes }}>
+  {%- if bs.label != blank -%}
+    <span class="dm-gift__label">{{ bs.label }}</span>
+  {%- endif -%}
+  <span class="dm-gift__media">
+    {%- if bs.image != blank -%}
+      {{ bs.image | image_url: width: 240 | image_tag: loading: 'lazy', class: 'dm-gift__image', alt: bs.name, sizes: '96px' }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'dm-gift__image dm-gift__image--placeholder' }}
+    {%- endif -%}
+    {%- if bs.locked -%}
+      <span class="dm-gift__lock" aria-hidden="true">{% render 'dm-icon', icon: 'lock' %}</span>
+    {%- endif -%}
+  </span>
+  {%- if bs.name != blank -%}
+    <span class="dm-gift__name">{{ bs.name }}</span>
+  {%- endif -%}
+</li>
+
+{% stylesheet %}
+  .dm-gift {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .dm-gift__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+  }
+
+  .dm-gift__media {
+    position: relative;
+    display: block;
+    width: 76px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .dm-gift__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .dm-gift__image--placeholder {
+    fill: rgb(var(--color-foreground-rgb) / 0.35);
+    background: rgb(var(--color-foreground-rgb) / 0.06);
+  }
+
+  .dm-gift--locked .dm-gift__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(var(--color-background-rgb) / 0.55);
+  }
+
+  .dm-gift__lock {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    color: var(--color-foreground);
+  }
+
+  .dm-gift__lock svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .dm-gift__name {
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+    font-size: 0.8125rem;
+    line-height: 1.3;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Gift",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Delivery label",
+      "default": "First delivery"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Gift",
+      "default": "Frother + digital extras"
+    },
+    {
+      "type": "checkbox",
+      "id": "locked",
+      "label": "Show as locked (future delivery)",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Gift"
+    }
+  ]
+}
+{% endschema %}

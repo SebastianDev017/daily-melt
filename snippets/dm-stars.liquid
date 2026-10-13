@@ -1,0 +1,59 @@
+{%- doc -%}
+  Daily Melt — star rating (supports fractions, e.g. 4.5).
+
+  @param {number} rating - Rating value
+  @param {number} [scale] - Max rating, defaults to 5
+  @param {string} [label] - Accessible label override
+
+  @example
+  {% render 'dm-stars', rating: 4.5 %}
+{%- enddoc -%}
+
+{%- liquid
+  assign scale = scale | default: 5
+  assign pct = rating | times: 100.0 | divided_by: scale
+  if label == blank
+    assign label = 'dm.reviews.rating_label' | t: rating: rating, scale: scale
+  endif
+-%}
+<span class="dm-stars" role="img" aria-label="{{ label | escape }}" style="--dm-stars-fill: {{ pct }}%;">
+  <span class="dm-stars__row dm-stars__row--base" aria-hidden="true">
+    {%- for i in (1..scale) -%}{% render 'dm-icon', icon: 'star' %}{%- endfor -%}
+  </span>
+  <span class="dm-stars__row dm-stars__row--fill" aria-hidden="true">
+    {%- for i in (1..scale) -%}{% render 'dm-icon', icon: 'star' %}{%- endfor -%}
+  </span>
+</span>
+
+{% stylesheet %}
+  .dm-stars {
+    --dm-star-size: 1.05em;
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    line-height: 0;
+    color: var(--dm-star-color, var(--color-foreground));
+  }
+
+  .dm-stars__row {
+    display: inline-flex;
+    gap: 0.12em;
+  }
+
+  .dm-stars__row svg {
+    width: var(--dm-star-size);
+    height: var(--dm-star-size);
+    flex: 0 0 auto;
+  }
+
+  .dm-stars__row--base {
+    opacity: 0.25;
+  }
+
+  .dm-stars__row--fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--dm-stars-fill);
+    overflow: hidden;
+  }
+{% endstylesheet %}

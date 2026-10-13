@@ -1,0 +1,794 @@
+{%- doc -%}
+  Daily Melt — purchase options (subscribe vs. one-time) built on Shopify's native selling plans.
+  Recharge (Shopify Checkout integration) creates native selling plan groups, so the plan picked here
+  is sent to the cart as the standard `selling_plan` field of Horizon's product form.
+  When the product has no selling plans yet, the subscription card shows DEMO pricing
+  (variant price minus the demo discount) and the cart receives a one-time purchase.
+
+  Child blocks (Buy buttons, Supplement facts popup, etc.) render under the cards.
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign product = closest.product
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'BuyButtons-ProductForm-' | append: section.id
+  assign allocations = variant.selling_plan_allocations
+  assign has_plans = false
+  if allocations.size > 0
+    assign has_plans = true
+  endif
+
+  assign show_one_time = true
+  if product.requires_selling_plan and has_plans
+    assign show_one_time = false
+  endif
+
+  assign servings = bs.servings | default: 0
+  assign one_time_price = variant.price
+
+  if has_plans
+    assign default_index = bs.default_plan_position | minus: 1
+    if default_index >= allocations.size
+      assign default_index = 0
+    endif
+    assign default_allocation = allocations[default_index]
+    assign sub_price = default_allocation.price
+    assign sub_compare = default_allocation.compare_at_price
+    assign default_plan_id = default_allocation.selling_plan.id
+  else
+    assign keep = 100 | minus: bs.demo_discount
+    assign sub_price = variant.price | times: keep | divided_by: 100
+    assign sub_compare = variant.price
+    assign default_plan_id = ''
+  endif
+  if sub_compare == sub_price
+    assign sub_compare = nil
+  endif
+
+  assign selected = bs.default_option
+  if show_one_time == false
+    assign selected = 'subscription'
+  endif
+
+  assign group_name = 'dm-purchase-' | append: block.id
+-%}
+
+{% if product != blank %}
+  <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
+
+  <dm-purchase-options
+    class="dm-purchase{% if bs.mobile_buttons_first %} dm-purchase--buttons-first{% endif %} dm-purchase--perks-{{ bs.perks_style }} spacing-style"
+    style="{% render 'spacing-style', settings: bs %} --dm-card-radius: {{ bs.card_radius }}px; --dm-accent: {{ bs.accent_color }}; --dm-selected-bg: {{ bs.selected_background }};"
+    data-form-id="{{ form_id }}"
+    data-has-plans="{{ has_plans }}"
+    data-show-button-price="{{ bs.show_button_price }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if bs.label != blank or bs.link_label != blank -%}
+      <div class="dm-purchase__header">
+        {%- if bs.label != blank -%}
+          <p class="dm-purchase__label">{{ bs.label }}</p>
+        {%- endif -%}
+        {%- if bs.link_label != blank -%}
+          <a class="dm-purchase__link" href="{{ bs.link | default: '#' }}">{{ bs.link_label }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="dm-purchase__options" role="radiogroup" aria-label="{{ 'dm.purchase.options_label' | t }}">
+      {%- capture subscription_card -%}
+        {%- assign perks = bs.sub_perks | newline_to_br | split: '<br />' -%}
+        <label
+          class="dm-option{% if bs.sub_badge != blank %} dm-option--badge{% endif %}"
+          data-option="subscription"
+          data-price="{{ sub_price | money }}"
+          data-compare="{% if sub_compare %}{{ sub_compare | money }}{% endif %}"
+          data-label="{{ bs.sub_title | escape }}"
+        >
+          {%- if bs.sub_badge != blank -%}
+            <span class="dm-option__badge">{{ bs.sub_badge }}</span>
+          {%- endif -%}
+          <input
+            class="dm-option__input"
+            type="radio"
+            name="{{ group_name }}"
+            value="subscription"
+            {% if selected == 'subscription' %}
+              checked
+            {% endif %}
+          >
+          <span class="dm-option__radio" aria-hidden="true"></span>
+          <span class="dm-option__body">
+            <span class="dm-option__top">
+              <span class="dm-option__title">{{ bs.sub_title }}</span>
+              <span class="dm-option__price">
+                <span class="dm-option__amount" data-dm-sub-price>{{ sub_price | money }}</span>
+                {%- if bs.sub_price_suffix != blank -%}
+                  <span class="dm-option__suffix">{{ bs.sub_price_suffix }}</span>
+                {%- endif -%}
+              </span>
+            </span>
+            <span class="dm-option__meta">
+              <span class="dm-option__subtitle">
+                {%- if bs.show_per_serving and servings > 0 -%}
+                  {%- assign per_serving = sub_price | divided_by: servings -%}
+                  <span data-dm-per-serving>{{ per_serving | money }}</span>{{ bs.per_serving_suffix }}
+                {%- endif -%}
+                {%- if bs.sub_subtitle != blank -%}
+                  {%- if bs.show_per_serving and servings > 0 %} · {% endif -%}
+                  {{ bs.sub_subtitle }}
+                {%- endif -%}
+              </span>
+              <s class="dm-option__compare" data-dm-sub-compare>{%- if sub_compare -%}{{ sub_compare | money }}{%- endif -%}</s>
+            </span>
+            {%- if has_plans and allocations.size > 1 -%}
+              <span class="dm-option__frequency">
+                <span class="dm-option__frequency-label">{{ bs.frequency_label }}</span>
+                <select
+                  class="dm-option__select"
+                  aria-label="{{ bs.frequency_label | default: bs.sub_title | escape }}"
+                  data-dm-plan-select
+                >
+                  {%- for allocation in allocations -%}
+                    {%- liquid
+                      if servings > 0
+                        assign plan_per_serving = allocation.price | divided_by: servings | money
+                      else
+                        assign plan_per_serving = ''
+                      endif
+                    -%}
+                    <option
+                      value="{{ allocation.selling_plan.id }}"
+                      data-price="{{ allocation.price | money }}"
+                      data-compare="{% if allocation.compare_at_price != allocation.price %}{{ allocation.compare_at_price | money }}{% endif %}"
+                      data-per-serving="{{ plan_per_serving }}"
+                      {% if allocation.selling_plan.id == default_plan_id %}
+                        selected
+                      {% endif %}
+                    >
+                      {{ allocation.selling_plan.name }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </span>
+            {%- endif -%}
+            {%- if perks.size > 0 -%}
+              <span class="dm-option__perks">
+                {%- for perk in perks -%}
+                  {%- assign perk_text = perk | strip -%}
+                  {%- if perk_text != blank -%}
+                    <span class="dm-option__perk">{{ perk_text }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </span>
+            {%- endif -%}
+          </span>
+        </label>
+      {%- endcapture -%}
+
+      {%- capture one_time_card -%}
+        {%- assign perks = bs.one_perks | newline_to_br | split: '<br />' -%}
+        <label
+          class="dm-option{% if bs.one_badge != blank %} dm-option--badge{% endif %}"
+          data-option="onetime"
+          data-price="{{ one_time_price | money }}"
+          data-compare=""
+          data-label="{{ bs.one_title | escape }}"
+        >
+          {%- if bs.one_badge != blank -%}
+            <span class="dm-option__badge">{{ bs.one_badge }}</span>
+          {%- endif -%}
+          <input
+            class="dm-option__input"
+            type="radio"
+            name="{{ group_name }}"
+            value="onetime"
+            {% if selected == 'onetime' %}
+              checked
+            {% endif %}
+          >
+          <span class="dm-option__radio" aria-hidden="true"></span>
+          <span class="dm-option__body">
+            <span class="dm-option__top">
+              <span class="dm-option__title">{{ bs.one_title }}</span>
+              <span class="dm-option__price">
+                <span class="dm-option__amount">{{ one_time_price | money }}</span>
+              </span>
+            </span>
+            {%- if bs.one_subtitle != blank -%}
+              <span class="dm-option__meta">
+                <span class="dm-option__subtitle">{{ bs.one_subtitle }}</span>
+              </span>
+            {%- endif -%}
+            {%- if perks.size > 0 -%}
+              <span class="dm-option__perks">
+                {%- for perk in perks -%}
+                  {%- assign perk_text = perk | strip -%}
+                  {%- if perk_text != blank -%}
+                    <span class="dm-option__perk">{{ perk_text }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </span>
+            {%- endif -%}
+          </span>
+        </label>
+      {%- endcapture -%}
+
+      {%- if bs.one_time_first and show_one_time -%}
+        {{ one_time_card }}
+        {{ subscription_card }}
+      {%- else -%}
+        {{ subscription_card }}
+        {%- if show_one_time -%}
+          {{ one_time_card }}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    <input
+      type="hidden"
+      name="selling_plan"
+      form="{{ form_id }}"
+      value="{{ default_plan_id }}"
+      data-dm-selling-plan
+      {% if has_plans == false or selected != 'subscription' %}
+        disabled
+      {% endif %}
+    >
+
+    {%- if has_plans == false and request.design_mode -%}
+      <p class="dm-purchase__notice">
+        {% render 'dm-placeholder-flag' %}
+        {{ 'dm.purchase.demo_notice' | t }}
+      </p>
+    {%- endif -%}
+
+    {%- if bs.footnote != blank -%}
+      <div class="dm-purchase__footnote">{{ bs.footnote }}</div>
+    {%- endif -%}
+
+    <div class="dm-purchase__actions">
+      {% content_for 'blocks' %}
+    </div>
+  </dm-purchase-options>
+{% endif %}
+
+{% stylesheet %}
+  .dm-purchase {
+    --dm-line: rgb(var(--color-foreground-rgb) / 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .dm-purchase__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .dm-purchase__label {
+    margin: 0;
+    font-size: var(--font-paragraph--size);
+  }
+
+  .dm-purchase__link {
+    font-size: 0.8125rem;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .dm-purchase__options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .dm-option {
+    position: relative;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    column-gap: 14px;
+    padding: 18px 18px 16px;
+    border: 1px solid var(--dm-line);
+    border-radius: var(--dm-card-radius, 0);
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .dm-option--badge {
+    margin-top: 12px;
+    padding-top: 22px;
+  }
+
+  .dm-option:hover {
+    border-color: var(--color-foreground);
+  }
+
+  .dm-option:has(.dm-option__input:checked) {
+    background: var(--dm-selected-bg, transparent);
+    border-color: var(--color-foreground);
+    box-shadow: inset 0 0 0 1px var(--color-foreground);
+  }
+
+  .dm-option:has(.dm-option__input:focus-visible) {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 3px;
+  }
+
+  .dm-option__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .dm-option__badge {
+    position: absolute;
+    top: 0;
+    left: 50px;
+    transform: translateY(-50%);
+    padding: 4px 10px;
+    background: var(--dm-accent);
+    color: #fff;
+    font-family: var(--font-body--family);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: min(var(--dm-card-radius, 0px), 4px);
+    max-width: calc(100% - 66px);
+  }
+
+  .dm-option__radio {
+    grid-row: 1 / span 4;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+    border: 1.5px solid var(--color-foreground);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--color-background);
+  }
+
+  .dm-option__radio::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    transform: scale(0);
+    transition: transform 0.15s ease;
+  }
+
+  .dm-option__input:checked ~ .dm-option__radio::after {
+    transform: scale(1);
+  }
+
+  .dm-option__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .dm-option__top,
+  .dm-option__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .dm-option__title {
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+    font-size: 1.0625rem;
+    line-height: 1.25;
+  }
+
+  .dm-option__price {
+    white-space: nowrap;
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+    font-size: 1.0625rem;
+  }
+
+  .dm-option__suffix {
+    font-size: 0.875rem;
+  }
+
+  .dm-option__subtitle {
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .dm-option__compare {
+    font-size: 0.8125rem;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+
+  .dm-option__compare:empty {
+    display: none;
+  }
+
+  .dm-option__frequency {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 0.875rem;
+  }
+
+  .dm-option__select {
+    font: inherit;
+    color: inherit;
+    padding: 6px 28px 6px 10px;
+    border: 1px solid var(--dm-line);
+    border-radius: min(var(--dm-card-radius, 0px), 6px);
+    background-color: var(--color-input-background, transparent);
+  }
+
+  .dm-option__perks {
+    margin-top: 6px;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--dm-accent);
+  }
+
+  .dm-purchase--perks-inline .dm-option__perk:not(:last-child)::after {
+    content: ' | ';
+    white-space: pre;
+  }
+
+  .dm-purchase--perks-list .dm-option__perks {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: inherit;
+  }
+
+  .dm-purchase--perks-list .dm-option__perk::before {
+    content: '↳ ';
+    color: var(--dm-accent);
+  }
+
+  .dm-purchase__notice {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .dm-purchase__footnote {
+    font-size: 0.75rem;
+    line-height: 1.45;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  .dm-purchase__footnote p {
+    margin: 0;
+  }
+
+  .dm-purchase__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .dm-purchase__actions .popup-link {
+    width: 100%;
+  }
+
+  .dm-purchase__actions .popup-link__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: var(--height-buy-buttons, 48px);
+    padding: 0 1.25rem;
+    border: var(--style-border-width-secondary, 1px) solid var(--color-secondary-button-border);
+    border-radius: var(--style-border-radius-buttons-secondary, 0);
+    color: var(--color-secondary-button-text);
+    background: var(--color-secondary-button-background);
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .dm-purchase__actions .popup-link__button:hover {
+    background: var(--color-secondary-button-hover-background);
+    color: var(--color-secondary-button-hover-text);
+  }
+
+  .dm-purchase__actions .popup-link__button svg {
+    display: none;
+  }
+
+  .dm-atc-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5em;
+    margin-inline-start: 0.75em;
+    padding-inline-start: 0.75em;
+    border-inline-start: 1px solid currentColor;
+  }
+
+  .dm-atc-price s {
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 749px) {
+    .dm-purchase--buttons-first .dm-purchase__actions {
+      display: contents;
+    }
+
+    .dm-purchase--buttons-first .dm-purchase__actions > .buy-buttons-block {
+      order: -1;
+    }
+
+    .dm-option {
+      padding-inline: 14px;
+      column-gap: 12px;
+    }
+
+    .dm-option__badge {
+      left: 46px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Purchase options",
+  "tag": null,
+  "blocks": [
+    { "type": "buy-buttons" },
+    { "type": "popup-link" },
+    { "type": "dm-checklist" },
+    { "type": "text" },
+    { "type": "@app" }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Subscription prices come from the product's selling plans (Recharge creates them natively). If the product has no selling plans, the subscription card shows demo pricing and adds a one-time purchase to the cart."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label above options"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label (right)"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "default_option",
+      "label": "Selected by default",
+      "options": [
+        { "value": "subscription", "label": "Subscription" },
+        { "value": "onetime", "label": "One-time purchase" }
+      ],
+      "default": "subscription"
+    },
+    {
+      "type": "checkbox",
+      "id": "one_time_first",
+      "label": "Show one-time card first",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_price",
+      "label": "Show selected price in Add to cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_buttons_first",
+      "label": "Mobile: show Add to cart above the options",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "servings",
+      "label": "Servings per pouch",
+      "info": "Used for the price per serving.",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Subscription card"
+    },
+    {
+      "type": "text",
+      "id": "sub_badge",
+      "label": "Badge",
+      "default": "Most popular - Get 15% off for life"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Title",
+      "default": "Delivered Monthly"
+    },
+    {
+      "type": "text",
+      "id": "sub_price_suffix",
+      "label": "Price suffix",
+      "default": "/month"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_per_serving",
+      "label": "Show price per serving",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "per_serving_suffix",
+      "label": "Per serving suffix",
+      "default": "/serving"
+    },
+    {
+      "type": "text",
+      "id": "sub_subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "sub_perks",
+      "label": "Perks",
+      "info": "One per line.",
+      "default": "Free frother ($25 value)\nFree shipping delivered every 30 days\nCancel anytime, no commitment\n60-Day Money Back Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "frequency_label",
+      "label": "Frequency label",
+      "info": "Shown only when the product has more than one selling plan.",
+      "default": "Deliver every"
+    },
+    {
+      "type": "range",
+      "id": "default_plan_position",
+      "label": "Default selling plan (position)",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "demo_discount",
+      "label": "Demo discount (no selling plans)",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "One-time card"
+    },
+    {
+      "type": "text",
+      "id": "one_badge",
+      "label": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "one_title",
+      "label": "Title",
+      "default": "One-Time Purchase"
+    },
+    {
+      "type": "text",
+      "id": "one_subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "one_perks",
+      "label": "Perks",
+      "info": "One per line.",
+      "default": "Delivered once\n60-Day Money Back Guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "perks_style",
+      "label": "Perks style",
+      "options": [
+        { "value": "inline", "label": "Inline (separated by |)" },
+        { "value": "list", "label": "List (↳)" }
+      ],
+      "default": "inline"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Badge / perks color",
+      "default": "{{ settings.color_palette.accent }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_background",
+      "label": "Selected card background",
+      "default": "{{ settings.color_palette.cream_light }}"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "richtext",
+      "id": "footnote",
+      "label": "Footnote under the options"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Purchase options",
+      "blocks": {
+        "buy_buttons": {
+          "type": "buy-buttons"
+        }
+      },
+      "block_order": ["buy_buttons"]
+    }
+  ]
+}
+{% endschema %}

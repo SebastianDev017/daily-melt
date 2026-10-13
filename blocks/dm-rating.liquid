@@ -1,0 +1,174 @@
+{%- doc -%}
+  Daily Melt — star rating + review count link for the product hero.
+  Reads the standard review metafields (reviews.rating / reviews.rating_count) that review apps
+  such as Judge.me, Okendo, Yotpo or Junip populate. Until an app is installed it shows the
+  PLACEHOLDER values set below.
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign product = closest.product
+  assign rating = product.metafields.reviews.rating.value.rating
+  assign scale = product.metafields.reviews.rating.value.scale_max | default: 5
+  assign count = product.metafields.reviews.rating_count.value
+  assign is_placeholder = false
+
+  if rating == blank and bs.show_placeholder
+    assign rating = bs.placeholder_rating
+    assign count = bs.placeholder_count
+    assign scale = 5
+    assign is_placeholder = true
+  endif
+
+  assign rating_rounded = rating | round: 1
+-%}
+
+{%- if rating != blank -%}
+  <div
+    class="dm-rating dm-rating--{{ bs.alignment }} spacing-style"
+    style="{% render 'spacing-style', settings: bs %}{% if bs.star_color != blank %} --dm-star-color: {{ bs.star_color }};{% endif %}"
+    {% if is_placeholder %}
+      data-dm-placeholder="reviews"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {% render 'dm-stars', rating: rating, scale: scale %}
+    {%- if bs.show_number -%}
+      <span class="dm-rating__value">{{ rating_rounded }}</span>
+    {%- endif -%}
+    {%- if count != blank -%}
+      {%- capture count_label -%}{{ count }} {{ bs.count_label }}{%- endcapture -%}
+      {%- if bs.link != blank -%}
+        <a class="dm-rating__count" href="{{ bs.link }}">{{ count_label | strip }}</a>
+      {%- else -%}
+        <span class="dm-rating__count">{{ count_label | strip }}</span>
+      {%- endif -%}
+    {%- endif -%}
+    {%- if is_placeholder and request.design_mode -%}
+      {% render 'dm-placeholder-flag' %}
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .dm-rating {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6em;
+    font-size: var(--font-paragraph--size);
+  }
+
+  .dm-rating--center {
+    justify-content: center;
+  }
+
+  .dm-rating .dm-stars {
+    --dm-star-size: 1.15em;
+  }
+
+  .dm-rating__value {
+    font-weight: 600;
+  }
+
+  .dm-rating__count {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+  }
+
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Rating",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Uses the review app's rating automatically (reviews.rating metafield). The values below are PLACEHOLDERS shown only until a review app is installed."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_placeholder",
+      "label": "Show placeholder rating when no review data",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "placeholder_rating",
+      "label": "Placeholder rating",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "default": 4.5
+    },
+    {
+      "type": "number",
+      "id": "placeholder_count",
+      "label": "Placeholder review count",
+      "default": 2235
+    },
+    {
+      "type": "text",
+      "id": "count_label",
+      "label": "Count label",
+      "default": "Verified Reviews"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "Use #reviews to jump to the reviews section."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_number",
+      "label": "Show rating number",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "{{ settings.color_palette.accent }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Rating"
+    }
+  ]
+}
+{% endschema %}

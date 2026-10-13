@@ -350,5 +350,34 @@
       "success_moderated": "Comentario publicado y a la espera de moderación",
       "success": "Comentario publicado"
     }
+  },
+  "dm": {
+    "general": {
+      "placeholder": "Placeholder",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "gallery": {
+      "temp_notice": "Temporary gallery. Turn it off in the Product media block once the product photos are uploaded."
+    },
+    "purchase": {
+      "options_label": "Purchase options",
+      "demo_notice": "Demo subscription pricing: this product has no selling plans yet, so the cart receives a one-time purchase."
+    },
+    "reviews": {
+      "rating_label": "Rated {{ rating }} out of {{ scale }}",
+      "based_on": "Based on {{ count }} reviews",
+      "load_more": "Load more",
+      "empty": "No reviews match this filter yet.",
+      "sort_recent": "Most Recent",
+      "sort_highest": "Highest Rated",
+      "sort_lowest": "Lowest Rated",
+      "sort_label": "Sort reviews",
+      "filter_label": "Filter reviews",
+      "placeholder_notice": "Sample reviews from the copy doc. Hide them once a review app is installed."
+    },
+    "tabs": {
+      "label": "Ingredients"
+    }
   }
 }
