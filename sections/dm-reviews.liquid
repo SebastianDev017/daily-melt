@@ -1,0 +1,413 @@
+{%- comment -%}
+  Daily Melt — reviews. Ready for a review app: add the app's block (Judge.me, Okendo, Yotpo, Junip…)
+  to this section and the PLACEHOLDER summary + reviews hide automatically. Until then it shows the
+  sample reviews from the copy doc with working filters, sort and "Load more".
+{%- endcomment -%}
+
+{%- liquid
+  assign ss = section.settings
+
+  assign has_app_block = false
+  for b in section.blocks
+    if b.type == '@app' or b.type contains 'shopify://apps'
+      assign has_app_block = true
+      break
+    endif
+  endfor
+
+  assign show_placeholders = ss.show_placeholders
+  if has_app_block and ss.hide_placeholders_with_app
+    assign show_placeholders = false
+  endif
+
+  assign rating = product.metafields.reviews.rating.value.rating
+  assign count = product.metafields.reviews.rating_count.value
+  assign summary_is_placeholder = false
+  if rating == blank
+    assign rating = ss.placeholder_rating
+    assign count = ss.placeholder_count
+    assign summary_is_placeholder = true
+  endif
+  assign rating_rounded = rating | round: 1
+-%}
+
+<div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
+<div
+  id="reviews"
+  class="dm-reviews section section--page-width"
+  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-accent: {{ ss.accent_color }};"
+>
+  <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
+  <div class="dm-reviews__inner">
+    {%- if ss.heading != blank -%}
+      <h2 class="dm-reviews__heading h2">{{ ss.heading }}</h2>
+    {%- endif -%}
+
+    <dm-reviews
+      class="dm-reviews__body{% unless show_placeholders %} dm-reviews__body--app{% endunless %}"
+      data-page-size="{{ ss.page_size }}"
+      data-mode="{% if show_placeholders %}placeholder{% else %}app{% endif %}"
+    >
+      {%- if show_placeholders -%}
+        {%- if request.design_mode -%}
+          <p class="dm-reviews__notice">
+            {% render 'dm-placeholder-flag' %}
+            {{ 'dm.reviews.placeholder_notice' | t }}
+          </p>
+        {%- endif -%}
+
+        {%- if ss.show_summary -%}
+          <div class="dm-reviews__summary" {% if summary_is_placeholder %}data-dm-placeholder="reviews"{% endif %}>
+            <span class="dm-reviews__average">{{ rating_rounded }}</span>
+            <div class="dm-reviews__summary-meta">
+              {% render 'dm-stars', rating: rating %}
+              {%- if count != blank -%}
+                <span class="dm-reviews__count">{{ 'dm.reviews.based_on' | t: count: count }}</span>
+              {%- endif -%}
+            </div>
+            {%- if ss.write_label != blank -%}
+              <a class="button dm-reviews__write" href="{{ ss.write_link | default: '#' }}">{{ ss.write_label }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="dm-reviews__toolbar">
+          <div class="dm-reviews__filters" role="group" aria-label="{{ 'dm.reviews.filter_label' | t }}">
+            <label class="dm-reviews__select">
+              <span class="visually-hidden">{{ 'dm.reviews.filter_label' | t }}</span>
+              <select data-dm-rating-filter>
+                <option value="all">{{ ss.label_all }}</option>
+                {%- for i in (1..5) reversed -%}
+                  <option value="{{ i }}">{{ i }} {{ ss.label_stars }}</option>
+                {%- endfor -%}
+              </select>
+            </label>
+            <button type="button" class="dm-reviews__pill" data-dm-filter="5" aria-pressed="false">5 {{ ss.label_stars }}</button>
+            <button type="button" class="dm-reviews__pill" data-dm-filter="4" aria-pressed="false">4 {{ ss.label_stars }}</button>
+            <button type="button" class="dm-reviews__pill" data-dm-filter="verified" aria-pressed="false">{{ ss.label_verified }}</button>
+          </div>
+          <label class="dm-reviews__select dm-reviews__select--sort">
+            <span class="visually-hidden">{{ 'dm.reviews.sort_label' | t }}</span>
+            <select data-dm-sort>
+              <option value="recent">{{ ss.label_recent }}</option>
+              <option value="highest">{{ 'dm.reviews.sort_highest' | t }}</option>
+              <option value="lowest">{{ 'dm.reviews.sort_lowest' | t }}</option>
+            </select>
+          </label>
+        </div>
+      {%- endif -%}
+
+      <div class="dm-reviews__list" data-dm-review-list>
+        {% content_for 'blocks' %}
+      </div>
+
+      {%- if show_placeholders -%}
+        <p class="dm-reviews__empty" data-dm-empty hidden>{{ 'dm.reviews.empty' | t }}</p>
+        <div class="dm-reviews__more">
+          <button type="button" class="button button-secondary" data-dm-load-more hidden>{{ ss.load_more_label }}</button>
+        </div>
+      {%- endif -%}
+    </dm-reviews>
+  </div>
+</div>
+
+{% stylesheet %}
+  .dm-reviews {
+    padding-block: var(--dm-pt) var(--dm-pb);
+    scroll-margin-top: 80px;
+  }
+
+  .dm-reviews__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 1080px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .dm-reviews__heading {
+    margin: 0;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .dm-reviews__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .dm-reviews__notice {
+    margin: 0;
+    font-size: 0.8125rem;
+    text-align: center;
+  }
+
+  .dm-reviews__summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px 18px;
+    --dm-star-color: var(--dm-accent);
+  }
+
+  .dm-reviews__average {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .dm-reviews__summary-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dm-reviews__summary-meta .dm-stars {
+    --dm-star-size: 1.35em;
+  }
+
+  .dm-reviews__count {
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .dm-reviews__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 4px;
+  }
+
+  .dm-reviews__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .dm-reviews__select select,
+  .dm-reviews__pill {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--color-foreground);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-foreground);
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .dm-reviews__select select {
+    padding-right: 34px;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  .dm-reviews__pill[aria-pressed='true'] {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .dm-reviews__list {
+    border-bottom: 1px solid rgb(var(--color-foreground-rgb) / 0.3);
+  }
+
+  .dm-reviews__body--app .dm-review {
+    display: none;
+  }
+
+  .dm-reviews__body--app .dm-reviews__list {
+    border-bottom: 0;
+  }
+
+  .dm-reviews__empty {
+    margin: 0;
+    text-align: center;
+  }
+
+  .dm-reviews__more {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    .dm-reviews__toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .dm-reviews__filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin-inline: calc(var(--page-margin, 16px) * -1);
+      padding-inline: var(--page-margin, 16px);
+      scrollbar-width: none;
+    }
+
+    .dm-reviews__filters > * {
+      flex: 0 0 auto;
+    }
+
+    .dm-reviews__select--sort {
+      align-self: flex-start;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Reviews",
+  "tag": "section",
+  "class": "dm-section",
+  "blocks": [{ "type": "_dm-review" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Sample reviews and the rating summary are PLACEHOLDERS. Add your review app's block to this section; the placeholders hide automatically."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Customers Are Saying"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_placeholders",
+      "label": "Show placeholder reviews",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_placeholders_with_app",
+      "label": "Hide placeholders when a review app block is added",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Show rating summary",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "placeholder_rating",
+      "label": "Placeholder average rating",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "default": 4.5
+    },
+    {
+      "type": "number",
+      "id": "placeholder_count",
+      "label": "Placeholder review count",
+      "default": 2235
+    },
+    {
+      "type": "text",
+      "id": "write_label",
+      "label": "Write a review button label"
+    },
+    {
+      "type": "url",
+      "id": "write_link",
+      "label": "Write a review link"
+    },
+    {
+      "type": "range",
+      "id": "page_size",
+      "label": "Reviews per page",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "label_all",
+      "label": "All reviews",
+      "default": "All Reviews"
+    },
+    {
+      "type": "text",
+      "id": "label_stars",
+      "label": "Stars",
+      "default": "Stars"
+    },
+    {
+      "type": "text",
+      "id": "label_verified",
+      "label": "Verified filter",
+      "default": "Verified Purchases"
+    },
+    {
+      "type": "text",
+      "id": "label_recent",
+      "label": "Most recent",
+      "default": "Most Recent"
+    },
+    {
+      "type": "text",
+      "id": "load_more_label",
+      "label": "Load more",
+      "default": "Load More"
+    },
+    {
+      "type": "header",
+      "content": "Colors and spacing"
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "Section background",
+      "default": "{{ settings.color_palette.cream_light }}"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Stars color",
+      "default": "{{ settings.color_palette.accent }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Reviews"
+    }
+  ]
+}
+{% endschema %}

@@ -244,8 +244,12 @@ document.addEventListener('click', (event) => {
  */
 class DmReviews extends HTMLElement {
   connectedCallback() {
+    if (this.dataset.mode === 'app') return;
     this.list = this.querySelector('[data-dm-review-list]');
     this.items = [...this.querySelectorAll('[data-dm-review]')];
+    this.items.forEach((item, index) => {
+      item.dataset.index = String(index);
+    });
     this.pageSize = Number(this.dataset.pageSize) || 6;
     this.visibleCount = this.pageSize;
     this.filter = 'all';
@@ -308,7 +312,7 @@ class DmReviews extends HTMLElement {
     const sorted = [...this.items].sort((a, b) => {
       if (this.sort === 'highest') return Number(b.dataset.rating) - Number(a.dataset.rating);
       if (this.sort === 'lowest') return Number(a.dataset.rating) - Number(b.dataset.rating);
-      return (Number(b.dataset.date) || 0) - (Number(a.dataset.date) || 0);
+      return Number(a.dataset.index) - Number(b.dataset.index);
     });
     sorted.forEach((item) => this.list.appendChild(item));
 

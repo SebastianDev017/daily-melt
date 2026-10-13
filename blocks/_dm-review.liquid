@@ -1,0 +1,211 @@
+{%- doc -%}
+  Daily Melt — one PLACEHOLDER review of DM · Reviews (to be replaced by a review app).
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign initials = ''
+  assign name_parts = bs.author | split: ' '
+  for part in name_parts limit: 2
+    assign first_char = part | slice: 0 | upcase
+    assign initials = initials | append: first_char
+  endfor
+-%}
+<article
+  class="dm-review"
+  data-dm-review
+  data-rating="{{ bs.rating }}"
+  data-verified="{{ bs.verified }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="dm-review__author">
+    <span class="dm-review__avatar" aria-hidden="true">{{ initials }}</span>
+    <div class="dm-review__who">
+      <p class="dm-review__name">{{ bs.author }}</p>
+      {%- if bs.verified -%}
+        <p class="dm-review__verified">
+          <span class="dm-review__verified-icon" aria-hidden="true">{% render 'dm-icon', icon: 'circle_check' %}</span>
+          {{ bs.verified_label }}
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="dm-review__content">
+    <div class="dm-review__top">
+      {% render 'dm-stars', rating: bs.rating %}
+      {%- if bs.title != blank -%}
+        <h3 class="dm-review__title">{{ bs.title }}</h3>
+      {%- endif -%}
+      {%- if bs.date != blank -%}
+        <span class="dm-review__date">{{ bs.date }}</span>
+      {%- endif -%}
+    </div>
+    {%- if bs.body != blank -%}
+      <p class="dm-review__body">{{ bs.body }}</p>
+    {%- endif -%}
+  </div>
+</article>
+
+{% stylesheet %}
+  .dm-review {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-block: 24px;
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.3);
+  }
+
+  .dm-review[hidden] {
+    display: none;
+  }
+
+  .dm-review__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .dm-review__avatar {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    color: var(--color-background);
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+  }
+
+  .dm-review__who p {
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .dm-review__name {
+    font-weight: 600;
+  }
+
+  .dm-review__verified {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8125rem;
+    color: var(--dm-accent, currentColor);
+  }
+
+  .dm-review__verified-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .dm-review__verified-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .dm-review__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+    --dm-star-color: var(--dm-accent);
+  }
+
+  .dm-review__title {
+    margin: 0;
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .dm-review__date {
+    margin-left: auto;
+    font-size: 0.8125rem;
+    opacity: 0.75;
+  }
+
+  .dm-review__body {
+    margin: 10px 0 0;
+    line-height: 1.55;
+  }
+
+  @media screen and (min-width: 750px) {
+    .dm-review {
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      padding-block: 28px;
+    }
+
+    .dm-review__author {
+      align-items: flex-start;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Review (placeholder)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "PLACEHOLDER review from the copy doc. Replace with a review app block."
+    },
+    {
+      "type": "range",
+      "id": "rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Review title"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Review"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author",
+      "default": "Customer"
+    },
+    {
+      "type": "checkbox",
+      "id": "verified",
+      "label": "Verified purchase",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "verified_label",
+      "label": "Verified label",
+      "default": "Verified Purchase"
+    },
+    {
+      "type": "text",
+      "id": "date",
+      "label": "Date (optional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Review (placeholder)"
+    }
+  ]
+}
+{% endschema %}
