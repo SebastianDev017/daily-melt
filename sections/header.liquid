@@ -548,7 +548,12 @@
   }
 
   #header-component[data-dm-always-drawer] header-actions {
-    --icon-size-md: 1.5rem;
+    --icon-size-md: 1.25rem;
+  }
+
+  #header-component[data-dm-always-drawer] :is(a, button, summary):focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
 
   /* Side menu: calmer type scale than Horizon's full-screen drawer */
