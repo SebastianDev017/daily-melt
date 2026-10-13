@@ -1,0 +1,148 @@
+{%- doc -%}
+  Daily Melt — monogram mark for the footer: an uploaded image, or a placeholder oval monogram drawn
+  from up to three editable letters.
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign letters = bs.letters | strip | upcase
+  assign l1 = letters | slice: 0
+  assign l2 = letters | slice: 1
+  assign l3 = letters | slice: 2
+-%}
+
+<div
+  class="dm-monogram dm-monogram--{{ bs.alignment }} spacing-style"
+  style="{% render 'spacing-style', settings: bs %} --dm-monogram-width: {{ bs.width }}px;{% if bs.color != blank %} --dm-monogram-color: {{ bs.color }};{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {%- if bs.link != blank -%}<a class="dm-monogram__link" href="{{ bs.link }}" aria-label="{{ bs.label | escape }}">{%- endif -%}
+  {%- if bs.image != blank -%}
+    {{ bs.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'dm-monogram__image', alt: bs.label }}
+  {%- else -%}
+    <svg class="dm-monogram__svg" viewBox="0 0 220 240" role="img" aria-label="{{ bs.label | escape }}">
+      <ellipse cx="110" cy="120" rx="106" ry="116" fill="none" stroke="currentColor" stroke-width="3.5"/>
+      <text x="34" y="118" class="dm-monogram__letter" font-size="112">{{ l1 }}</text>
+      <text x="118" y="146" class="dm-monogram__letter" font-size="98">{{ l2 }}</text>
+      <text x="68" y="212" class="dm-monogram__letter" font-size="98">{{ l3 }}</text>
+    </svg>
+  {%- endif -%}
+  {%- if bs.link != blank -%}</a>{%- endif -%}
+</div>
+
+{% stylesheet %}
+  .dm-monogram {
+    display: flex;
+    width: 100%;
+    color: var(--dm-monogram-color, var(--color-foreground));
+  }
+
+  .dm-monogram--center {
+    justify-content: center;
+  }
+
+  .dm-monogram--left {
+    justify-content: flex-start;
+  }
+
+  .dm-monogram__link {
+    display: block;
+    color: inherit;
+  }
+
+  .dm-monogram__svg,
+  .dm-monogram__image {
+    display: block;
+    width: var(--dm-monogram-width, 180px);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .dm-monogram__letter {
+    fill: currentColor;
+    font-family: var(--font-heading--family);
+    font-weight: 400;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Monogram",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Monogram image",
+      "info": "Upload the final mark. Until then the letters below are drawn as a placeholder."
+    },
+    {
+      "type": "text",
+      "id": "letters",
+      "label": "Placeholder letters (up to 3)",
+      "default": "NTB"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Accessible name",
+      "default": "No Take Backs"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "label": "Width",
+      "min": 80,
+      "max": 320,
+      "step": 4,
+      "unit": "px",
+      "default": 180
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Monogram"
+    }
+  ]
+}
+{% endschema %}

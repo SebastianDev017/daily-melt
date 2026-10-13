@@ -17,6 +17,11 @@
 
     # Grid layout calculations
     assign grid_columns = total_blocks | at_most: 4
+    assign dm_grid = false
+    if section.settings.dm_layout == 'grid'
+      assign dm_grid = true
+      assign grid_columns = total_blocks | at_most: 6
+    endif
 
     # Calculate last row counts using modulo arithmetic
     # last_row_count = (total_blocks - 1) % N + 1
@@ -38,6 +43,7 @@
   <div
     class="
       footer-content
+      {% if dm_grid %}footer-content--dm-grid{% endif %}
       spacing-style
       {% if has_isolated_grid_item_desktop %}footer-content--isolated-grid-item-desktop{% endif %}
       {% if has_isolated_grid_item_tablet %}footer-content--isolated-grid-item-tablet{% endif %}
@@ -45,6 +51,7 @@
     style="
       {%  render 'spacing-style', settings: section.settings %}
       --footer-gap: {{ section.settings.gap }}px;
+      {% if dm_grid %}--dm-footer-line: {{ section.settings.dm_line_color | default: 'var(--color-foreground)' }}; --dm-footer-cell-padding: {{ section.settings.dm_cell_padding }}px;{% endif %}
       --grid-columns: {{ grid_columns }};
       --last-row-count: {{ last_row_count }};
       --tablet-last-row-count: {{ tablet_last_row_count }};
@@ -55,6 +62,64 @@
 </div>
 
 {% stylesheet %}
+  /* Daily Melt: table-like grid, lines drawn with a 1px gap over the line color */
+  .footer-content.footer-content--dm-grid {
+    gap: 1px;
+    align-items: stretch;
+    margin-block: var(--padding-block-start, 0px) var(--padding-block-end, 0px);
+    padding-block: 0;
+    background: var(--dm-footer-line);
+    border-block-start: 1px solid var(--dm-footer-line);
+    contain: none;
+    content-visibility: visible;
+  }
+
+  .footer-content--dm-grid > * {
+    min-width: 0;
+    height: 100%;
+    padding: var(--dm-footer-cell-padding, 20px);
+    background: var(--color-background);
+  }
+
+  .footer-content--dm-grid :is(.menu__heading, .text-block.h5, .text-block.h5 > *) {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .footer-content--dm-grid .menu__heading {
+    padding-block: 0;
+  }
+
+  .footer-content--dm-grid :is(.menu__item, .text-block.paragraph) {
+    font-size: clamp(1rem, 1.2vw, 1.1875rem);
+    line-height: 1.5;
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .footer-content.footer-content--dm-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer-content--dm-grid > :first-child,
+    .footer-content--dm-grid > :last-child:nth-child(even) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .footer-content.footer-content--dm-grid {
+      grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    }
+
+    .footer-content--dm-grid.footer-content--isolated-grid-item-desktop > :last-child {
+      grid-column: auto;
+    }
+  }
+
   .footer-content {
     contain: content;
     content-visibility: auto;
@@ -145,10 +210,15 @@
     },
     {
       "type": "email-signup"
+    },
+    {
+      "type": "dm-monogram"
     }
   ],
   "enabled_on": {
-    "groups": ["footer"]
+    "groups": [
+      "footer"
+    ]
   },
   "settings": [
     {
@@ -166,6 +236,40 @@
         }
       ],
       "default": "page-width"
+    },
+    {
+      "type": "select",
+      "id": "dm_layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "grid",
+          "label": "Grid with lines"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "color",
+      "id": "dm_line_color",
+      "label": "Line color",
+      "default": "{{ settings.color_palette.foreground }}",
+      "visible_if": "{{ section.settings.dm_layout == 'grid' }}"
+    },
+    {
+      "type": "range",
+      "id": "dm_cell_padding",
+      "label": "Cell padding",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ section.settings.dm_layout == 'grid' }}"
     },
     {
       "type": "range",
@@ -248,7 +352,10 @@
               }
             }
           },
-          "block_order": ["newsletter-heading", "newsletter-text"]
+          "block_order": [
+            "newsletter-heading",
+            "newsletter-text"
+          ]
         },
         "newsletter-form": {
           "type": "email-signup",
@@ -257,7 +364,10 @@
           }
         }
       },
-      "block_order": ["newsletter-group", "newsletter-form"]
+      "block_order": [
+        "newsletter-group",
+        "newsletter-form"
+      ]
     }
   ]
 }

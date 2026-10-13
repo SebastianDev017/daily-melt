@@ -9,12 +9,18 @@
   style="
     {% render 'typography-style', preset: 'custom', settings: block_settings %}
     {% if block_settings.text_color != blank %}--color-utilities: {{ block_settings.text_color }};{% endif %}
+    font-weight: {{ block_settings.dm_weight | default: 400 }};
   "
   {{ block.shopify_attributes }}
 >
   <span class="footer-utilities__text">
-    &copy; {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url -}}
+    {%- if block_settings.dm_text != blank -%}
+      {%- assign dm_year = 'now' | date: '%Y' -%}
+      {{ block_settings.dm_text | replace: '[year]', dm_year }}
+    {%- else -%}
+      &copy; {{ 'now' | date: '%Y' }}
+      {{ shop.name | link_to: routes.root_url -}}
+    {%- endif -%}
     {%- if block_settings.show_powered_by -%}
       , {{ powered_by_link }}
     {%- endif -%}
@@ -32,6 +38,28 @@
   "name": "t:names.copyright",
   "tag": null,
   "settings": [
+    {
+      "type": "text",
+      "id": "dm_text",
+      "label": "Custom text",
+      "info": "Replaces the store name line. Use [year] for the current year."
+    },
+    {
+      "type": "select",
+      "id": "dm_weight",
+      "label": "Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
     {
       "type": "checkbox",
       "id": "show_powered_by",

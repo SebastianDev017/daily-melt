@@ -14,133 +14,165 @@
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
-        "group_H6VpwJ": {
+        "monogram": {
+          "type": "dm-monogram",
+          "settings": {
+            "letters": "NTB",
+            "label": "No Take Backs",
+            "link": "",
+            "width": 200,
+            "alignment": "center",
+            "padding-block-start": 4,
+            "padding-block-end": 4
+          }
+        },
+        "inbox": {
           "type": "group",
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 6,
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 10,
             "width": "fill",
-            "custom_width": 100,
             "width_mobile": "fill",
-            "custom_width_mobile": 100,
             "height": "fit",
-            "custom_height": 100,
             "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
             "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_LWt8Pz": {
+            "inbox_heading": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<h3>Your Inbox</h3>",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "type_preset": "h5"
               },
               "blocks": {}
             },
-            "text_f9CFLH": {
+            "inbox_text": {
               "type": "text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p>Get up to 50% off when you sign up for NTB stuff!</p>",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
+                "type_preset": "paragraph"
+              },
+              "blocks": {}
+            },
+            "inbox_signup": {
+              "type": "email-signup",
+              "settings": {
+                "width": "fill",
+                "heading": "",
+                "border_style": "underline",
+                "input_style": "default",
+                "display_type": "arrow",
+                "style_class": "button-unstyled",
+                "integrated_button": false,
+                "padding-block-start": 6,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
+              }
+            },
+            "inbox_legal": {
+              "type": "text",
+              "settings": {
+                "text": "<p>You can unsubscribe by using the unsubscribe link. NTB’s Privacy Policy applies and sets out your rights.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.625rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
               },
               "blocks": {}
             }
           },
           "block_order": [
-            "text_LWt8Pz",
-            "text_f9CFLH"
+            "inbox_heading",
+            "inbox_text",
+            "inbox_signup",
+            "inbox_legal"
           ]
         },
-        "email_signup_crihX7": {
-          "type": "email-signup",
+        "customer_service": {
+          "type": "menu",
           "settings": {
-            "width": "fill",
-            "custom_width": 100,
-            "heading_preset": "h3",
-            "border_style": "all",
-            "input_style": "custom",
-            "border_width": 1,
-            "border_radius": 100,
-            "input_background_color": "{{ settings.color_palette.background }}",
-            "input_text_color": "{{ settings.color_palette.color1 }}",
-            "input_border_color": "{{ settings.color_palette.color2 }}",
-            "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
-            "display_type": "arrow",
-            "label": "Sign up",
-            "integrated_button": true,
-            "button_type_preset": "paragraph",
+            "menu": "dm-footer-customer-service",
+            "heading": "Customer Service",
+            "menu_spacing": 4,
+            "show_as_accordion": false,
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
-          },
-          "blocks": {}
+          }
+        },
+        "ntb_universe": {
+          "type": "menu",
+          "settings": {
+            "menu": "dm-footer-ntb-universe",
+            "heading": "The NTB® Universe",
+            "menu_spacing": 4,
+            "show_as_accordion": false,
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "information": {
+          "type": "menu",
+          "settings": {
+            "menu": "dm-footer-information",
+            "heading": "Information",
+            "menu_spacing": 4,
+            "show_as_accordion": false,
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
         }
       },
       "block_order": [
-        "group_H6VpwJ",
-        "email_signup_crihX7"
+        "monogram",
+        "inbox",
+        "customer_service",
+        "ntb_universe",
+        "information"
       ],
       "name": "t:names.footer",
       "settings": {
-        "section_width": "page-width",
-        "gap": 20,
+        "section_width": "full-width",
+        "dm_layout": "grid",
+        "dm_line_color": "{{ settings.color_palette.foreground }}",
+        "dm_cell_padding": 24,
+        "gap": 0,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-start": 48,
+        "padding-block-end": 0
       }
     },
     "footer_utilities_jLGE8U": {
@@ -149,9 +181,12 @@
         "footer_copyright_jweRK8": {
           "type": "footer-copyright",
           "settings": {
-            "show_powered_by": true,
+            "dm_text": "© [year] No Take Backs All Rights Reserved",
+            "dm_weight": "700",
+            "show_powered_by": false,
+            "text_color": "{{ settings.color_palette.foreground }}",
             "font_size": "0.75rem",
-            "case": "none"
+            "case": "uppercase"
           },
           "blocks": {}
         },
@@ -161,7 +196,8 @@
             "font_size": "0.75rem",
             "case": "none"
           },
-          "blocks": {}
+          "blocks": {},
+          "disabled": true
         },
         "social_links_Ew63Kq": {
           "type": "social-links",
@@ -172,7 +208,8 @@
             "tiktok_url": "https://www.tiktok.com/",
             "twitter_url": "https://x.com/"
           },
-          "blocks": {}
+          "blocks": {},
+          "disabled": true
         }
       },
       "block_order": [
@@ -182,13 +219,13 @@
       ],
       "name": "t:names.utilities",
       "settings": {
-        "section_width": "page-width",
+        "section_width": "full-width",
         "gap": 24,
         "divider_thickness": 1,
-        "divider_color": "{{ settings.color_palette.color2 }}",
+        "divider_color": "{{ settings.color_palette.foreground }}",
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 20,
-        "padding-block-end": 48
+        "padding-block-start": 18,
+        "padding-block-end": 22
       }
     }
   },
