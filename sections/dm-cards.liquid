@@ -1,0 +1,233 @@
+{%- comment -%}
+  Daily Melt — centered heading + intro + row of cards (image with tag, title, checklist, optional
+  "Learn more" disclosure) + CTA. Used for "Consistency" (Month 1–3) on the PDP.
+{%- endcomment -%}
+
+{%- assign ss = section.settings -%}
+
+<div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
+<div
+  class="dm-cards section section--page-width"
+  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-cols: {{ ss.columns }}; --dm-radius: {{ ss.radius }}px; --dm-card-bg: {{ ss.card_background }}; --dm-card-text: {{ ss.card_text_color }}; --dm-accent: {{ ss.accent_color }};{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
+>
+  <div class="dm-cards__inner">
+    {%- if ss.heading != blank or ss.text != blank -%}
+      <header class="dm-cards__header">
+        {%- if ss.heading != blank -%}
+          <h2 class="dm-cards__heading h2">{{ ss.heading }}</h2>
+        {%- endif -%}
+        {%- if ss.text != blank -%}
+          <div class="dm-cards__text">{{ ss.text }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <ul class="dm-cards__list" role="list">
+      {% content_for 'blocks' %}
+    </ul>
+
+    {%- if ss.button_label != blank -%}
+      <div class="dm-cards__cta">
+        <a class="button dm-cards__button" href="{{ ss.button_link | default: '#dm-buy' }}">{{ ss.button_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .dm-cards {
+    padding-block: var(--dm-pt) var(--dm-pb);
+  }
+
+  .dm-cards__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .dm-cards__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .dm-cards__heading {
+    margin: 0;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+
+  .dm-cards__text {
+    max-width: 44rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+  }
+
+  .dm-cards__text p {
+    margin: 0;
+  }
+
+  .dm-cards__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dm-cards__cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  .dm-cards .dm-cards__button {
+    --button-color: var(--dm-card-text);
+    --button-background-color: var(--dm-card-bg);
+    --button-border-color: var(--dm-card-bg);
+    color: var(--dm-card-text);
+    background: var(--dm-card-bg);
+    border-color: var(--dm-card-bg);
+  }
+
+  .dm-cards .dm-cards__button:hover {
+    background: var(--dm-accent);
+    border-color: var(--dm-accent);
+    color: #fff;
+  }
+
+  @media screen and (min-width: 750px) {
+    .dm-cards__inner {
+      gap: 48px;
+    }
+
+    .dm-cards__list {
+      grid-template-columns: repeat(var(--dm-cols, 3), minmax(0, 1fr));
+      gap: 20px;
+      max-width: 1120px;
+      width: 100%;
+      margin-inline: auto;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Cards",
+  "tag": "section",
+  "class": "dm-section",
+  "blocks": [{ "type": "_dm-card" }],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Consistency Creates Change. Feel The Results Over Time."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Daily Melt"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Leave empty to scroll to the purchase options."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "Section background",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Section text",
+      "default": "{{ settings.color_palette.cream_light }}"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "{{ settings.color_palette.cream_light }}"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Tag and check color",
+      "default": "{{ settings.color_palette.accent }}"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Cards",
+      "blocks": {
+        "card_1": { "type": "_dm-card" },
+        "card_2": { "type": "_dm-card" },
+        "card_3": { "type": "_dm-card" }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
+    }
+  ]
+}
+{% endschema %}
