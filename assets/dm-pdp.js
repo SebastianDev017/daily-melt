@@ -226,6 +226,18 @@ if (!customElements.get('dm-tabs')) {
   customElements.define('dm-tabs', DmTabs);
 }
 
+/* "View full ingredient list" only shows while the Supplement Facts popup exists on the page. */
+function syncSupplementFactsTriggers() {
+  const hasPopup = Boolean(document.querySelector('.dm-purchase .popup-link'));
+  document.querySelectorAll('[data-dm-open-sfp]').forEach((trigger) => {
+    const wrapper = trigger.closest('.dm-tabs__cta') ?? trigger;
+    wrapper.hidden = !hasPopup;
+  });
+}
+syncSupplementFactsTriggers();
+document.addEventListener('shopify:section:load', syncSupplementFactsTriggers);
+document.addEventListener('shopify:block:select', syncSupplementFactsTriggers);
+
 /* "View full ingredient list" opens the Supplement Facts popup of the purchase block. */
 document.addEventListener('click', (event) => {
   const trigger = event.target.closest('[data-dm-open-sfp]');

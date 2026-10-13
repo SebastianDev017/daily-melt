@@ -1,0 +1,380 @@
+{%- doc -%}
+  Daily Melt — Supplement Facts panel in label format, as real text (accessible, sharp at any size).
+  Rows: one per line as "Name | Amount | % Daily Value". Start a line with "-" to indent it as a
+  sub-row, and use "---" on its own line for a heavy rule. Optional label image (e.g. the printed
+  label artwork) renders under the panel or replaces it.
+{%- enddoc -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign rows = bs.rows | newline_to_br | split: '<br />'
+  assign has_placeholder = false
+  if bs.rows contains '[' or bs.serving_size contains '[' or bs.other_ingredients contains '['
+    assign has_placeholder = true
+  endif
+-%}
+
+<div
+  class="dm-sfp spacing-style"
+  style="{% render 'spacing-style', settings: bs %}{% if bs.panel_background != blank %} --dm-sfp-bg: {{ bs.panel_background }};{% endif %}{% if bs.ink_color != blank %} --dm-sfp-ink: {{ bs.ink_color }};{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {%- if has_placeholder and request.design_mode -%}
+    <p class="dm-sfp__notice">{% render 'dm-placeholder-flag' %} {{ 'dm.sfp.placeholder_notice' | t }}</p>
+  {%- endif -%}
+
+  {%- if bs.display != 'image' -%}
+    <section class="dm-sfp__panel" aria-labelledby="dm-sfp-title-{{ block.id }}">
+      <h3 class="dm-sfp__title" id="dm-sfp-title-{{ block.id }}">{{ bs.title }}</h3>
+      {%- if bs.serving_size != blank or bs.servings != blank -%}
+        <dl class="dm-sfp__serving">
+          {%- if bs.serving_size != blank -%}
+            <div><dt>{{ bs.serving_size_label }}</dt><dd>{{ bs.serving_size }}</dd></div>
+          {%- endif -%}
+          {%- if bs.servings != blank -%}
+            <div><dt>{{ bs.servings_label }}</dt><dd>{{ bs.servings }}</dd></div>
+          {%- endif -%}
+        </dl>
+      {%- endif -%}
+
+      <table class="dm-sfp__table">
+        <colgroup>
+          <col class="dm-sfp__col-name">
+          <col class="dm-sfp__col-amount">
+          <col class="dm-sfp__col-dv">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col"><span class="visually-hidden">{{ 'dm.sfp.ingredient' | t }}</span></th>
+            <th scope="col" class="dm-sfp__num">{{ bs.amount_label }}</th>
+            <th scope="col" class="dm-sfp__num">{{ bs.dv_label }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- assign heavy_next = false -%}
+          {%- for row in rows -%}
+            {%- assign line = row | strip -%}
+            {%- if line == blank -%}{%- continue -%}{%- endif -%}
+            {%- if line == '---' -%}
+              {%- assign heavy_next = true -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- liquid
+              assign is_sub = false
+              if line contains '-' and line != '-'
+                assign first_char = line | slice: 0
+                if first_char == '-'
+                  assign is_sub = true
+                  assign line = line | slice: 1, 500 | strip
+                endif
+              endif
+              assign cells = line | split: '|'
+            -%}
+            <tr class="{% if is_sub %}dm-sfp__row--sub{% endif %}{% if heavy_next %} dm-sfp__row--heavy{% endif %}">
+              <th scope="row">{{ cells[0] | strip }}</th>
+              <td class="dm-sfp__num">{{ cells[1] | strip }}</td>
+              <td class="dm-sfp__num">{{ cells[2] | strip }}</td>
+            </tr>
+            {%- assign heavy_next = false -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      {%- if bs.footnote != blank -%}
+        <p class="dm-sfp__footnote">{{ bs.footnote | newline_to_br }}</p>
+      {%- endif -%}
+    </section>
+
+    {%- if bs.other_ingredients != blank -%}
+      <p class="dm-sfp__other"><strong>{{ bs.other_label }}</strong> {{ bs.other_ingredients }}</p>
+    {%- endif -%}
+    {%- if bs.notes != blank -%}
+      <div class="dm-sfp__notes">{{ bs.notes }}</div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if bs.display != 'table' and bs.label_image != blank -%}
+    {{ bs.label_image | image_url: width: 1200 | image_tag: widths: '480, 720, 960, 1200', sizes: '(min-width: 750px) 460px, 100vw', loading: 'lazy', class: 'dm-sfp__image', alt: bs.title }}
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .dm-sfp {
+    --dm-sfp-ink: var(--color-foreground);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    color: var(--dm-sfp-ink);
+  }
+
+  .dm-sfp__notice {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .dm-sfp__panel {
+    padding: 14px 16px 12px;
+    border: 1.5px solid var(--dm-sfp-ink);
+    background: var(--dm-sfp-bg, transparent);
+    font-family: var(--font-body--family);
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .dm-sfp__title {
+    margin: 0 0 4px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--dm-sfp-ink);
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(1.75rem, 6vw, 2.125rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: inherit;
+  }
+
+  .dm-sfp__serving {
+    margin: 0;
+    padding: 4px 0 6px;
+    border-bottom: 8px solid var(--dm-sfp-ink);
+  }
+
+  .dm-sfp__serving > div {
+    display: flex;
+    gap: 0.35em;
+  }
+
+  .dm-sfp__serving dt,
+  .dm-sfp__serving dd {
+    margin: 0;
+  }
+
+  .dm-sfp__serving dt {
+    font-weight: 600;
+  }
+
+  .dm-sfp__table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dm-sfp__col-name {
+    width: 56%;
+  }
+
+  .dm-sfp__col-amount {
+    width: 26%;
+  }
+
+  .dm-sfp__col-dv {
+    width: 18%;
+  }
+
+  .dm-sfp__table thead th {
+    padding: 4px 0;
+    border-bottom: 4px solid var(--dm-sfp-ink);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.15;
+    vertical-align: bottom;
+    white-space: normal;
+  }
+
+  .dm-sfp__table tbody th,
+  .dm-sfp__table tbody td {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--dm-sfp-ink);
+    vertical-align: top;
+  }
+
+  .dm-sfp__table tbody th {
+    font-weight: 700;
+    text-align: start;
+    padding-inline-end: 12px;
+  }
+
+  .dm-sfp__table tbody tr:last-child :is(th, td) {
+    border-bottom-width: 8px;
+  }
+
+  .dm-sfp__row--sub th {
+    padding-inline-start: 14px;
+    font-weight: 400;
+  }
+
+  .dm-sfp__row--heavy :is(th, td) {
+    border-top: 4px solid var(--dm-sfp-ink);
+  }
+
+  .dm-sfp__num {
+    text-align: end;
+    padding-inline-start: 8px;
+  }
+
+  .dm-sfp__table tbody .dm-sfp__num {
+    white-space: nowrap;
+  }
+
+  .dm-sfp__footnote {
+    margin: 6px 0 0;
+    font-size: 0.75rem;
+  }
+
+  .dm-sfp__other,
+  .dm-sfp__notes {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .dm-sfp__notes p {
+    margin: 0;
+  }
+
+  .dm-sfp__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DM · Supplement facts",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "display",
+      "label": "Show",
+      "options": [
+        { "value": "table", "label": "Facts panel (text)" },
+        { "value": "both", "label": "Facts panel + label image" },
+        { "value": "image", "label": "Label image only" }
+      ],
+      "default": "table"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Supplement Facts"
+    },
+    {
+      "type": "text",
+      "id": "serving_size_label",
+      "label": "Serving size label",
+      "default": "Serving Size"
+    },
+    {
+      "type": "text",
+      "id": "serving_size",
+      "label": "Serving size",
+      "default": "1 Scoop"
+    },
+    {
+      "type": "text",
+      "id": "servings_label",
+      "label": "Servings label",
+      "default": "Servings Per Container"
+    },
+    {
+      "type": "text",
+      "id": "servings",
+      "label": "Servings per container",
+      "default": "25"
+    },
+    {
+      "type": "text",
+      "id": "amount_label",
+      "label": "Amount column",
+      "default": "Amount Per Serving"
+    },
+    {
+      "type": "text",
+      "id": "dv_label",
+      "label": "Daily value column",
+      "default": "% Daily Value"
+    },
+    {
+      "type": "textarea",
+      "id": "rows",
+      "label": "Rows",
+      "info": "One per line: Name | Amount | % DV. Start with - to indent a sub-row. A line with --- adds a heavy rule."
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "† Daily Value not established."
+    },
+    {
+      "type": "text",
+      "id": "other_label",
+      "label": "Other ingredients label",
+      "default": "Other Ingredients:"
+    },
+    {
+      "type": "textarea",
+      "id": "other_ingredients",
+      "label": "Other ingredients"
+    },
+    {
+      "type": "richtext",
+      "id": "notes",
+      "label": "Notes (allergens, warnings)"
+    },
+    {
+      "type": "image_picker",
+      "id": "label_image",
+      "label": "Label image",
+      "visible_if": "{{ block.settings.display != 'table' }}"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Panel background",
+      "default": "{{ settings.color_palette.white }}"
+    },
+    {
+      "type": "color",
+      "id": "ink_color",
+      "label": "Ink color"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "DM · Supplement facts"
+    }
+  ]
+}
+{% endschema %}

@@ -345,59 +345,33 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "sfp_heading": {
-                      "type": "text",
+                    "sfp_panel": {
+                      "type": "dm-supplement-facts",
                       "settings": {
-                        "text": "<h3>Supplement Facts</h3><ul><li>Feeling fuller for longer</li><li>Calming cravings between meals</li><li>Satisfying your sweet tooth</li><li>Supporting natural appetite control</li><li>25 servings per pouch</li></ul>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "h4",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "text_color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
+                        "display": "table",
+                        "title": "Supplement Facts",
+                        "serving_size_label": "Serving Size",
+                        "serving_size": "1 Scoop ([X] g)",
+                        "servings_label": "Servings Per Container",
+                        "servings": "25",
+                        "amount_label": "Amount Per Serving",
+                        "dv_label": "% Daily Value",
+                        "rows": "African Spice Fruit Extract | [X] mg | †\nResistant Potato Starch | [X] g | †\nCeylon Cinnamon | [X] mg | †\nChromium (as Chromium Picolinate) | [X] mcg | [X]%\nOrganic Cacao | [X] g | †\nMCT Oil Powder | [X] g | †",
+                        "footnote": "† Daily Value not established.",
+                        "other_label": "Other Ingredients:",
+                        "other_ingredients": "[Organic cocoa, carob, monk fruit extract. Confirm order and wording against the final label.]",
+                        "notes": "",
+                        "panel_background": "{{ settings.color_palette.white }}",
+                        "ink_color": "",
                         "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    },
-                    "sfp_image": {
-                      "type": "image",
-                      "settings": {
-                        "image": "shopify://shop_images/Screenshot2026-08-26at12.23.37PM.png",
-                        "link": "",
-                        "image_ratio": "adapt",
-                        "width": "fill",
-                        "custom_width": 100,
-                        "width_mobile": "fill",
-                        "custom_width_mobile": 100,
-                        "height": "fit",
-                        "border": "none",
-                        "border_width": 1,
-                        "border_opacity": 100,
-                        "border_color": "",
-                        "border_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
+                        "padding-block-end": 0
+                      }
                     }
                   },
                   "block_order": [
-                    "sfp_heading",
-                    "sfp_image"
-                  ]
+                    "sfp_panel"
+                  ],
+                  "disabled": true
                 }
               },
               "block_order": [

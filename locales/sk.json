@@ -397,6 +397,10 @@
     },
     "cart": {
       "save": "Save {{ amount }}"
+    },
+    "sfp": {
+      "ingredient": "Ingredient",
+      "placeholder_notice": "Values in [brackets] are placeholders. Fill them from the final label before showing this panel."
     }
   }
 }

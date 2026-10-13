@@ -524,6 +524,71 @@
     display: none;
   }
 
+  /* Supplement Facts popup: compact card on desktop, bottom sheet on mobile */
+  .dm-purchase .popup-link__content {
+    width: min(480px, calc(100vw - 32px));
+    max-width: none;
+    height: fit-content;
+    max-height: min(90dvh, 920px);
+    padding: 52px 28px 28px;
+    border: 0;
+    border-radius: 0;
+    overscroll-behavior: contain;
+  }
+
+  .dm-purchase .popup-link__close {
+    top: 10px;
+    inset-inline-end: 10px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.35);
+    border-radius: 50%;
+    opacity: 1;
+  }
+
+  .dm-purchase .popup-link__close:hover {
+    border-color: var(--color-foreground);
+  }
+
+  @media screen and (max-width: 749px) {
+    .dm-purchase .popup-link__content {
+      width: 100%;
+      max-width: 100%;
+      max-height: 88dvh;
+      margin: auto 0 0;
+      padding: 52px 16px calc(24px + var(--safe-area-inset-bottom, 0px));
+    }
+
+    .dm-purchase .popup-link__content[open] {
+      animation: dmSheetIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .dm-purchase .popup-link__content.dialog-closing {
+      animation: dmSheetOut 0.2s ease-in both;
+    }
+  }
+
+  @keyframes dmSheetIn {
+    from {
+      transform: translateY(32px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes dmSheetOut {
+    to {
+      transform: translateY(32px);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dm-purchase .popup-link__content[open],
+    .dm-purchase .popup-link__content.dialog-closing {
+      animation-duration: 1ms;
+    }
+  }
+
   .dm-atc-price {
     display: inline-flex;
     align-items: baseline;
@@ -601,6 +666,7 @@
   "blocks": [
     { "type": "buy-buttons" },
     { "type": "popup-link" },
+    { "type": "dm-supplement-facts" },
     { "type": "dm-checklist" },
     { "type": "text" },
     { "type": "@app" }
