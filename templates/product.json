@@ -1,8 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product-information",
       "blocks": {
+        "disclosures_g9mWze": {
+          "type": "disclosures",
+          "name": "t:names.disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h5",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h6",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "{{ settings.color_palette.color2 }}",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -25,12 +53,13 @@
             "zoom": true,
             "video_loop": false,
             "hide_variants": true,
+            "dm_temp_gallery": true,
+            "dm_slots": 7,
+            "dm_captions": "Main: Daily Melt package with drink and frother on white background\nAngle 2: % stat of increase benefits\nAngle 3: Ingredient label / Supplement Facts\nAngle 4: Lifestyle shot (person enjoying)\nAngle 5: Before & after\nAngle 6: Delicious drink shot with benefits\nAngle 7: Subscription gifts",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "dm_temp_gallery": true,
-            "dm_slots": 7
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -74,15 +103,31 @@
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0
-              }
+              },
+              "blocks": {}
             },
             "title": {
               "type": "text",
               "settings": {
                 "text": "<h1>Daily Melt™</h1>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h1"
+                "type_preset": "h1",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -91,6 +136,7 @@
               "settings": {
                 "text": "<p>Mother Nature’s pathway to calm cravings, control appetite without needles, stimulants or lab-made chemicals</p>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-subheading--family)",
@@ -98,7 +144,15 @@
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
-                "wrap": "pretty"
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -107,6 +161,7 @@
               "settings": {
                 "text": "<p>Classic Dark Chocolate</p>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-accent--family)",
@@ -115,7 +170,14 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.accent }}"
+                "text_color": "{{ settings.color_palette.accent }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -124,22 +186,41 @@
               "settings": {
                 "text": "<p><em>Deep dark chocolate with a gently sweet, warm cinnamon finish.</em></p>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "paragraph"
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
             "benefits": {
               "type": "dm-checklist",
               "settings": {
+                "heading": "",
                 "items": "Natural GLP-1 support*\nHelps manage cravings*\nPrebiotic gut support",
                 "layout": "inline",
                 "icon": "circle_check",
                 "text_size": "small",
                 "alignment": "left",
+                "icon_color": "{{ settings.color_palette.accent }}",
+                "text_color": "",
                 "padding-block-start": 4,
                 "padding-block-end": 0
-              }
+              },
+              "blocks": {}
             },
             "divider": {
               "type": "_divider",
@@ -171,6 +252,9 @@
                 "per_serving_suffix": "/serving",
                 "sub_subtitle": "",
                 "sub_perks": "Free frother ($25 value)\nFree shipping delivered every 30 days\nCancel anytime, no commitment\n60-Day Money Back Guarantee",
+                "plan_display": "single",
+                "auto_badges": true,
+                "auto_badge_format": "[percent]% off",
                 "frequency_label": "Deliver every",
                 "default_plan_position": 1,
                 "demo_discount": 15,
@@ -182,6 +266,7 @@
                 "accent_color": "{{ settings.color_palette.accent }}",
                 "selected_background": "{{ settings.color_palette.cream_light }}",
                 "card_radius": 0,
+                "footnote": "",
                 "padding-block-start": 4,
                 "padding-block-end": 0
               },
@@ -215,6 +300,7 @@
                   "blocks": {
                     "quantity": {
                       "type": "quantity",
+                      "disabled": true,
                       "static": true,
                       "settings": {
                         "input_style": "default",
@@ -224,8 +310,7 @@
                         "border_width": 1,
                         "border_radius": 0
                       },
-                      "blocks": {},
-                      "disabled": true
+                      "blocks": {}
                     },
                     "add-to-cart": {
                       "type": "add-to-cart",
@@ -240,19 +325,24 @@
                     },
                     "accelerated-checkout": {
                       "type": "accelerated-checkout",
+                      "disabled": true,
                       "static": true,
                       "settings": {},
-                      "blocks": {},
-                      "disabled": true
+                      "blocks": {}
                     }
-                  }
+                  },
+                  "block_order": []
                 },
                 "supplement_facts": {
                   "type": "popup-link",
                   "settings": {
                     "behavior": "default",
                     "heading": "View Supplement Facts",
-                    "type_preset": ""
+                    "type_preset": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {
                     "sfp_heading": {
@@ -260,14 +350,46 @@
                       "settings": {
                         "text": "<h3>Supplement Facts</h3>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "h4"
+                        "type_preset": "h4",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     },
                     "sfp_image": {
                       "type": "image",
-                      "settings": {},
+                      "settings": {
+                        "link": "",
+                        "image_ratio": "adapt",
+                        "width": "fill",
+                        "custom_width": 100,
+                        "width_mobile": "fill",
+                        "custom_width_mobile": 100,
+                        "height": "fit",
+                        "border": "none",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_color": "",
+                        "border_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
                       "blocks": {}
                     }
                   },
@@ -285,12 +407,18 @@
             "trust": {
               "type": "dm-checklist",
               "settings": {
+                "heading": "",
                 "items": "60-Day Money-Back Guarantee\nThird-Party Tested for Purity\nMade in the USA in an FDA-reviewed, NSF and GMP certified facility",
                 "layout": "inline",
                 "icon": "check",
                 "text_size": "small",
-                "alignment": "center"
-              }
+                "alignment": "center",
+                "icon_color": "{{ settings.color_palette.accent }}",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
             },
             "gifts": {
               "type": "dm-subscription-gifts",
@@ -300,7 +428,9 @@
                 "perks": "Free frother in your first box\nFree recipe guidebook/e-book\nFree fast shipping\nBonus gifts in deliveries 2, 3, and 4\nSkip or cancel anytime",
                 "cta_label": "Start My Daily Melt Ritual",
                 "cta_action": "subscribe",
+                "cta_link": "",
                 "style": "lines",
+                "background": "",
                 "accent_color": "{{ settings.color_palette.accent }}",
                 "padding-block-start": 4,
                 "padding-block-end": 0
@@ -312,7 +442,8 @@
                     "label": "First delivery",
                     "name": "Frother + digital extras",
                     "locked": false
-                  }
+                  },
+                  "blocks": {}
                 },
                 "gift_2": {
                   "type": "_dm-gift",
@@ -320,7 +451,8 @@
                     "label": "Second delivery",
                     "name": "Metal scoop",
                     "locked": true
-                  }
+                  },
+                  "blocks": {}
                 },
                 "gift_3": {
                   "type": "_dm-gift",
@@ -328,7 +460,8 @@
                     "label": "Third delivery",
                     "name": "Canister",
                     "locked": true
-                  }
+                  },
+                  "blocks": {}
                 },
                 "gift_4": {
                   "type": "_dm-gift",
@@ -336,7 +469,8 @@
                     "label": "Fourth delivery",
                     "name": "Subscriber-exclusive cup",
                     "locked": true
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -351,8 +485,23 @@
               "settings": {
                 "text": "<h2>Dark chocolate that does more than satisfy.*</h2>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h4"
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -361,20 +510,41 @@
               "settings": {
                 "text": "<p>Daily Melt is a rich, creamy chocolate drink with clinically-studied ingredients that support natural GLP-1, satiety, healthy metabolism, and gut health.*</p>",
                 "width": "100%",
+                "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte"
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
             "key_benefits": {
               "type": "dm-checklist",
               "settings": {
+                "heading": "",
                 "items": "Feeling fuller for longer\nCalming cravings between meals\nSatisfying your sweet tooth\nSupporting natural appetite control\n25 servings per pouch",
                 "layout": "stacked",
                 "icon": "check",
                 "text_size": "base",
-                "alignment": "left"
-              }
+                "alignment": "left",
+                "icon_color": "{{ settings.color_palette.accent }}",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
             },
             "accordion": {
               "type": "accordion",
@@ -383,8 +553,17 @@
                 "dividers": true,
                 "divider_color": "{{ settings.color_palette.foreground }}",
                 "type_preset": "h5",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
                 "padding-block-start": 8,
-                "padding-block-end": 0
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "row_ingredients": {
@@ -392,7 +571,8 @@
                   "settings": {
                     "heading": "Key Ingredients",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "content": {
@@ -400,8 +580,23 @@
                       "settings": {
                         "text": "<p><strong>A doctor-formulated blend of functional ingredients that supports satiety, metabolism, and healthy weight management—without compromising on taste.</strong></p><ul><li>[Clinically studied active ingredient + primary benefit]</li><li>[Clinically studied active ingredient + primary benefit]</li><li>Organic cacao + cocoa for rich chocolate flavor</li><li>Carob for natural depth and sweetness</li><li>Ceylon cinnamon for a warm, balanced finish</li><li>Monk fruit for sweetness without added sugar</li></ul>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -415,7 +610,8 @@
                   "settings": {
                     "heading": "How Does It Work",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "content": {
@@ -423,8 +619,23 @@
                       "settings": {
                         "text": "<p>Daily Melt is a functional hot cacao designed to satisfy chocolate cravings while supporting your metabolism, satiety, and healthy blood sugar balance.</p><p>Powered by clinically studied ingredients, it works with your body’s natural pathways to help you feel satisfied and support healthy weight management—without pills, injections, or stimulants.</p><p>Enjoy it before or after a meal for a chocolate ritual that does more than satisfy your sweet tooth.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -438,7 +649,8 @@
                   "settings": {
                     "heading": "Who It’s For",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "content": {
@@ -446,8 +658,23 @@
                       "settings": {
                         "text": "<p>Daily Melt is for anyone who wants to:</p><ul><li>Feel more satisfied between meals</li><li>Support a healthy, active metabolism</li><li>Satisfy chocolate cravings more mindfully</li><li>Support natural GLP-1 and fullness signals</li><li>Make healthy weight management feel more sustainable</li><li>Replace pills and restrictive routines with an enjoyable daily ritual</li></ul>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -461,7 +688,8 @@
                   "settings": {
                     "heading": "How To Use",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "content": {
@@ -469,8 +697,23 @@
                       "settings": {
                         "text": "<p>Blend one scoop with hot water or your favorite milk until smooth and creamy.</p><p>Enjoy it hot, poured over ice, blended into coffee, or prepared in your favorite way. Drink once daily, either before or after a meal, for best results.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -484,7 +727,8 @@
                   "settings": {
                     "heading": "Taste Profile",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "content": {
@@ -492,8 +736,23 @@
                       "settings": {
                         "text": "<p>Organic cacao and cocoa create a rich chocolate base, while carob, Ceylon cinnamon, and monk fruit round out every smooth, creamy cup. It’s indulgent without being overly sweet—like a grown-up hot chocolate made for your daily ritual.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -513,8 +772,8 @@
             },
             "recharge_subscriptions_subscription_widget_v2_zR3Fxg": {
               "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
-              "settings": {},
-              "disabled": true
+              "disabled": true,
+              "settings": {}
             }
           },
           "block_order": [
@@ -534,25 +793,6 @@
             "accordion",
             "recharge_subscriptions_subscription_widget_v2_zR3Fxg"
           ]
-        },
-        "disclosures_g9mWze": {
-          "type": "disclosures",
-          "name": "t:names.disclosures",
-          "settings": {
-            "heading": "Disclosures",
-            "heading_preset": "h5",
-            "open_by_default": false,
-            "icon": "caret",
-            "disclosure_heading_preset": "h6",
-            "text_color": "",
-            "dividers": true,
-            "divider_color": "{{ settings.color_palette.color2 }}",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
         }
       },
       "block_order": [
@@ -572,26 +812,29 @@
     },
     "dm_description": {
       "type": "dm-media-grid",
-      "settings": {
-        "content_position": "left",
-        "mobile_order": "content",
-        "panel_style": "panel",
-        "panel_background": "{{ settings.color_palette.cream_light }}",
-        "panel_text_color": "",
-        "image_count": 4,
-        "radius": 0,
-        "background": "",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
       "blocks": {
         "heading": {
           "type": "text",
           "settings": {
             "text": "<h2>The Chocolate Ritual That Works With Your Biology</h2>",
             "width": "100%",
+            "max_width": "normal",
             "alignment": "left",
-            "type_preset": "h2"
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -600,8 +843,23 @@
           "settings": {
             "text": "<p><strong>Modern life makes it nearly impossible to ignore cravings.</strong></p><p>Sugar is everywhere. Stress is constant. Convenient snacks are always within reach. And when your body’s natural fullness and metabolic signals aren’t working in your favor, even your best intentions can feel like a daily battle.</p><p>Daily Melt works with your body’s natural pathways to support satiety, metabolism, and healthy weight – without needles, stimulants, or extreme restriction.</p><p>And because it tastes like an indulgent chocolate treat, supporting your goals finally feels like something you’ll want to do every day.</p>",
             "width": "100%",
+            "max_width": "normal",
             "alignment": "left",
-            "type_preset": "rte"
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -614,8 +872,12 @@
             "icon": "check",
             "text_size": "base",
             "alignment": "left",
-            "icon_color": "{{ settings.color_palette.accent }}"
-          }
+            "icon_color": "{{ settings.color_palette.accent }}",
+            "text_color": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
         },
         "button": {
           "type": "button",
@@ -624,7 +886,12 @@
             "link": "#dm-buy",
             "open_in_new_tab": false,
             "style_class": "button",
+            "custom_button_background": "{{ settings.color_palette.foreground }}",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
             "width": "fit-content",
+            "custom_width": 100,
             "width_mobile": "custom",
             "custom_width_mobile": 100
           },
@@ -636,22 +903,22 @@
         "body",
         "perfect_for",
         "button"
-      ]
+      ],
+      "settings": {
+        "content_position": "left",
+        "mobile_order": "content",
+        "panel_style": "panel",
+        "panel_background": "{{ settings.color_palette.cream_light }}",
+        "panel_text_color": "",
+        "image_count": 4,
+        "radius": 0,
+        "background": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "dm_how_to_use": {
       "type": "dm-steps",
-      "settings": {
-        "heading": "Your Daily Ritual in Three Simple Steps",
-        "text": "",
-        "columns": 3,
-        "button_label": "Get Your Daily Melt",
-        "button_link": "",
-        "accent_color": "{{ settings.color_palette.accent }}",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "background_start": "{{ settings.color_palette.cream_light }}",
-        "background_end": "{{ settings.color_palette.caramel }}"
-      },
       "blocks": {
         "step_1": {
           "type": "_dm-step",
@@ -660,7 +927,8 @@
             "number": "1",
             "title": "Scoop Daily Melt into your favorite mug or glass.",
             "text": ""
-          }
+          },
+          "blocks": {}
         },
         "step_2": {
           "type": "_dm-step",
@@ -669,7 +937,8 @@
             "number": "2",
             "title": "Mix with hot or cold liquid until smooth and creamy.",
             "text": ""
-          }
+          },
+          "blocks": {}
         },
         "step_3": {
           "type": "_dm-step",
@@ -678,17 +947,76 @@
             "number": "3",
             "title": "Sip, savor, and make it part of your daily routine.",
             "text": ""
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "step_1",
         "step_2",
         "step_3"
-      ]
+      ],
+      "settings": {
+        "heading": "Your Daily Ritual in Three Simple Steps",
+        "text": "",
+        "columns": 3,
+        "button_label": "Get Your Daily Melt",
+        "button_link": "",
+        "background_start": "{{ settings.color_palette.cream_light }}",
+        "background_end": "{{ settings.color_palette.caramel }}",
+        "accent_color": "{{ settings.color_palette.accent }}",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
     },
     "dm_consistency": {
       "type": "dm-cards",
+      "blocks": {
+        "month_1": {
+          "type": "_dm-card",
+          "settings": {
+            "show_image": true,
+            "tag": "Month 1",
+            "title": "Build the Ritual",
+            "subtitle": "Give your body consistent daily support.",
+            "items": "Begin establishing more balanced daily habits*\nFeel more satisfied after meals*\nSupport steadier energy throughout the day*\nStart satisfying chocolate cravings more mindfully*",
+            "more_label": "Learn More",
+            "more_text": ""
+          },
+          "blocks": {}
+        },
+        "month_2": {
+          "type": "_dm-card",
+          "settings": {
+            "show_image": true,
+            "tag": "Month 2",
+            "title": "Find Your Rhythm",
+            "subtitle": "Consistency begins to feel more natural.",
+            "items": "Fullness and appetite cues may feel easier to recognize*\nCravings between meals may feel more manageable*\nSupport healthy blood sugar levels already within a normal range*\nFeel more consistent in the habits that support your goals*",
+            "more_label": "Learn More",
+            "more_text": ""
+          },
+          "blocks": {}
+        },
+        "month_3": {
+          "type": "_dm-card",
+          "settings": {
+            "show_image": true,
+            "tag": "Month 3",
+            "title": "Keep the Momentum Going",
+            "subtitle": "Let small, repeatable choices add up over time.",
+            "items": "Support a healthy, active metabolism*\nMaintain steadier energy and greater satisfaction*\nMake healthy weight management feel more sustainable*\nFeel more confident and consistent in your daily routine*",
+            "more_label": "Learn More",
+            "more_text": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "month_1",
+        "month_2",
+        "month_3"
+      ],
       "settings": {
         "heading": "Consistency Creates Change. Feel The Results Over Time.",
         "text": "<p>Daily Melt isn’t an overnight fix. Its clinically studied ingredients are designed to support satiety, metabolic health, and healthy weight management with consistent daily use.</p><p>As the ritual becomes part of your routine, you may notice that cravings feel calmer, energy feels steadier, and healthy choices become easier to maintain.*</p>",
@@ -703,53 +1031,80 @@
         "radius": 0,
         "padding_top": 72,
         "padding_bottom": 72
-      },
-      "blocks": {
-        "month_1": {
-          "type": "_dm-card",
-          "settings": {
-            "show_image": true,
-            "tag": "Month 1",
-            "title": "Build the Ritual",
-            "subtitle": "Give your body consistent daily support.",
-            "items": "Begin establishing more balanced daily habits*\nFeel more satisfied after meals*\nSupport steadier energy throughout the day*\nStart satisfying chocolate cravings more mindfully*",
-            "more_label": "Learn More",
-            "more_text": ""
-          }
-        },
-        "month_2": {
-          "type": "_dm-card",
-          "settings": {
-            "show_image": true,
-            "tag": "Month 2",
-            "title": "Find Your Rhythm",
-            "subtitle": "Consistency begins to feel more natural.",
-            "items": "Fullness and appetite cues may feel easier to recognize*\nCravings between meals may feel more manageable*\nSupport healthy blood sugar levels already within a normal range*\nFeel more consistent in the habits that support your goals*",
-            "more_label": "Learn More",
-            "more_text": ""
-          }
-        },
-        "month_3": {
-          "type": "_dm-card",
-          "settings": {
-            "show_image": true,
-            "tag": "Month 3",
-            "title": "Keep the Momentum Going",
-            "subtitle": "Let small, repeatable choices add up over time.",
-            "items": "Support a healthy, active metabolism*\nMaintain steadier energy and greater satisfaction*\nMake healthy weight management feel more sustainable*\nFeel more confident and consistent in your daily routine*",
-            "more_label": "Learn More",
-            "more_text": ""
-          }
-        }
-      },
-      "block_order": [
-        "month_1",
-        "month_2",
-        "month_3"
-      ]
+      }
     },
     "dm_ingredients": {
       "type": "dm-tabs",
+      "blocks": {
+        "african_spice_fruit": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "African Spice Fruit",
+            "heading": "African Spice Fruit",
+            "text": "",
+            "items": "Supports natural GLP-1 activity*\nPromotes satiety*\nSupports healthy weight management*"
+          },
+          "blocks": {}
+        },
+        "resistant_potato_starch": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Resistant Potato Starch",
+            "heading": "Resistant Potato Starch",
+            "text": "",
+            "items": "Feeds beneficial gut bacteria*\nSupports natural fullness*\nPromotes digestive wellness*"
+          },
+          "blocks": {}
+        },
+        "ceylon_cinnamon": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Ceylon Cinnamon",
+            "heading": "Ceylon Cinnamon",
+            "text": "",
+            "items": "Supports healthy glucose metabolism*\nProvides antioxidant protection*\nPromotes balanced blood sugar levels*"
+          },
+          "blocks": {}
+        },
+        "chromium_picolinate": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Chromium Picolinate",
+            "heading": "Chromium Picolinate",
+            "text": "",
+            "items": "Supports carbohydrate and fat metabolism*\nPromotes healthy blood sugar regulation*\nSupports balanced energy*"
+          },
+          "blocks": {}
+        },
+        "organic_cacao": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "Organic Cacao",
+            "heading": "Organic Cacao",
+            "text": "",
+            "items": "Rich in flavonoid antioxidants\nSatisfies chocolate cravings\nDelivers deep, indulgent flavor"
+          },
+          "blocks": {}
+        },
+        "mct_oil_powder": {
+          "type": "_dm-tab",
+          "settings": {
+            "label": "MCT Oil Powder",
+            "heading": "MCT Oil Powder",
+            "text": "",
+            "items": "Provides a quick source of energy*\nHelps you feel satisfied*\nCreates a smooth, creamy texture"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "african_spice_fruit",
+        "resistant_potato_starch",
+        "ceylon_cinnamon",
+        "chromium_picolinate",
+        "organic_cacao",
+        "mct_oil_powder"
+      ],
       "settings": {
         "heading": "Science-Backed Ingredients for Metabolic Support",
         "text": "",
@@ -761,74 +1116,98 @@
         "radius": 0,
         "padding_top": 72,
         "padding_bottom": 72
-      },
-      "blocks": {
-        "african_spice_fruit": {
-          "type": "_dm-tab",
-          "settings": {
-            "label": "African Spice Fruit",
-            "heading": "African Spice Fruit",
-            "text": "",
-            "items": "Supports natural GLP-1 activity*\nPromotes satiety*\nSupports healthy weight management*"
-          }
-        },
-        "resistant_potato_starch": {
-          "type": "_dm-tab",
-          "settings": {
-            "label": "Resistant Potato Starch",
-            "heading": "Resistant Potato Starch",
-            "text": "",
-            "items": "Feeds beneficial gut bacteria*\nSupports natural fullness*\nPromotes digestive wellness*"
-          }
-        },
-        "ceylon_cinnamon": {
-          "type": "_dm-tab",
-          "settings": {
-            "label": "Ceylon Cinnamon",
-            "heading": "Ceylon Cinnamon",
-            "text": "",
-            "items": "Supports healthy glucose metabolism*\nProvides antioxidant protection*\nPromotes balanced blood sugar levels*"
-          }
-        },
-        "chromium_picolinate": {
-          "type": "_dm-tab",
-          "settings": {
-            "label": "Chromium Picolinate",
-            "heading": "Chromium Picolinate",
-            "text": "",
-            "items": "Supports carbohydrate and fat metabolism*\nPromotes healthy blood sugar regulation*\nSupports balanced energy*"
-          }
-        },
-        "organic_cacao": {
-          "type": "_dm-tab",
-          "settings": {
-            "label": "Organic Cacao",
-            "heading": "Organic Cacao",
-            "text": "",
-            "items": "Rich in flavonoid antioxidants\nSatisfies chocolate cravings\nDelivers deep, indulgent flavor"
-          }
-        },
-        "mct_oil_powder": {
-          "type": "_dm-tab",
-          "settings": {
-            "label": "MCT Oil Powder",
-            "heading": "MCT Oil Powder",
-            "text": "",
-            "items": "Provides a quick source of energy*\nHelps you feel satisfied*\nCreates a smooth, creamy texture"
-          }
-        }
-      },
-      "block_order": [
-        "african_spice_fruit",
-        "resistant_potato_starch",
-        "ceylon_cinnamon",
-        "chromium_picolinate",
-        "organic_cacao",
-        "mct_oil_powder"
-      ]
+      }
     },
     "dm_reviews": {
       "type": "dm-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "Finally, something that works",
+            "body": "I've tried everything for my sugar cravings. Daily Melt is the first thing that's actually helped. I look forward to it every afternoon—it's like having dessert that's good for you.",
+            "author": "Sarah M.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          },
+          "blocks": {}
+        },
+        "review_2": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "Tastes amazing, actually works",
+            "body": "I was skeptical about the taste, but this is legitimately delicious. And I've noticed I'm not reaching for snacks at 9pm anymore. The Mini Bitter Balance with my subscription is a huge bonus.",
+            "author": "Jason T.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          },
+          "blocks": {}
+        },
+        "review_3": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "Replaced my afternoon latte habit",
+            "body": "Used to spend $6/day on coffee shop drinks. Now I make Daily Melt at home—tastes better, costs less, and I feel so much better throughout the day.",
+            "author": "Maria L.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          },
+          "blocks": {}
+        },
+        "review_4": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "My nutritionist recommended it",
+            "body": "My RD suggested Daily Melt as part of my weight management plan. Three months in and I'm down 12 pounds, my cravings are under control, and I actually enjoy my daily ritual.",
+            "author": "David K.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          },
+          "blocks": {}
+        },
+        "review_5": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 4,
+            "title": "Great product, wish it was cheaper",
+            "body": "Love the taste and it definitely helps with my sweet tooth. Subscription saves money but still pricey. That said, I haven't found anything else that works this well.",
+            "author": "Amanda R.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          },
+          "blocks": {}
+        },
+        "review_6": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "The Mini Bitter Balance is genius",
+            "body": "I subscribed for the Daily Melt but the free Bitter Balance tincture is such a game-changer. I take it before meals and it really does help with blood sugar crashes.",
+            "author": "Eric P.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6"
+      ],
       "settings": {
         "heading": "What Our Customers Are Saying",
         "show_placeholders": true,
@@ -848,121 +1227,33 @@
         "accent_color": "{{ settings.color_palette.accent }}",
         "padding_top": 72,
         "padding_bottom": 72
-      },
-      "blocks": {
-        "review_1": {
-          "type": "_dm-review",
-          "settings": {
-            "rating": 5,
-            "title": "Finally, something that works",
-            "body": "I've tried everything for my sugar cravings. Daily Melt is the first thing that's actually helped. I look forward to it every afternoon—it's like having dessert that's good for you.",
-            "author": "Sarah M.",
-            "verified": true,
-            "verified_label": "Verified Purchase",
-            "date": ""
-          }
-        },
-        "review_2": {
-          "type": "_dm-review",
-          "settings": {
-            "rating": 5,
-            "title": "Tastes amazing, actually works",
-            "body": "I was skeptical about the taste, but this is legitimately delicious. And I've noticed I'm not reaching for snacks at 9pm anymore. The Mini Bitter Balance with my subscription is a huge bonus.",
-            "author": "Jason T.",
-            "verified": true,
-            "verified_label": "Verified Purchase",
-            "date": ""
-          }
-        },
-        "review_3": {
-          "type": "_dm-review",
-          "settings": {
-            "rating": 5,
-            "title": "Replaced my afternoon latte habit",
-            "body": "Used to spend $6/day on coffee shop drinks. Now I make Daily Melt at home—tastes better, costs less, and I feel so much better throughout the day.",
-            "author": "Maria L.",
-            "verified": true,
-            "verified_label": "Verified Purchase",
-            "date": ""
-          }
-        },
-        "review_4": {
-          "type": "_dm-review",
-          "settings": {
-            "rating": 5,
-            "title": "My nutritionist recommended it",
-            "body": "My RD suggested Daily Melt as part of my weight management plan. Three months in and I'm down 12 pounds, my cravings are under control, and I actually enjoy my daily ritual.",
-            "author": "David K.",
-            "verified": true,
-            "verified_label": "Verified Purchase",
-            "date": ""
-          }
-        },
-        "review_5": {
-          "type": "_dm-review",
-          "settings": {
-            "rating": 4,
-            "title": "Great product, wish it was cheaper",
-            "body": "Love the taste and it definitely helps with my sweet tooth. Subscription saves money but still pricey. That said, I haven't found anything else that works this well.",
-            "author": "Amanda R.",
-            "verified": true,
-            "verified_label": "Verified Purchase",
-            "date": ""
-          }
-        },
-        "review_6": {
-          "type": "_dm-review",
-          "settings": {
-            "rating": 5,
-            "title": "The Mini Bitter Balance is genius",
-            "body": "I subscribed for the Daily Melt but the free Bitter Balance tincture is such a game-changer. I take it before meals and it really does help with blood sugar crashes.",
-            "author": "Eric P.",
-            "verified": true,
-            "verified_label": "Verified Purchase",
-            "date": ""
-          }
-        }
-      },
-      "block_order": [
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4",
-        "review_5",
-        "review_6"
-      ]
+      }
     },
     "dm_faq": {
       "type": "section",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 32,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 72,
-        "padding-block-end": 72
-      },
       "blocks": {
         "heading": {
           "type": "text",
           "settings": {
             "text": "<h2>Frequently Asked Questions</h2>",
             "width": "100%",
+            "max_width": "normal",
             "alignment": "center",
-            "type_preset": "h2"
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -982,8 +1273,23 @@
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
+            "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
             "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -997,8 +1303,17 @@
                 "dividers": true,
                 "divider_color": "{{ settings.color_palette.foreground }}",
                 "type_preset": "h5",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "faq_1": {
@@ -1006,7 +1321,8 @@
                   "settings": {
                     "heading": "When should I drink Daily Melt?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1014,8 +1330,23 @@
                       "settings": {
                         "text": "<p>Enjoy Daily Melt whenever it best fits your routine – before or after a meal, as an afternoon pick-me-up, or when you want something chocolatey. For best results, enjoy one serving daily. Consistency matters more than timing.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1029,7 +1360,8 @@
                   "settings": {
                     "heading": "What does it taste like?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1037,8 +1369,23 @@
                       "settings": {
                         "text": "<p>Deep dark chocolate with subtle sweetness and a warm cinnamon finish. Organic cacao and cocoa create its rich chocolate depth, while carob, Ceylon cinnamon, and monk fruit round out every smooth, creamy cup. It’s indulgent without tasting overly sweet.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1052,7 +1399,8 @@
                   "settings": {
                     "heading": "How is this different from regular hot chocolate?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1060,8 +1408,23 @@
                       "settings": {
                         "text": "<p>Daily Melt is more than a chocolate treat. It combines rich cacao with clinically studied ingredients that support natural GLP-1 production, satiety, healthy blood sugar levels, and metabolic health.*</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1075,7 +1438,8 @@
                   "settings": {
                     "heading": "Will this help me lose weight?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1083,8 +1447,23 @@
                       "settings": {
                         "text": "<p>Daily Melt is designed to support healthy weight management by promoting satiety, helping manage cravings, and supporting metabolic health.*</p><p>It isn’t a weight-loss medication or quick fix, and results vary. It works best alongside balanced nutrition, regular movement, and other healthy habits.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1098,7 +1477,8 @@
                   "settings": {
                     "heading": "Can I cancel my subscription anytime?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1106,8 +1486,23 @@
                       "settings": {
                         "text": "<p>Absolutely. You can pause, skip, modify, or cancel future shipments through your account portal.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1121,7 +1516,8 @@
                   "settings": {
                     "heading": "Is Daily Melt safe for my diet?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1129,8 +1525,23 @@
                       "settings": {
                         "text": "<p>Daily Melt is vegan, gluten-free, dairy-free, soy-free, and made with non-GMO ingredients. It contains no artificial additives. Always review the complete ingredient and allergen information, and consult your healthcare provider if you have a medical condition or take medication.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1144,7 +1555,8 @@
                   "settings": {
                     "heading": "How many servings per container?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1152,8 +1564,23 @@
                       "settings": {
                         "text": "<p>Each package contains 25 servings (one month supply at one serving per day).</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1167,7 +1594,8 @@
                   "settings": {
                     "heading": "Does Daily Melt contain caffeine or stimulants?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1175,8 +1603,23 @@
                       "settings": {
                         "text": "<p>Daily Melt contains naturally occurring compounds from cacao, so this answer should reflect the actual caffeine and theobromine content.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1190,7 +1633,8 @@
                   "settings": {
                     "heading": "Do you offer a money-back guarantee?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1198,8 +1642,23 @@
                       "settings": {
                         "text": "<p>Yes! Try Daily Melt risk-free for 30 days. If you're not satisfied, contact us for a full refund—no questions asked.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1213,7 +1672,8 @@
                   "settings": {
                     "heading": "Does Daily Melt contain sugar?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1221,8 +1681,23 @@
                       "settings": {
                         "text": "<p>Daily Melt is sweetened with monk fruit for a balanced sweetness without artificial sweeteners.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1236,7 +1711,8 @@
                   "settings": {
                     "heading": "How should I store it?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1244,8 +1720,23 @@
                       "settings": {
                         "text": "<p>Store in a cool, dry place away from direct sunlight. No refrigeration needed.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1259,7 +1750,8 @@
                   "settings": {
                     "heading": "Can I add it to coffee or smoothies?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "answer": {
@@ -1267,8 +1759,23 @@
                       "settings": {
                         "text": "<p>Absolutely! Many customers add Daily Melt to their morning coffee for a mocha flavor, or blend it into smoothies and protein shakes.</p>",
                         "width": "100%",
+                        "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte"
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     }
@@ -1302,54 +1809,78 @@
       "block_order": [
         "heading",
         "faq_group"
-      ]
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
     },
     "dm_certifications": {
       "type": "dm-badges",
-      "settings": {
-        "heading": "Our Quality Promise",
-        "text": "<p>Every batch of Daily Melt is third-party tested for purity and potency. We source organic ingredients when available, manufactured in GMP-certified facilities in the USA, and never compromise on quality.</p>",
-        "background": "{{ settings.color_palette.cream_light }}",
-        "text_color": "",
-        "accent_color": "{{ settings.color_palette.accent }}",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "third_party": {
           "type": "_dm-badge",
           "settings": {
             "icon": "flask",
             "label": "Third-Party Tested"
-          }
+          },
+          "blocks": {}
         },
         "non_gmo": {
           "type": "_dm-badge",
           "settings": {
             "icon": "leaf",
             "label": "Non-GMO"
-          }
+          },
+          "blocks": {}
         },
         "vegan": {
           "type": "_dm-badge",
           "settings": {
             "icon": "leaf",
             "label": "Vegan"
-          }
+          },
+          "blocks": {}
         },
         "gluten_free": {
           "type": "_dm-badge",
           "settings": {
             "icon": "circle_check",
             "label": "Gluten-Free"
-          }
+          },
+          "blocks": {}
         },
         "gmp": {
           "type": "_dm-badge",
           "settings": {
             "icon": "badge",
             "label": "GMP Certified"
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -1358,7 +1889,16 @@
         "vegan",
         "gluten_free",
         "gmp"
-      ]
+      ],
+      "settings": {
+        "heading": "Our Quality Promise",
+        "text": "<p>Every batch of Daily Melt is third-party tested for purity and potency. We source organic ingredients when available, manufactured in GMP-certified facilities in the USA, and never compromise on quality.</p>",
+        "background": "{{ settings.color_palette.cream_light }}",
+        "text_color": "",
+        "accent_color": "{{ settings.color_palette.accent }}",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
