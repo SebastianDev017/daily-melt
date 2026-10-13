@@ -825,6 +825,539 @@
         "organic_cacao",
         "mct_oil_powder"
       ]
+    },
+    "dm_reviews": {
+      "type": "dm-reviews",
+      "settings": {
+        "heading": "What Our Customers Are Saying",
+        "show_placeholders": true,
+        "hide_placeholders_with_app": true,
+        "show_summary": true,
+        "placeholder_rating": 4.5,
+        "placeholder_count": 2235,
+        "write_label": "",
+        "write_link": "",
+        "page_size": 6,
+        "label_all": "All Reviews",
+        "label_stars": "Stars",
+        "label_verified": "Verified Purchases",
+        "label_recent": "Most Recent",
+        "load_more_label": "Load More",
+        "background": "{{ settings.color_palette.cream_light }}",
+        "accent_color": "{{ settings.color_palette.accent }}",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "review_1": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "Finally, something that works",
+            "body": "I've tried everything for my sugar cravings. Daily Melt is the first thing that's actually helped. I look forward to it every afternoon—it's like having dessert that's good for you.",
+            "author": "Sarah M.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          }
+        },
+        "review_2": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "Tastes amazing, actually works",
+            "body": "I was skeptical about the taste, but this is legitimately delicious. And I've noticed I'm not reaching for snacks at 9pm anymore. The Mini Bitter Balance with my subscription is a huge bonus.",
+            "author": "Jason T.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          }
+        },
+        "review_3": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "Replaced my afternoon latte habit",
+            "body": "Used to spend $6/day on coffee shop drinks. Now I make Daily Melt at home—tastes better, costs less, and I feel so much better throughout the day.",
+            "author": "Maria L.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          }
+        },
+        "review_4": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "My nutritionist recommended it",
+            "body": "My RD suggested Daily Melt as part of my weight management plan. Three months in and I'm down 12 pounds, my cravings are under control, and I actually enjoy my daily ritual.",
+            "author": "David K.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          }
+        },
+        "review_5": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 4,
+            "title": "Great product, wish it was cheaper",
+            "body": "Love the taste and it definitely helps with my sweet tooth. Subscription saves money but still pricey. That said, I haven't found anything else that works this well.",
+            "author": "Amanda R.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          }
+        },
+        "review_6": {
+          "type": "_dm-review",
+          "settings": {
+            "rating": 5,
+            "title": "The Mini Bitter Balance is genius",
+            "body": "I subscribed for the Daily Melt but the free Bitter Balance tincture is such a game-changer. I take it before meals and it really does help with blood sugar crashes.",
+            "author": "Eric P.",
+            "verified": true,
+            "verified_label": "Verified Purchase",
+            "date": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6"
+      ]
+    },
+    "dm_faq": {
+      "type": "section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      },
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Frequently Asked Questions</h2>",
+            "width": "100%",
+            "alignment": "center",
+            "type_preset": "h2"
+          },
+          "blocks": {}
+        },
+        "faq_group": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "custom",
+            "custom_width": 75,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "faq_accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "divider_color": "{{ settings.color_palette.foreground }}",
+                "type_preset": "h5",
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {
+                "faq_1": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "When should I drink Daily Melt?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Enjoy Daily Melt whenever it best fits your routine – before or after a meal, as an afternoon pick-me-up, or when you want something chocolatey. For best results, enjoy one serving daily. Consistency matters more than timing.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_2": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "What does it taste like?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Deep dark chocolate with subtle sweetness and a warm cinnamon finish. Organic cacao and cocoa create its rich chocolate depth, while carob, Ceylon cinnamon, and monk fruit round out every smooth, creamy cup. It’s indulgent without tasting overly sweet.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_3": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "How is this different from regular hot chocolate?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Daily Melt is more than a chocolate treat. It combines rich cacao with clinically studied ingredients that support natural GLP-1 production, satiety, healthy blood sugar levels, and metabolic health.*</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_4": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Will this help me lose weight?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Daily Melt is designed to support healthy weight management by promoting satiety, helping manage cravings, and supporting metabolic health.*</p><p>It isn’t a weight-loss medication or quick fix, and results vary. It works best alongside balanced nutrition, regular movement, and other healthy habits.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_5": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Can I cancel my subscription anytime?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Absolutely. You can pause, skip, modify, or cancel future shipments through your account portal.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_6": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Is Daily Melt safe for my diet?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Daily Melt is vegan, gluten-free, dairy-free, soy-free, and made with non-GMO ingredients. It contains no artificial additives. Always review the complete ingredient and allergen information, and consult your healthcare provider if you have a medical condition or take medication.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_7": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "How many servings per container?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Each package contains 25 servings (one month supply at one serving per day).</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_8": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Does Daily Melt contain caffeine or stimulants?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Daily Melt contains naturally occurring compounds from cacao, so this answer should reflect the actual caffeine and theobromine content.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_9": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Do you offer a money-back guarantee?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Yes! Try Daily Melt risk-free for 30 days. If you're not satisfied, contact us for a full refund—no questions asked.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_10": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Does Daily Melt contain sugar?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Daily Melt is sweetened with monk fruit for a balanced sweetness without artificial sweeteners.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_11": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "How should I store it?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Store in a cool, dry place away from direct sunlight. No refrigeration needed.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                },
+                "faq_12": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Can I add it to coffee or smoothies?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Absolutely! Many customers add Daily Melt to their morning coffee for a mocha flavor, or blend it into smoothies and protein shakes.</p>",
+                        "width": "100%",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "answer"
+                  ]
+                }
+              },
+              "block_order": [
+                "faq_1",
+                "faq_2",
+                "faq_3",
+                "faq_4",
+                "faq_5",
+                "faq_6",
+                "faq_7",
+                "faq_8",
+                "faq_9",
+                "faq_10",
+                "faq_11",
+                "faq_12"
+              ]
+            }
+          },
+          "block_order": [
+            "faq_accordion"
+          ]
+        }
+      },
+      "block_order": [
+        "heading",
+        "faq_group"
+      ]
+    },
+    "dm_certifications": {
+      "type": "dm-badges",
+      "settings": {
+        "heading": "Our Quality Promise",
+        "text": "<p>Every batch of Daily Melt is third-party tested for purity and potency. We source organic ingredients when available, manufactured in GMP-certified facilities in the USA, and never compromise on quality.</p>",
+        "background": "{{ settings.color_palette.cream_light }}",
+        "text_color": "",
+        "accent_color": "{{ settings.color_palette.accent }}",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "third_party": {
+          "type": "_dm-badge",
+          "settings": {
+            "icon": "flask",
+            "label": "Third-Party Tested"
+          }
+        },
+        "non_gmo": {
+          "type": "_dm-badge",
+          "settings": {
+            "icon": "leaf",
+            "label": "Non-GMO"
+          }
+        },
+        "vegan": {
+          "type": "_dm-badge",
+          "settings": {
+            "icon": "leaf",
+            "label": "Vegan"
+          }
+        },
+        "gluten_free": {
+          "type": "_dm-badge",
+          "settings": {
+            "icon": "circle_check",
+            "label": "Gluten-Free"
+          }
+        },
+        "gmp": {
+          "type": "_dm-badge",
+          "settings": {
+            "icon": "badge",
+            "label": "GMP Certified"
+          }
+        }
+      },
+      "block_order": [
+        "third_party",
+        "non_gmo",
+        "vegan",
+        "gluten_free",
+        "gmp"
+      ]
     }
   },
   "order": [
@@ -832,6 +1365,9 @@
     "dm_description",
     "dm_how_to_use",
     "dm_consistency",
-    "dm_ingredients"
+    "dm_ingredients",
+    "dm_reviews",
+    "dm_faq",
+    "dm_certifications"
   ]
 }
