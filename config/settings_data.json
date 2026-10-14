@@ -17,9 +17,9 @@
     "type_heading_font": "besley_n8",
     "type_accent_font": "kaushan_script_n4",
     "dm_adobe_kit_id": "nri2uvk",
-    "dm_adobe_heading_family": "",
+    "dm_adobe_heading_family": "clarendon-urw-extra-narrow",
     "dm_adobe_heading_weight": "700",
-    "dm_adobe_subheading_weight": "700",
+    "dm_adobe_subheading_weight": "500",
     "dm_adobe_body_family": "forma-djr-micro",
     "dm_adobe_body_weight": "400",
     "dm_adobe_body_buttons": false,
@@ -167,7 +167,9 @@
     "dm_margin_min": 16,
     "dm_margin_max": 128,
     "dm_scale_1920": 112,
-    "dm_accent_eastbay": true
+    "dm_accent_eastbay": true,
+    "dm_adobe_button_family": "clarendon-urw",
+    "dm_adobe_button_weight": "500"
   },
   "presets": {
     "Horizon": {

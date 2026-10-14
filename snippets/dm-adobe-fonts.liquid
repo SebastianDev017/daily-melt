@@ -13,6 +13,7 @@
   assign kit_id = settings.dm_adobe_kit_id | strip
   assign heading_family = settings.dm_adobe_heading_family | strip | remove: '"' | remove: "'"
   assign body_family = settings.dm_adobe_body_family | strip | remove: '"' | remove: "'"
+  assign button_family = settings.dm_adobe_button_family | strip | remove: '"' | remove: "'"
 
   # Metric-matched local fallback (measured against Arial) so text keeps its size and wrapping while
   # the kit font loads. Only defined for families we have measured.
@@ -30,7 +31,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/{{ kit_id | url_encode }}.css">
   {%- # theme-check-enable RemoteAsset -%}
 
-  {%- if heading_family != blank or body_family != blank -%}
+  {%- if heading_family != blank or body_family != blank or button_family != blank -%}
     {% style %}
       {%- if fallback != blank %}
         @font-face {
@@ -76,7 +77,18 @@
             {%- endif %}
           {%- endunless %}
         {%- endif %}
+        {%- if button_family != blank %}
+          --button-font-family-primary: "{{ button_family }}", {{ settings.type_heading_font.fallback_families }};
+          --button-font-family-secondary: "{{ button_family }}", {{ settings.type_heading_font.fallback_families }};
+          --dm-button-font-weight: {{ settings.dm_adobe_button_weight }};
+        {%- endif %}
       }
+
+      {%- if button_family != blank %}
+        :is(.button, .button-secondary, .dm-tabs__tab, .popup-link__button, .cart__checkout-button) {
+          font-weight: var(--dm-button-font-weight);
+        }
+      {%- endif %}
     {% endstyle %}
   {%- endif -%}
 {%- endif -%}
