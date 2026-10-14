@@ -215,7 +215,7 @@
                 "icon": "check",
                 "text_size": "base",
                 "alignment": "left",
-                "icon_color": "{{ settings.color_palette.accent }}",
+                "icon_color": "#9B1B31",
                 "text_color": "",
                 "padding-block-start": 4,
                 "padding-block-end": 0
@@ -389,7 +389,7 @@
                 "icon": "check",
                 "text_size": "small",
                 "alignment": "left",
-                "icon_color": "{{ settings.color_palette.accent }}",
+                "icon_color": "#9B1B31",
                 "text_color": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0
