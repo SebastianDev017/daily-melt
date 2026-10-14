@@ -892,7 +892,7 @@
         "image_3": "shopify://shop_images/DM_03.jpg",
         "image_4": "shopify://shop_images/DM_02-2_42fe97f9-09c3-41be-b630-88698d4d309f.jpg",
         "radius": 0,
-        "background": "#F1F0ED",
+        "background": "{{ settings.color_palette.white }}",
         "padding_top": 60,
         "padding_bottom": 60
       }
