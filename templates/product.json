@@ -1896,9 +1896,9 @@
       "settings": {
         "heading": "Our Quality Promise",
         "text": "<p>Every batch of Daily Melt is third-party tested for purity and potency. We source organic ingredients when available, manufactured in GMP-certified facilities in the USA, and never compromise on quality.</p>",
-        "background": "{{ settings.color_palette.cream_light }}",
+        "background": "#DCEAF7",
         "text_color": "",
-        "accent_color": "{{ settings.color_palette.accent }}",
+        "accent_color": "#9B1B31",
         "padding_top": 60,
         "padding_bottom": 60,
         "dm_font_label": "subheading"
