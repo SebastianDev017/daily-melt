@@ -532,8 +532,8 @@
 
   /* Daily Melt: hamburger + centered wordmark on every breakpoint (mockup proportions) */
   #header-component[data-dm-always-drawer] .header__columns {
-    padding-inline: clamp(var(--page-margin), 6.9vw, 100px) clamp(var(--page-margin), 3.6vw, 52px);
-    min-height: var(--dm-header-min-height, 56px);
+    padding-inline: var(--page-margin);
+    min-height: var(--dm-header-min-height, 3.5rem);
   }
 
   #header-component[data-dm-always-drawer] .header__icon--summary,
@@ -564,8 +564,20 @@
 
   @media screen and (max-width: 749px) {
     #header-component[data-dm-always-drawer] .header__columns {
-      min-height: var(--dm-header-min-height-mobile, 52px);
+      min-height: var(--dm-header-min-height-mobile, 3.25rem);
     }
+
+  }
+
+  /* Narrow phones: smaller wordmark so it never touches the 44px icon targets */
+  @media screen and (max-width: 374px) {
+    #header-component[data-dm-always-drawer] .header-logo {
+      font-size: clamp(0.625rem, 3.3vw, 0.875rem);
+      letter-spacing: 0;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
 
     #header-component[data-dm-always-drawer] .header-drawer-icon--icon-menu-classic,
     #header-component[data-dm-always-drawer] .header-drawer-icon--icon-menu-classic > svg {

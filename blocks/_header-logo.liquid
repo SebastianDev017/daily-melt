@@ -41,8 +41,8 @@
     --font-family: var(--font-{{ wordmark_font }}--family);
     --font-style: var(--font-{{ wordmark_font }}--style);
     --font-weight: {{ block_settings.dm_wordmark_weight | default: 600 }};
-    --dm-wordmark-size: {{ block_settings.dm_wordmark_size | default: 18 }}px;
-    --dm-wordmark-size-mobile: {{ block_settings.dm_wordmark_size_mobile | default: 16 }}px;
+    --dm-wordmark-size: {{ block_settings.dm_wordmark_size | default: 18 | divided_by: 16.0 }}rem;
+    --dm-wordmark-size-mobile: {{ block_settings.dm_wordmark_size_mobile | default: 16 | divided_by: 16.0 }}rem;
     --dm-wordmark-tracking: {{ block_settings.dm_wordmark_tracking | default: 0 | divided_by: 100.0 }}em;
   "
   {{ block.shopify_attributes }}
@@ -93,7 +93,8 @@
   .header-logo {
     display: flex;
     height: 100%;
-    font-size: var(--dm-wordmark-size-mobile, var(--font-size--md));
+    font-size: clamp(0.75rem, 3.9vw, var(--dm-wordmark-size-mobile, var(--font-size--md)));
+    min-width: 0;
     letter-spacing: var(--dm-wordmark-tracking, normal);
     white-space: nowrap;
     font-family: var(--font-family);
