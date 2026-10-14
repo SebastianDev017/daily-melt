@@ -1,0 +1,59 @@
+{%- doc -%}
+  Daily Melt — site-wide layout rules from Theme settings > Page layout:
+  - "Full width (fluid)" page width: sections span the whole screen minus the side margins.
+  - Fluid side margins: grow linearly from the minimum (narrow phones) to the maximum (1920px), then stay.
+  - Large-screen scale: root font size grows from 100% at 1440px to the chosen % at 1920px, so rem-based
+    type and spacing keep the mockup proportions on big screens. Capped above 1920px.
+  Render once in the <head>, after 'theme-styles-variables'.
+
+  @example
+  {% render 'dm-layout' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign margin_min = settings.dm_margin_min | default: 16
+  assign margin_max = settings.dm_margin_max | default: 128
+  if margin_max < margin_min
+    assign margin_max = margin_min
+  endif
+  assign margin_vw = margin_max | times: 100.0 | divided_by: 1920
+  assign scale = settings.dm_scale_1920 | default: 100
+  assign scale_extra = scale | minus: 100
+  assign scale_slope = scale_extra | times: 16.0 | divided_by: 100 | divided_by: 480
+-%}
+
+{% style %}
+  .page-width-full {
+    --page-content-width: 100vw;
+    --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+  }
+
+  :is(.page-width-full, .page-width-wide, .page-width-normal, .page-width-narrow, .page-width-content) {
+    --page-margin: max(
+      clamp({{ margin_min }}px, {{ margin_vw | round: 4 }}vw, {{ margin_max }}px),
+      var(--safe-area-inset-left, 0px),
+      var(--safe-area-inset-right, 0px)
+    );
+  }
+
+  :root {
+    --dm-space: 0.7;
+  }
+
+  @media screen and (min-width: 990px) {
+    :root {
+      --dm-space: 1;
+    }
+  }
+
+  /* Readable measure for product copy on very wide screens */
+  .product-details .text-block :is(p, li) {
+    max-width: 72ch;
+  }
+
+  {%- if scale_extra > 0 %}
+    html {
+      font-size: clamp(100%, calc(100% + (100vw - 1440px) * {{ scale_slope | round: 5 }}), {{ scale }}%);
+    }
+  {%- endif %}
+{% endstyle %}

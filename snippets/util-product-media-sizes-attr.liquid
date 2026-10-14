@@ -64,7 +64,8 @@
   endif
 
   # Override for center-aligned content
-  if section.settings.content_width == 'content-center-aligned'
+  # Full (fluid) page width behaves like full-width content: the default sizes above already apply
+  if section.settings.content_width == 'content-center-aligned' and settings.page_width != 'full'
     # Define breakpoints and base sizes based on page width
     # Breakpoints are the page width setting + margin (where 2 x margin is 80px = 5rem)
     case settings.page_width

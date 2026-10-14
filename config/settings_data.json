@@ -55,7 +55,7 @@
     "type_letter_spacing_h6": "heading-loose",
     "type_case_h6": "uppercase",
     "page_background_color": "{{ settings.color_palette.white }}",
-    "page_width": "narrow",
+    "page_width": "full",
     "page_transition_enabled": false,
     "transition_to_main_product": false,
     "card_hover_effect": "none",
@@ -163,7 +163,10 @@
       "cream_light": "#F3ECDD",
       "white": "#FFFFFF",
       "caramel": "#E7B98C"
-    }
+    },
+    "dm_margin_min": 16,
+    "dm_margin_max": 128,
+    "dm_scale_1920": 112
   },
   "presets": {
     "Horizon": {

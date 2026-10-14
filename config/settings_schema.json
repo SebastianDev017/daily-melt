@@ -1210,9 +1210,45 @@
           {
             "value": "wide",
             "label": "t:options.wide"
+          },
+          {
+            "value": "full",
+            "label": "Full width (fluid)"
           }
         ],
         "default": "narrow"
+      },
+      {
+        "type": "range",
+        "id": "dm_margin_min",
+        "label": "Side margin on small phones",
+        "min": 8,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "dm_margin_max",
+        "label": "Side margin at 1920px",
+        "info": "Margins grow smoothly between both values and stay fixed above 1920px.",
+        "min": 16,
+        "max": 240,
+        "step": 4,
+        "unit": "px",
+        "default": 128
+      },
+      {
+        "type": "range",
+        "id": "dm_scale_1920",
+        "label": "Type and spacing scale at 1920px",
+        "info": "100% = no change. Grows from 1440px and stays fixed above 1920px.",
+        "min": 100,
+        "max": 130,
+        "step": 1,
+        "unit": "%",
+        "default": 112
       }
     ]
   },

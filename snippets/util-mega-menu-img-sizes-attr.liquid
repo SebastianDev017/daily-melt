@@ -41,6 +41,9 @@
     when 'wide'
       assign page_max_width = '150rem'
       assign breakpoint = '155rem'
+    else
+      assign page_max_width = '100vw'
+      assign breakpoint = '1px'
   endcase
 
   # Common values
