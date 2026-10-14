@@ -258,7 +258,7 @@
         "dm_cell_padding": 24,
         "gap": 0,
         "background_color": "{{ settings.color_palette.white }}",
-        "padding-block-start": 48,
+        "padding-block-start": 0,
         "padding-block-end": 0
       }
     },
