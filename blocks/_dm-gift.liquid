@@ -87,6 +87,11 @@
     font-size: 0.8125rem;
     line-height: 1.3;
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-gift-name-case'] .dm-gift__name {
+    text-transform: var(--dm-gift-name-case);
+  }
 {% endstylesheet %}
 
 {% schema %}

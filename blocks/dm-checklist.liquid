@@ -11,7 +11,7 @@
 
 <div
   class="dm-checklist dm-checklist--{{ bs.layout }} dm-checklist--{{ bs.text_size }} dm-checklist--align-{{ bs.alignment }} spacing-style"
-  style="{% render 'spacing-style', settings: bs %} {% render 'dm-font-var', name: 'checklist-heading', font: bs.dm_font_heading %}{% if bs.icon_color != blank %} --dm-icon-color: {{ bs.icon_color }};{% endif %}{% if bs.text_color != blank %} --dm-text-color: {{ bs.text_color }};{% endif %}"
+  style="{% render 'spacing-style', settings: bs %} {% render 'dm-font-var', name: 'checklist-heading', font: bs.dm_font_heading, text_case: bs.dm_case_heading %}{% if bs.icon_color != blank %} --dm-icon-color: {{ bs.icon_color }};{% endif %}{% if bs.text_color != blank %} --dm-text-color: {{ bs.text_color }};{% endif %}"
   {{ block.shopify_attributes }}
 >
   {%- if bs.heading != blank -%}
@@ -111,6 +111,11 @@
 
   .dm-checklist--large {
     font-size: calc(var(--font-paragraph--size) * 1.125);
+  }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-checklist-heading-case'] .dm-checklist__heading {
+    text-transform: var(--dm-checklist-heading-case);
   }
 {% endstylesheet %}
 
@@ -276,8 +281,36 @@
           "label": "Accent"
         }
       ],
-      "default": "subheading",
-      "info": "Fonts come from Theme settings > Typography."
+      "default": "subheading"
+    },
+    {
+      "type": "select",
+      "id": "dm_case_heading",
+      "label": "Heading case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": "",
+      "info": "Fonts come from Theme settings > Typography. Case: Default keeps the design."
     }
   ],
   "presets": [

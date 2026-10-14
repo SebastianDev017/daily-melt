@@ -8,7 +8,7 @@
 <div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
 <div
   class="dm-cards section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }}; --dm-radius: {{ ss.radius }}px; --dm-card-bg: {{ ss.card_background }}; --dm-card-text: {{ ss.card_text_color }}; --dm-accent: {{ ss.accent_color }};{% render 'dm-font-var', name: 'card-title', font: ss.dm_font_title %}{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }}; --dm-radius: {{ ss.radius }}px; --dm-card-bg: {{ ss.card_background }}; --dm-card-text: {{ ss.card_text_color }}; --dm-accent: {{ ss.accent_color }};{% render 'dm-font-var', name: 'card-title', font: ss.dm_font_title, text_case: ss.dm_case_title %}{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
 >
   <div class="dm-cards__inner">
     {%- if ss.heading != blank or ss.text != blank -%}
@@ -245,8 +245,36 @@
           "label": "Accent"
         }
       ],
-      "default": "heading",
-      "info": "Fonts come from Theme settings > Typography."
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "dm_case_title",
+      "label": "Card titles case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": "",
+      "info": "Fonts come from Theme settings > Typography. Case: Default keeps the design."
     }
   ],
   "presets": [

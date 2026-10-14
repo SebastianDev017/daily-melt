@@ -35,7 +35,7 @@
 <div
   id="reviews"
   class="dm-reviews section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-accent: {{ ss.accent_color }}; {% render 'dm-font-var', name: 'review-average', font: ss.dm_font_average %}{% render 'dm-font-var', name: 'review-title', font: ss.dm_font_title %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-accent: {{ ss.accent_color }}; {% render 'dm-font-var', name: 'review-average', font: ss.dm_font_average, text_case: ss.dm_case_average %}{% render 'dm-font-var', name: 'review-title', font: ss.dm_font_title, text_case: ss.dm_case_title %}"
 >
   <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
   <div class="dm-reviews__inner">
@@ -279,6 +279,11 @@
       align-self: flex-start;
     }
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-review-average-case'] .dm-reviews__average {
+    text-transform: var(--dm-review-average-case);
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -457,6 +462,34 @@
     },
     {
       "type": "select",
+      "id": "dm_case_average",
+      "label": "Average rating case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
       "id": "dm_font_title",
       "label": "Review titles font",
       "options": [
@@ -477,8 +510,36 @@
           "label": "Accent"
         }
       ],
-      "default": "subheading",
-      "info": "Fonts come from Theme settings > Typography."
+      "default": "subheading"
+    },
+    {
+      "type": "select",
+      "id": "dm_case_title",
+      "label": "Review titles case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": "",
+      "info": "Fonts come from Theme settings > Typography. Case: Default keeps the design."
     }
   ],
   "presets": [

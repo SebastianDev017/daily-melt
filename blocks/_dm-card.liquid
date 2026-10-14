@@ -205,6 +205,11 @@
       min-height: 100%;
     }
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-card-title-case'] .dm-card__title {
+    text-transform: var(--dm-card-title-case);
+  }
 {% endstylesheet %}
 
 {% schema %}

@@ -53,7 +53,7 @@
   <dm-purchase-options
     id="dm-buy"
     class="dm-purchase{% if bs.mobile_buttons_first %} dm-purchase--buttons-first{% endif %} dm-purchase--perks-{{ bs.perks_style }} spacing-style"
-    style="{% render 'spacing-style', settings: bs %} --dm-card-radius: {{ bs.card_radius }}px; --dm-card-border: {{ bs.card_border }}px; --dm-accent: {{ bs.accent_color }}; --dm-selected-bg: {{ bs.selected_background }}; {% render 'dm-font-var', name: 'option-title', font: bs.dm_font_title %}{% render 'dm-font-var', name: 'option-badge', font: bs.dm_font_badge %}"
+    style="{% render 'spacing-style', settings: bs %} --dm-card-radius: {{ bs.card_radius }}px; --dm-card-border: {{ bs.card_border }}px; --dm-selected-outline: {{ bs.selected_outline }}px;{% if bs.card_border_color != blank %} --dm-card-border-color: {{ bs.card_border_color }};{% endif %}{% if bs.selected_border_color != blank %} --dm-selected-border-color: {{ bs.selected_border_color }};{% endif %} --dm-accent: {{ bs.accent_color }}; --dm-selected-bg: {{ bs.selected_background }}; {% render 'dm-font-var', name: 'option-title', font: bs.dm_font_title, text_case: bs.dm_case_title %}{% render 'dm-font-var', name: 'option-badge', font: bs.dm_font_badge, text_case: bs.dm_case_badge %}"
     data-form-id="{{ form_id }}"
     data-has-plans="{{ has_plans }}"
     data-show-button-price="{{ bs.show_button_price }}"
@@ -300,7 +300,7 @@
     grid-template-columns: 22px 1fr;
     column-gap: 14px;
     padding: 18px 18px 16px;
-    border: var(--dm-card-border, 1px) solid var(--dm-line);
+    border: var(--dm-card-border, 1px) solid var(--dm-card-border-color, var(--dm-line));
     border-radius: var(--dm-card-radius, 0);
     background: transparent;
     cursor: pointer;
@@ -313,13 +313,13 @@
   }
 
   .dm-option:hover {
-    border-color: var(--color-foreground);
+    border-color: var(--dm-selected-border-color, var(--color-foreground));
   }
 
   .dm-option:has(.dm-option__input:checked) {
     background: var(--dm-selected-bg, transparent);
-    border-color: var(--color-foreground);
-    box-shadow: inset 0 0 0 var(--dm-card-border, 1px) var(--color-foreground);
+    border-color: var(--dm-selected-border-color, var(--color-foreground));
+    box-shadow: inset 0 0 0 var(--dm-selected-outline, 1px) var(--dm-selected-border-color, var(--color-foreground));
   }
 
   .dm-option:has(.dm-option__input:focus-visible) {
@@ -675,6 +675,15 @@
       left: 46px;
     }
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-option-title-case'] .dm-option__title {
+    text-transform: var(--dm-option-title-case);
+  }
+
+  [style*='--dm-option-badge-case'] .dm-option__badge {
+    text-transform: var(--dm-option-badge-case);
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -949,6 +958,28 @@
       "default": 1
     },
     {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "info": "Empty uses a faint line in the text color."
+    },
+    {
+      "type": "color",
+      "id": "selected_border_color",
+      "label": "Selected card border color",
+      "info": "Empty uses the text color."
+    },
+    {
+      "type": "range",
+      "id": "selected_outline",
+      "label": "Selected card extra outline",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
       "type": "richtext",
       "id": "footnote",
       "label": "Footnote under the options"
@@ -1003,6 +1034,34 @@
     },
     {
       "type": "select",
+      "id": "dm_case_title",
+      "label": "Option title and price case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
       "id": "dm_font_badge",
       "label": "Badge font",
       "options": [
@@ -1023,8 +1082,36 @@
           "label": "Accent"
         }
       ],
-      "default": "subheading",
-      "info": "Fonts come from Theme settings > Typography."
+      "default": "subheading"
+    },
+    {
+      "type": "select",
+      "id": "dm_case_badge",
+      "label": "Badge case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": "",
+      "info": "Fonts come from Theme settings > Typography. Case: Default keeps the design."
     }
   ],
   "presets": [

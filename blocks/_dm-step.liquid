@@ -114,6 +114,15 @@
       font-size: 1.625rem;
     }
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-step-number-case'] .dm-step__number {
+    text-transform: var(--dm-step-number-case);
+  }
+
+  [style*='--dm-step-title-case'] .dm-step__title {
+    text-transform: var(--dm-step-title-case);
+  }
 {% endstylesheet %}
 
 {% schema %}

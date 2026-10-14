@@ -14,7 +14,7 @@
 <div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
 <div
   class="dm-tabs section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-radius: {{ ss.radius }}px; --dm-panel-bg: {{ ss.panel_background }}; --dm-accent: {{ ss.accent_color }}; {% render 'dm-font-var', name: 'tab-button', font: ss.dm_font_tabs %}{% render 'dm-font-var', name: 'tab-heading', font: ss.dm_font_heading %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-radius: {{ ss.radius }}px; --dm-panel-bg: {{ ss.panel_background }}; --dm-accent: {{ ss.accent_color }}; {% render 'dm-font-var', name: 'tab-button', font: ss.dm_font_tabs, text_case: ss.dm_case_tabs %}{% render 'dm-font-var', name: 'tab-heading', font: ss.dm_font_heading, text_case: ss.dm_case_heading %}"
 >
   <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
   <dm-tabs class="dm-tabs__inner">
@@ -173,6 +173,11 @@
       gap: 36px;
     }
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-tab-button-case'] .dm-tabs__tab {
+    text-transform: var(--dm-tab-button-case);
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -294,6 +299,34 @@
     },
     {
       "type": "select",
+      "id": "dm_case_tabs",
+      "label": "Tab buttons case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
       "id": "dm_font_heading",
       "label": "Panel headings font",
       "options": [
@@ -314,8 +347,36 @@
           "label": "Accent"
         }
       ],
-      "default": "heading",
-      "info": "Fonts come from Theme settings > Typography."
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "dm_case_heading",
+      "label": "Panel headings case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": "",
+      "info": "Fonts come from Theme settings > Typography. Case: Default keeps the design."
     }
   ],
   "presets": [

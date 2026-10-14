@@ -8,7 +8,7 @@
 
 <div
   class="dm-gifts dm-gifts--{{ bs.style }} spacing-style"
-  style="{% render 'spacing-style', settings: bs %} --dm-accent: {{ bs.accent_color }}; {% render 'dm-font-var', name: 'gifts-heading', font: bs.dm_font_heading %}{% render 'dm-font-var', name: 'gift-name', font: bs.dm_font_gift %}{% if bs.background != blank %} --dm-gifts-bg: {{ bs.background }};{% endif %}"
+  style="{% render 'spacing-style', settings: bs %} --dm-accent: {{ bs.accent_color }}; {% render 'dm-font-var', name: 'gifts-heading', font: bs.dm_font_heading, text_case: bs.dm_case_heading %}{% render 'dm-font-var', name: 'gift-name', font: bs.dm_font_gift, text_case: bs.dm_case_gift %}{% if bs.background != blank %} --dm-gifts-bg: {{ bs.background }};{% endif %}"
   {{ block.shopify_attributes }}
 >
   {%- if bs.heading != blank -%}
@@ -138,6 +138,11 @@
     .dm-gifts__perks {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-gifts-heading-case'] .dm-gifts__heading {
+    text-transform: var(--dm-gifts-heading-case);
   }
 {% endstylesheet %}
 
@@ -276,6 +281,34 @@
     },
     {
       "type": "select",
+      "id": "dm_case_heading",
+      "label": "Heading case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
       "id": "dm_font_gift",
       "label": "Gift names font",
       "options": [
@@ -296,8 +329,36 @@
           "label": "Accent"
         }
       ],
-      "default": "subheading",
-      "info": "Fonts come from Theme settings > Typography."
+      "default": "subheading"
+    },
+    {
+      "type": "select",
+      "id": "dm_case_gift",
+      "label": "Gift names case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": "",
+      "info": "Fonts come from Theme settings > Typography. Case: Default keeps the design."
     }
   ],
   "presets": [

@@ -148,6 +148,11 @@
       align-items: flex-start;
     }
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-review-title-case'] .dm-review__title {
+    text-transform: var(--dm-review-title-case);
+  }
 {% endstylesheet %}
 
 {% schema %}

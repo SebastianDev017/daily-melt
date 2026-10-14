@@ -161,6 +161,11 @@
       aspect-ratio: 5 / 4;
     }
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-tab-heading-case'] .dm-tab-panel__heading {
+    text-transform: var(--dm-tab-heading-case);
+  }
 {% endstylesheet %}
 
 {% schema %}

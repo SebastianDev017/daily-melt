@@ -2,13 +2,15 @@
   Daily Melt — CSS custom properties for a component's "font" select setting, so one text role can
   switch between the theme's heading, subheading, body, accent or button font (Theme settings > Typography).
   Outputs `--dm-{name}-font` and `--dm-{name}-weight` (font only for 'button', so the component keeps its own weight);
-  the component CSS reads them with its default as fallback.
+  the component CSS reads them with its default as fallback. A non-blank `text_case` also outputs `--dm-{name}-case`,
+  which the component applies through a `[style*='--dm-{name}-case']` rule, so blank leaves the design untouched.
 
   @param {string} name - Role name, e.g. 'card-title'
   @param {string} font - heading | subheading | body | accent | button
+  @param {string} [text_case] - none | uppercase | lowercase | capitalize; blank keeps the design's case
 
   @example
-  style="{% render 'dm-font-var', name: 'card-title', font: section.settings.dm_font_title %}"
+  style="{% render 'dm-font-var', name: 'card-title', font: section.settings.dm_font_title, text_case: section.settings.dm_case_title %}"
 {%- enddoc -%}
 
 {%- liquid
@@ -18,5 +20,9 @@
       echo '--dm-' | append: name | append: '-weight: var(--font-' | append: font | append: '--weight); '
     when 'button'
       echo '--dm-' | append: name | append: '-font: var(--button-font-family-primary, var(--font-body--family)); '
+  endcase
+  case text_case
+    when 'none', 'uppercase', 'lowercase', 'capitalize'
+      echo '--dm-' | append: name | append: '-case: ' | append: text_case | append: '; '
   endcase
 -%}

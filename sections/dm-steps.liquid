@@ -16,7 +16,7 @@
 <div class="section-background"{% if section_bg != blank %} style="background: {{ section_bg }};"{% endif %}></div>
 <div
   class="dm-steps section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }}; {% render 'dm-font-var', name: 'step-number', font: ss.dm_font_number %}{% render 'dm-font-var', name: 'step-title', font: ss.dm_font_title %}{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }}; {% render 'dm-font-var', name: 'step-number', font: ss.dm_font_number, text_case: ss.dm_case_number %}{% render 'dm-font-var', name: 'step-title', font: ss.dm_font_title, text_case: ss.dm_case_title %}{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
 >
   <div class="dm-steps__inner">
     {%- if ss.heading != blank or ss.text != blank -%}
@@ -213,6 +213,34 @@
     },
     {
       "type": "select",
+      "id": "dm_case_number",
+      "label": "Step numbers case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
       "id": "dm_font_title",
       "label": "Step titles font",
       "options": [
@@ -233,8 +261,36 @@
           "label": "Accent"
         }
       ],
-      "default": "subheading",
-      "info": "Fonts come from Theme settings > Typography."
+      "default": "subheading"
+    },
+    {
+      "type": "select",
+      "id": "dm_case_title",
+      "label": "Step titles case",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "none",
+          "label": "As typed"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize Each Word"
+        }
+      ],
+      "default": "",
+      "info": "Fonts come from Theme settings > Typography. Case: Default keeps the design."
     }
   ],
   "presets": [

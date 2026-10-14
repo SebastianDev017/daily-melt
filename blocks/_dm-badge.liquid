@@ -58,6 +58,11 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+
+  /* Text case chosen in the section/block settings (only applies when one is picked) */
+  [style*='--dm-badge-label-case'] .dm-badge__label {
+    text-transform: var(--dm-badge-label-case);
+  }
 {% endstylesheet %}
 
 {% schema %}
