@@ -781,7 +781,7 @@
         "limit_details_width": false,
         "gap": 48,
         "enable_sticky_add_to_cart": true,
-        "background_color": "{{ settings.color_palette.background }}",
+        "background_color": "{{ settings.color_palette.white }}",
         "padding-block-start": 16,
         "padding-block-end": 40
       }
@@ -884,11 +884,11 @@
         "content_position": "left",
         "mobile_order": "content",
         "panel_style": "panel",
-        "panel_background": "{{ settings.color_palette.cream_light }}",
+        "panel_background": "{{ settings.color_palette.caramel }}",
         "panel_text_color": "",
         "image_count": 4,
         "radius": 0,
-        "background": "",
+        "background": "{{ settings.color_palette.cream_light }}",
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -938,8 +938,8 @@
         "columns": 3,
         "button_label": "Get Your Daily Melt",
         "button_link": "",
-        "background_start": "{{ settings.color_palette.cream_light }}",
-        "background_end": "{{ settings.color_palette.caramel }}",
+        "background_start": "{{ settings.color_palette.white }}",
+        "background_end": "{{ settings.color_palette.white }}",
         "accent_color": "{{ settings.color_palette.accent }}",
         "padding_top": 72,
         "padding_bottom": 72
