@@ -268,7 +268,10 @@
                 "card_radius": 5,
                 "footnote": "",
                 "padding-block-start": 4,
-                "padding-block-end": 0
+                "padding-block-end": 0,
+                "dm_font_title": "body",
+                "dm_font_badge": "body",
+                "card_border": 0
               },
               "blocks": {
                 "buy_buttons": {
