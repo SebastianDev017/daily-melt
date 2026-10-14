@@ -51,6 +51,38 @@
     max-width: 72ch;
   }
 
+  /* Tablet portrait: stack the product hero (gallery full width, purchase below) instead of two cramped columns */
+  @media screen and (min-width: 750px) and (max-width: 989px) and (orientation: portrait) {
+    #MainContent .product-information__grid:not(.product-information--media-none) {
+      grid-column: 1 / -1;
+      grid-template-columns: var(--full-page-grid-with-margins);
+    }
+
+    #MainContent .product-information__grid:not(.product-information--media-none) :is(.product-information__media, .product-details) {
+      grid-column: 2;
+      padding-inline: 0;
+    }
+  }
+
+  /* Touch screens: comfortable tap targets without changing the desktop look */
+  @media (pointer: coarse) {
+    .dm-tabs__tab {
+      min-height: 44px;
+    }
+
+    .footer-content--dm-grid .menu__item a {
+      display: inline-block;
+      padding-block: 11px;
+      margin-block: -11px;
+    }
+
+    .dm-rating__count {
+      display: inline-block;
+      padding-block: 11px;
+      margin-block: -11px;
+    }
+  }
+
   {%- if scale_extra > 0 %}
     html {
       font-size: clamp(100%, calc(100% + (100vw - 1440px) * {{ scale_slope | round: 5 }}), {{ scale }}%);
