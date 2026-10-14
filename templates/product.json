@@ -848,7 +848,7 @@
             "icon": "check",
             "text_size": "base",
             "alignment": "left",
-            "icon_color": "{{ settings.color_palette.accent }}",
+            "icon_color": "#9B1B31",
             "text_color": "",
             "padding-block-start": 0,
             "padding-block-end": 0
@@ -884,11 +884,15 @@
         "content_position": "left",
         "mobile_order": "content",
         "panel_style": "panel",
-        "panel_background": "{{ settings.color_palette.caramel }}",
+        "panel_background": "#DCEAF7",
         "panel_text_color": "",
         "image_count": 4,
+        "image_1": "shopify://shop_images/Swirled_cocoa_with_soft_marshmallows.png",
+        "image_2": "shopify://shop_images/DTS_FIRST_ROUND_JELLY_LUISE_Photos_ID10671.jpg",
+        "image_3": "shopify://shop_images/DM_03.jpg",
+        "image_4": "shopify://shop_images/DM_02-2_42fe97f9-09c3-41be-b630-88698d4d309f.jpg",
         "radius": 0,
-        "background": "{{ settings.color_palette.cream_light }}",
+        "background": "#F1F0ED",
         "padding_top": 60,
         "padding_bottom": 60
       }
@@ -940,7 +944,7 @@
         "button_link": "",
         "background_start": "{{ settings.color_palette.white }}",
         "background_end": "{{ settings.color_palette.white }}",
-        "accent_color": "{{ settings.color_palette.accent }}",
+        "accent_color": "#9B1B31",
         "padding_top": 60,
         "padding_bottom": 60
       }
