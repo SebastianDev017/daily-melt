@@ -123,6 +123,13 @@
         "label": "t:options.accent"
       },
       {
+        "type": "checkbox",
+        "id": "dm_accent_eastbay",
+        "label": "Use East Bay (uploaded font) for the accent / script text",
+        "info": "Replaces the accent font above, which stays as the fallback. File: assets/eastbay-demi.woff2.",
+        "default": false
+      },
+      {
         "type": "header",
         "content": "Adobe Fonts"
       },

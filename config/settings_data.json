@@ -166,7 +166,8 @@
     },
     "dm_margin_min": 16,
     "dm_margin_max": 128,
-    "dm_scale_1920": 112
+    "dm_scale_1920": 112,
+    "dm_accent_eastbay": true
   },
   "presets": {
     "Horizon": {

@@ -2,6 +2,7 @@
   Daily Melt — loads the Adobe Fonts (Typekit) kit set in Theme settings > Typography and maps its
   families onto Horizon's font variables, so every heading, subheading and body style follows it.
   Horizon's font pickers stay as the fallback stack (system fonts, nothing extra to download).
+  Also maps the uploaded East Bay font (assets/eastbay-demi.woff2) onto the accent font when enabled.
   Render once in the <head>, after 'theme-styles-variables'.
 
   @example
@@ -78,4 +79,22 @@
       }
     {% endstyle %}
   {%- endif -%}
+{%- endif -%}
+
+{%- if settings.dm_accent_eastbay -%}
+  {{ 'eastbay-demi.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {% style %}
+    @font-face {
+      font-family: "East Bay";
+      src: url("{{ 'eastbay-demi.woff2' | asset_url }}") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --font-accent--family: "East Bay", {{ settings.type_accent_font.family }}, {{ settings.type_accent_font.fallback_families }};
+      --font-accent--style: normal;
+    }
+  {% endstyle %}
 {%- endif -%}
