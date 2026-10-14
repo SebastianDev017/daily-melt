@@ -263,9 +263,9 @@
                 "one_subtitle": "",
                 "one_perks": "Delivered once\n60-Day Money Back Guarantee",
                 "perks_style": "inline",
-                "accent_color": "{{ settings.color_palette.accent }}",
-                "selected_background": "{{ settings.color_palette.cream_light }}",
-                "card_radius": 0,
+                "accent_color": "{{ settings.color_palette.foreground }}",
+                "selected_background": "#F1F0ED",
+                "card_radius": 5,
                 "footnote": "",
                 "padding-block-start": 4,
                 "padding-block-end": 0
