@@ -11,7 +11,7 @@
 
 <div
   class="dm-checklist dm-checklist--{{ bs.layout }} dm-checklist--{{ bs.text_size }} dm-checklist--align-{{ bs.alignment }} spacing-style"
-  style="{% render 'spacing-style', settings: bs %}{% if bs.icon_color != blank %} --dm-icon-color: {{ bs.icon_color }};{% endif %}{% if bs.text_color != blank %} --dm-text-color: {{ bs.text_color }};{% endif %}"
+  style="{% render 'spacing-style', settings: bs %} {% render 'dm-font-var', name: 'checklist-heading', font: bs.dm_font_heading %}{% if bs.icon_color != blank %} --dm-icon-color: {{ bs.icon_color }};{% endif %}{% if bs.text_color != blank %} --dm-text-color: {{ bs.text_color }};{% endif %}"
   {{ block.shopify_attributes }}
 >
   {%- if bs.heading != blank -%}
@@ -41,8 +41,8 @@
 
   .dm-checklist__heading {
     margin: 0 0 0.6em;
-    font-family: var(--font-subheading--family);
-    font-weight: var(--font-subheading--weight);
+    font-family: var(--dm-checklist-heading-font, var(--font-subheading--family));
+    font-weight: var(--dm-checklist-heading-weight, var(--font-subheading--weight));
   }
 
   .dm-checklist__list {
@@ -136,8 +136,14 @@
       "id": "layout",
       "label": "Layout",
       "options": [
-        { "value": "stacked", "label": "Stacked" },
-        { "value": "inline", "label": "Inline row" }
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        },
+        {
+          "value": "inline",
+          "label": "Inline row"
+        }
       ],
       "default": "stacked"
     },
@@ -146,12 +152,30 @@
       "id": "icon",
       "label": "Icon",
       "options": [
-        { "value": "circle_check", "label": "Circle check" },
-        { "value": "check", "label": "Check" },
-        { "value": "arrow", "label": "Arrow" },
-        { "value": "return", "label": "Return arrow (↳)" },
-        { "value": "dot", "label": "Dot" },
-        { "value": "none", "label": "None" }
+        {
+          "value": "circle_check",
+          "label": "Circle check"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        },
+        {
+          "value": "return",
+          "label": "Return arrow (↳)"
+        },
+        {
+          "value": "dot",
+          "label": "Dot"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
       ],
       "default": "check"
     },
@@ -160,9 +184,18 @@
       "id": "text_size",
       "label": "Text size",
       "options": [
-        { "value": "small", "label": "Small" },
-        { "value": "base", "label": "Base" },
-        { "value": "large", "label": "Large" }
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "base",
+          "label": "Base"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
       ],
       "default": "base"
     },
@@ -171,8 +204,14 @@
       "id": "alignment",
       "label": "Alignment",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
       ],
       "default": "left"
     },
@@ -210,6 +249,35 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_heading",
+      "label": "Heading font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "subheading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [

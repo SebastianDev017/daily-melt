@@ -61,8 +61,8 @@
   }
 
   .dm-step__number {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--dm-step-number-font, var(--font-heading--family));
+    font-weight: var(--dm-step-number-weight, var(--font-heading--weight));
     font-size: 2.75rem;
     line-height: 1;
     color: var(--dm-accent, var(--color-foreground));
@@ -70,8 +70,8 @@
 
   .dm-step__title {
     margin: 0;
-    font-family: var(--font-subheading--family);
-    font-weight: var(--font-subheading--weight);
+    font-family: var(--dm-step-title-font, var(--font-subheading--family));
+    font-weight: var(--dm-step-title-weight, var(--font-subheading--weight));
     font-size: 1.375rem;
     line-height: 1.25;
     text-transform: none;

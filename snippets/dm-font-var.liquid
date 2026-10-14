@@ -1,0 +1,22 @@
+{%- doc -%}
+  Daily Melt — CSS custom properties for a component's "font" select setting, so one text role can
+  switch between the theme's heading, subheading, body, accent or button font (Theme settings > Typography).
+  Outputs `--dm-{name}-font` and `--dm-{name}-weight` (font only for 'button', so the component keeps its own weight);
+  the component CSS reads them with its default as fallback.
+
+  @param {string} name - Role name, e.g. 'card-title'
+  @param {string} font - heading | subheading | body | accent | button
+
+  @example
+  style="{% render 'dm-font-var', name: 'card-title', font: section.settings.dm_font_title %}"
+{%- enddoc -%}
+
+{%- liquid
+  case font
+    when 'heading', 'subheading', 'body', 'accent'
+      echo '--dm-' | append: name | append: '-font: var(--font-' | append: font | append: '--family); '
+      echo '--dm-' | append: name | append: '-weight: var(--font-' | append: font | append: '--weight); '
+    when 'button'
+      echo '--dm-' | append: name | append: '-font: var(--button-font-family-primary, var(--font-body--family)); '
+  endcase
+-%}

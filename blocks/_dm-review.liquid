@@ -74,8 +74,8 @@
     border-radius: 50%;
     background: var(--color-foreground);
     color: var(--color-background);
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--dm-review-average-font, var(--font-heading--family));
+    font-weight: var(--dm-review-average-weight, var(--font-heading--weight));
     font-size: 0.875rem;
     letter-spacing: 0.04em;
   }
@@ -117,8 +117,8 @@
 
   .dm-review__title {
     margin: 0;
-    font-family: var(--font-subheading--family);
-    font-weight: var(--font-subheading--weight);
+    font-family: var(--dm-review-title-font, var(--font-subheading--family));
+    font-weight: var(--dm-review-title-weight, var(--font-subheading--weight));
     font-size: 1.0625rem;
     line-height: 1.3;
     text-transform: none;

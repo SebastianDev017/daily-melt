@@ -14,7 +14,7 @@
 <div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
 <div
   class="dm-tabs section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-radius: {{ ss.radius }}px; --dm-panel-bg: {{ ss.panel_background }}; --dm-accent: {{ ss.accent_color }};"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-radius: {{ ss.radius }}px; --dm-panel-bg: {{ ss.panel_background }}; --dm-accent: {{ ss.accent_color }}; {% render 'dm-font-var', name: 'tab-button', font: ss.dm_font_tabs %}{% render 'dm-font-var', name: 'tab-heading', font: ss.dm_font_heading %}"
 >
   <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
   <dm-tabs class="dm-tabs__inner">
@@ -88,13 +88,17 @@
     gap: 10px;
   }
 
+  .dm-tabs__list .dm-tabs__tab {
+    font-weight: var(--dm-tab-button-weight, 600);
+  }
+
   .dm-tabs__tab {
     padding: 9px 18px;
     border: 1px solid var(--color-foreground);
     border-radius: 999px;
     background: transparent;
     color: var(--color-foreground);
-    font-family: var(--button-font-family-secondary, var(--font-body--family));
+    font-family: var(--dm-tab-button-font, var(--button-font-family-secondary, var(--font-body--family)));
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -176,7 +180,11 @@
   "name": "DM · Tabs",
   "tag": "section",
   "class": "dm-section",
-  "blocks": [{ "type": "_dm-tab" }],
+  "blocks": [
+    {
+      "type": "_dm-tab"
+    }
+  ],
   "settings": [
     {
       "type": "text",
@@ -251,16 +259,80 @@
       "step": 4,
       "unit": "px",
       "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_tabs",
+      "label": "Tab buttons font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        },
+        {
+          "value": "button",
+          "label": "Button"
+        }
+      ],
+      "default": "button"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_heading",
+      "label": "Panel headings font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "heading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [
     {
       "name": "DM · Tabs",
       "blocks": {
-        "tab_1": { "type": "_dm-tab" },
-        "tab_2": { "type": "_dm-tab" }
+        "tab_1": {
+          "type": "_dm-tab"
+        },
+        "tab_2": {
+          "type": "_dm-tab"
+        }
       },
-      "block_order": ["tab_1", "tab_2"]
+      "block_order": [
+        "tab_1",
+        "tab_2"
+      ]
     }
   ]
 }

@@ -53,7 +53,7 @@
   <dm-purchase-options
     id="dm-buy"
     class="dm-purchase{% if bs.mobile_buttons_first %} dm-purchase--buttons-first{% endif %} dm-purchase--perks-{{ bs.perks_style }} spacing-style"
-    style="{% render 'spacing-style', settings: bs %} --dm-card-radius: {{ bs.card_radius }}px; --dm-accent: {{ bs.accent_color }}; --dm-selected-bg: {{ bs.selected_background }};"
+    style="{% render 'spacing-style', settings: bs %} --dm-card-radius: {{ bs.card_radius }}px; --dm-card-border: {{ bs.card_border }}px; --dm-accent: {{ bs.accent_color }}; --dm-selected-bg: {{ bs.selected_background }}; {% render 'dm-font-var', name: 'option-title', font: bs.dm_font_title %}{% render 'dm-font-var', name: 'option-badge', font: bs.dm_font_badge %}"
     data-form-id="{{ form_id }}"
     data-has-plans="{{ has_plans }}"
     data-show-button-price="{{ bs.show_button_price }}"
@@ -300,7 +300,7 @@
     grid-template-columns: 22px 1fr;
     column-gap: 14px;
     padding: 18px 18px 16px;
-    border: 1px solid var(--dm-line);
+    border: var(--dm-card-border, 1px) solid var(--dm-line);
     border-radius: var(--dm-card-radius, 0);
     background: transparent;
     cursor: pointer;
@@ -319,7 +319,7 @@
   .dm-option:has(.dm-option__input:checked) {
     background: var(--dm-selected-bg, transparent);
     border-color: var(--color-foreground);
-    box-shadow: inset 0 0 0 1px var(--color-foreground);
+    box-shadow: inset 0 0 0 var(--dm-card-border, 1px) var(--color-foreground);
   }
 
   .dm-option:has(.dm-option__input:focus-visible) {
@@ -344,7 +344,7 @@
     padding: 4px 10px;
     background: var(--dm-accent);
     color: #fff;
-    font-family: var(--font-subheading--family);
+    font-family: var(--dm-option-badge-font, var(--font-subheading--family));
     font-size: 0.6875rem;
     font-weight: 700;
     line-height: 1.2;
@@ -396,16 +396,16 @@
   }
 
   .dm-option__title {
-    font-family: var(--font-subheading--family);
-    font-weight: var(--font-subheading--weight);
+    font-family: var(--dm-option-title-font, var(--font-subheading--family));
+    font-weight: var(--dm-option-title-weight, var(--font-subheading--weight));
     font-size: 1.0625rem;
     line-height: 1.25;
   }
 
   .dm-option__price {
     white-space: nowrap;
-    font-family: var(--font-subheading--family);
-    font-weight: var(--font-subheading--weight);
+    font-family: var(--dm-option-title-font, var(--font-subheading--family));
+    font-weight: var(--dm-option-title-weight, var(--font-subheading--weight));
     font-size: 1.0625rem;
   }
 
@@ -682,12 +682,24 @@
   "name": "DM · Purchase options",
   "tag": null,
   "blocks": [
-    { "type": "buy-buttons" },
-    { "type": "popup-link" },
-    { "type": "dm-supplement-facts" },
-    { "type": "dm-checklist" },
-    { "type": "text" },
-    { "type": "@app" }
+    {
+      "type": "buy-buttons"
+    },
+    {
+      "type": "popup-link"
+    },
+    {
+      "type": "dm-supplement-facts"
+    },
+    {
+      "type": "dm-checklist"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "@app"
+    }
   ],
   "settings": [
     {
@@ -714,8 +726,14 @@
       "id": "default_option",
       "label": "Selected by default",
       "options": [
-        { "value": "subscription", "label": "Subscription" },
-        { "value": "onetime", "label": "One-time purchase" }
+        {
+          "value": "subscription",
+          "label": "Subscription"
+        },
+        {
+          "value": "onetime",
+          "label": "One-time purchase"
+        }
       ],
       "default": "subscription"
     },
@@ -795,9 +813,18 @@
       "id": "plan_display",
       "label": "Selling plans shown",
       "options": [
-        { "value": "single", "label": "Default plan only" },
-        { "value": "selector", "label": "One card with a frequency selector" },
-        { "value": "cards", "label": "One card per plan" }
+        {
+          "value": "single",
+          "label": "Default plan only"
+        },
+        {
+          "value": "selector",
+          "label": "One card with a frequency selector"
+        },
+        {
+          "value": "cards",
+          "label": "One card per plan"
+        }
       ],
       "default": "single"
     },
@@ -878,8 +905,14 @@
       "id": "perks_style",
       "label": "Perks style",
       "options": [
-        { "value": "inline", "label": "Inline (separated by |)" },
-        { "value": "list", "label": "List (↳)" }
+        {
+          "value": "inline",
+          "label": "Inline (separated by |)"
+        },
+        {
+          "value": "list",
+          "label": "List (↳)"
+        }
       ],
       "default": "inline"
     },
@@ -906,6 +939,16 @@
       "default": 0
     },
     {
+      "type": "range",
+      "id": "card_border",
+      "label": "Card border",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
       "type": "richtext",
       "id": "footnote",
       "label": "Footnote under the options"
@@ -929,6 +972,59 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_title",
+      "label": "Option title and price font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "subheading"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_badge",
+      "label": "Badge font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "subheading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [
@@ -939,7 +1035,9 @@
           "type": "buy-buttons"
         }
       },
-      "block_order": ["buy_buttons"]
+      "block_order": [
+        "buy_buttons"
+      ]
     }
   ]
 }

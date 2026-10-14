@@ -7,7 +7,7 @@
 <div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
 <div
   class="dm-badges section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-accent: {{ ss.accent_color }};{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-accent: {{ ss.accent_color }};{% render 'dm-font-var', name: 'badge-label', font: ss.dm_font_label %}{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
 >
   <div class="dm-badges__inner">
     {%- if ss.heading != blank or ss.text != blank -%}
@@ -92,7 +92,11 @@
   "name": "DM · Badges",
   "tag": "section",
   "class": "dm-section",
-  "blocks": [{ "type": "_dm-badge" }],
+  "blocks": [
+    {
+      "type": "_dm-badge"
+    }
+  ],
   "settings": [
     {
       "type": "text",
@@ -140,17 +144,56 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_label",
+      "label": "Badge labels font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "subheading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [
     {
       "name": "DM · Badges",
       "blocks": {
-        "badge_1": { "type": "_dm-badge" },
-        "badge_2": { "type": "_dm-badge" },
-        "badge_3": { "type": "_dm-badge" }
+        "badge_1": {
+          "type": "_dm-badge"
+        },
+        "badge_2": {
+          "type": "_dm-badge"
+        },
+        "badge_3": {
+          "type": "_dm-badge"
+        }
       },
-      "block_order": ["badge_1", "badge_2", "badge_3"]
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3"
+      ]
     }
   ]
 }

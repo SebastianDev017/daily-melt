@@ -16,7 +16,7 @@
 <div class="section-background"{% if section_bg != blank %} style="background: {{ section_bg }};"{% endif %}></div>
 <div
   class="dm-steps section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }};{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }}; {% render 'dm-font-var', name: 'step-number', font: ss.dm_font_number %}{% render 'dm-font-var', name: 'step-title', font: ss.dm_font_title %}{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
 >
   <div class="dm-steps__inner">
     {%- if ss.heading != blank or ss.text != blank -%}
@@ -106,7 +106,11 @@
   "name": "DM · Steps",
   "tag": "section",
   "class": "dm-section",
-  "blocks": [{ "type": "_dm-step" }],
+  "blocks": [
+    {
+      "type": "_dm-step"
+    }
+  ],
   "settings": [
     {
       "type": "text",
@@ -178,17 +182,89 @@
       "step": 4,
       "unit": "px",
       "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_number",
+      "label": "Step numbers font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_title",
+      "label": "Step titles font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "subheading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [
     {
       "name": "DM · Steps",
       "blocks": {
-        "step_1": { "type": "_dm-step", "settings": { "number": "1" } },
-        "step_2": { "type": "_dm-step", "settings": { "number": "2" } },
-        "step_3": { "type": "_dm-step", "settings": { "number": "3" } }
+        "step_1": {
+          "type": "_dm-step",
+          "settings": {
+            "number": "1"
+          }
+        },
+        "step_2": {
+          "type": "_dm-step",
+          "settings": {
+            "number": "2"
+          }
+        },
+        "step_3": {
+          "type": "_dm-step",
+          "settings": {
+            "number": "3"
+          }
+        }
       },
-      "block_order": ["step_1", "step_2", "step_3"]
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
     }
   ]
 }

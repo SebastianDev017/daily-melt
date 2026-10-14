@@ -100,8 +100,8 @@
 
   .dm-tab-panel__heading {
     margin: 0;
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--dm-tab-heading-font, var(--font-heading--family));
+    font-weight: var(--dm-tab-heading-weight, var(--font-heading--weight));
     font-size: clamp(1.5rem, 2.6vw, 2.25rem);
     line-height: 1.1;
     text-transform: uppercase;

@@ -8,7 +8,7 @@
 
 <div
   class="dm-gifts dm-gifts--{{ bs.style }} spacing-style"
-  style="{% render 'spacing-style', settings: bs %} --dm-accent: {{ bs.accent_color }};{% if bs.background != blank %} --dm-gifts-bg: {{ bs.background }};{% endif %}"
+  style="{% render 'spacing-style', settings: bs %} --dm-accent: {{ bs.accent_color }}; {% render 'dm-font-var', name: 'gifts-heading', font: bs.dm_font_heading %}{% render 'dm-font-var', name: 'gift-name', font: bs.dm_font_gift %}{% if bs.background != blank %} --dm-gifts-bg: {{ bs.background }};{% endif %}"
   {{ block.shopify_attributes }}
 >
   {%- if bs.heading != blank -%}
@@ -65,8 +65,8 @@
   .dm-gifts__heading {
     margin: 0;
     color: var(--dm-accent);
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--dm-gifts-heading-font, var(--font-heading--family));
+    font-weight: var(--dm-gifts-heading-weight, var(--font-heading--weight));
     font-size: 1.25rem;
     line-height: 1.2;
     letter-spacing: 0.02em;
@@ -145,7 +145,11 @@
 {
   "name": "DM · Subscription gifts",
   "tag": null,
-  "blocks": [{ "type": "_dm-gift" }],
+  "blocks": [
+    {
+      "type": "_dm-gift"
+    }
+  ],
   "settings": [
     {
       "type": "text",
@@ -177,8 +181,14 @@
       "id": "cta_action",
       "label": "Button action",
       "options": [
-        { "value": "subscribe", "label": "Select subscription and add to cart" },
-        { "value": "link", "label": "Link" }
+        {
+          "value": "subscribe",
+          "label": "Select subscription and add to cart"
+        },
+        {
+          "value": "link",
+          "label": "Link"
+        }
       ],
       "default": "subscribe"
     },
@@ -193,8 +203,14 @@
       "id": "style",
       "label": "Style",
       "options": [
-        { "value": "lines", "label": "Lines above and below" },
-        { "value": "panel", "label": "Panel" }
+        {
+          "value": "lines",
+          "label": "Lines above and below"
+        },
+        {
+          "value": "panel",
+          "label": "Panel"
+        }
       ],
       "default": "lines"
     },
@@ -229,6 +245,59 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_heading",
+      "label": "Heading font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_gift",
+      "label": "Gift names font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "subheading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [

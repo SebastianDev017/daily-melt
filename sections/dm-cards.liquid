@@ -8,7 +8,7 @@
 <div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
 <div
   class="dm-cards section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }}; --dm-radius: {{ ss.radius }}px; --dm-card-bg: {{ ss.card_background }}; --dm-card-text: {{ ss.card_text_color }}; --dm-accent: {{ ss.accent_color }};{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }}; --dm-radius: {{ ss.radius }}px; --dm-card-bg: {{ ss.card_background }}; --dm-card-text: {{ ss.card_text_color }}; --dm-accent: {{ ss.accent_color }};{% render 'dm-font-var', name: 'card-title', font: ss.dm_font_title %}{% if ss.text_color != blank %} --color-foreground: {{ ss.text_color }}; --color-foreground-rgb: {{ ss.text_color.rgb }}; color: {{ ss.text_color }};{% endif %}"
 >
   <div class="dm-cards__inner">
     {%- if ss.heading != blank or ss.text != blank -%}
@@ -117,7 +117,11 @@
   "name": "DM · Cards",
   "tag": "section",
   "class": "dm-section",
-  "blocks": [{ "type": "_dm-card" }],
+  "blocks": [
+    {
+      "type": "_dm-card"
+    }
+  ],
   "settings": [
     {
       "type": "text",
@@ -214,17 +218,56 @@
       "step": 4,
       "unit": "px",
       "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_title",
+      "label": "Card titles font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "heading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [
     {
       "name": "DM · Cards",
       "blocks": {
-        "card_1": { "type": "_dm-card" },
-        "card_2": { "type": "_dm-card" },
-        "card_3": { "type": "_dm-card" }
+        "card_1": {
+          "type": "_dm-card"
+        },
+        "card_2": {
+          "type": "_dm-card"
+        },
+        "card_3": {
+          "type": "_dm-card"
+        }
       },
-      "block_order": ["card_1", "card_2", "card_3"]
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
     }
   ]
 }

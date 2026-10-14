@@ -35,7 +35,7 @@
 <div
   id="reviews"
   class="dm-reviews section section--page-width"
-  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-accent: {{ ss.accent_color }};"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-accent: {{ ss.accent_color }}; {% render 'dm-font-var', name: 'review-average', font: ss.dm_font_average %}{% render 'dm-font-var', name: 'review-title', font: ss.dm_font_title %}"
 >
   <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
   <div class="dm-reviews__inner">
@@ -154,8 +154,8 @@
   }
 
   .dm-reviews__average {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--dm-review-average-font, var(--font-heading--family));
+    font-weight: var(--dm-review-average-weight, var(--font-heading--weight));
     font-size: 3rem;
     line-height: 1;
   }
@@ -286,7 +286,14 @@
   "name": "DM · Reviews",
   "tag": "section",
   "class": "dm-section",
-  "blocks": [{ "type": "_dm-review" }, { "type": "@app" }],
+  "blocks": [
+    {
+      "type": "_dm-review"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
     {
       "type": "paragraph",
@@ -419,6 +426,59 @@
       "step": 4,
       "unit": "px",
       "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_average",
+      "label": "Average rating font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "dm_font_title",
+      "label": "Review titles font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "subheading",
+      "info": "Fonts come from Theme settings > Typography."
     }
   ],
   "presets": [
