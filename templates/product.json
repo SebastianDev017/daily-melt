@@ -99,7 +99,7 @@
                 "count_label": "Verified Reviews",
                 "link": "#reviews",
                 "show_number": false,
-                "star_color": "#9B1B31",
+                "star_color": "#9b1b31",
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0
@@ -215,10 +215,11 @@
                 "icon": "check",
                 "text_size": "base",
                 "alignment": "left",
-                "icon_color": "#9B1B31",
+                "icon_color": "#9b1b31",
                 "text_color": "",
                 "padding-block-start": 4,
-                "padding-block-end": 0
+                "padding-block-end": 0,
+                "dm_font_heading": "subheading"
               },
               "blocks": {}
             },
@@ -263,15 +264,15 @@
                 "one_subtitle": "",
                 "one_perks": "Delivered once\n60-Day Money Back Guarantee",
                 "perks_style": "inline",
-                "accent_color": "#49526D",
-                "selected_background": "#DCEAF7",
+                "accent_color": "#49526d",
+                "selected_background": "#dceaf7",
                 "card_radius": 5,
+                "card_border": 0,
                 "footnote": "",
                 "padding-block-start": 4,
                 "padding-block-end": 0,
                 "dm_font_title": "body",
-                "dm_font_badge": "body",
-                "card_border": 0
+                "dm_font_badge": "body"
               },
               "blocks": {
                 "buy_buttons": {
@@ -392,10 +393,11 @@
                 "icon": "check",
                 "text_size": "small",
                 "alignment": "left",
-                "icon_color": "#9B1B31",
+                "icon_color": "#9b1b31",
                 "text_color": "",
                 "padding-block-start": 0,
-                "padding-block-end": 0
+                "padding-block-end": 0,
+                "dm_font_heading": "subheading"
               },
               "blocks": {}
             },
@@ -412,7 +414,9 @@
                 "background": "",
                 "accent_color": "{{ settings.color_palette.foreground }}",
                 "padding-block-start": 4,
-                "padding-block-end": 0
+                "padding-block-end": 0,
+                "dm_font_heading": "heading",
+                "dm_font_gift": "subheading"
               },
               "blocks": {
                 "gift_1": {
@@ -473,7 +477,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#9B1B31",
+                "text_color": "#9b1b31",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -518,10 +522,11 @@
                 "icon": "check",
                 "text_size": "base",
                 "alignment": "left",
-                "icon_color": "#9B1B31",
+                "icon_color": "#9b1b31",
                 "text_color": "",
                 "padding-block-start": 0,
-                "padding-block-end": 0
+                "padding-block-end": 0,
+                "dm_font_heading": "subheading"
               },
               "blocks": {}
             },
@@ -851,10 +856,11 @@
             "icon": "check",
             "text_size": "base",
             "alignment": "left",
-            "icon_color": "#9B1B31",
+            "icon_color": "#9b1b31",
             "text_color": "",
             "padding-block-start": 0,
-            "padding-block-end": 0
+            "padding-block-end": 0,
+            "dm_font_heading": "subheading"
           },
           "blocks": {}
         },
@@ -887,7 +893,7 @@
         "content_position": "left",
         "mobile_order": "content",
         "panel_style": "panel",
-        "panel_background": "#DCEAF7",
+        "panel_background": "#dceaf7",
         "panel_text_color": "",
         "image_count": 4,
         "image_1": "shopify://shop_images/Swirled_cocoa_with_soft_marshmallows.png",
@@ -907,6 +913,7 @@
           "type": "_dm-step",
           "settings": {
             "show_image": true,
+            "image": "shopify://shop_images/Swirled_cocoa_with_soft_marshmallows_e9a7aaca-643e-498f-9baf-8f49ef851cc6.png",
             "number": "1",
             "title": "Scoop Daily Melt into your favorite mug or glass.",
             "text": ""
@@ -917,6 +924,7 @@
           "type": "_dm-step",
           "settings": {
             "show_image": true,
+            "image": "shopify://shop_images/Swirled_cocoa_with_soft_marshmallows_85aa5a38-80c8-4f51-9fc9-24c848f91dbd.png",
             "number": "2",
             "title": "Mix with hot or cold liquid until smooth and creamy.",
             "text": ""
@@ -927,6 +935,7 @@
           "type": "_dm-step",
           "settings": {
             "show_image": true,
+            "image": "shopify://shop_images/Swirled_cocoa_with_soft_marshmallows_6e067aa2-8cbb-4f9d-8fb5-5331ffd8071c.png",
             "number": "3",
             "title": "Sip, savor, and make it part of your daily routine.",
             "text": ""
@@ -947,9 +956,11 @@
         "button_link": "",
         "background_start": "{{ settings.color_palette.white }}",
         "background_end": "{{ settings.color_palette.white }}",
-        "accent_color": "#9B1B31",
+        "accent_color": "#9b1b31",
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "dm_font_number": "heading",
+        "dm_font_title": "subheading"
       }
     },
     "dm_consistency": {
@@ -959,6 +970,7 @@
           "type": "_dm-card",
           "settings": {
             "show_image": true,
+            "image": "shopify://shop_images/DTS_MORNING_GREENS_Shauna_Summers_Photos_ID15324_91a128dc-abd2-4879-8955-ad79a52b5765.jpg",
             "tag": "Month 1",
             "title": "Build the Ritual",
             "subtitle": "Give your body consistent daily support.",
@@ -972,6 +984,7 @@
           "type": "_dm-card",
           "settings": {
             "show_image": true,
+            "image": "shopify://shop_images/DTS_MORNING_GREENS_Shauna_Summers_Photos_ID15324_94aa0b08-cd86-4df4-a379-fd11516febb5.jpg",
             "tag": "Month 2",
             "title": "Find Your Rhythm",
             "subtitle": "Consistency begins to feel more natural.",
@@ -985,6 +998,7 @@
           "type": "_dm-card",
           "settings": {
             "show_image": true,
+            "image": "shopify://shop_images/DTS_MORNING_GREENS_Shauna_Summers_Photos_ID15324_10e48323-daeb-4cf9-8334-bca92eadc136.jpg",
             "tag": "Month 3",
             "title": "Keep the Momentum Going",
             "subtitle": "Let small, repeatable choices add up over time.",
@@ -1007,13 +1021,14 @@
         "button_label": "Shop Daily Melt",
         "button_link": "",
         "background": "{{ settings.color_palette.foreground }}",
-        "text_color": "{{ settings.color_palette.cream_light }}",
-        "card_background": "{{ settings.color_palette.cream_light }}",
+        "text_color": "{{ settings.color_palette.white }}",
+        "card_background": "{{ settings.color_palette.white }}",
         "card_text_color": "{{ settings.color_palette.foreground }}",
-        "accent_color": "{{ settings.color_palette.accent }}",
+        "accent_color": "#9B1B31",
         "radius": 0,
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "dm_font_title": "heading"
       }
     },
     "dm_ingredients": {
@@ -1023,6 +1038,7 @@
           "type": "_dm-tab",
           "settings": {
             "label": "African Spice Fruit",
+            "image": "shopify://shop_images/Swirled_cocoa_with_soft_marshmallows_df1de02a-6b1d-4166-8ac0-1b6d6df72047.png",
             "heading": "African Spice Fruit",
             "text": "",
             "items": "Supports natural GLP-1 activity*\nPromotes satiety*\nSupports healthy weight management*"
@@ -1093,12 +1109,14 @@
         "text": "",
         "button_label": "View Full Ingredient List",
         "button_link": "",
-        "background": "",
+        "background": "#DCEAF7",
         "panel_background": "{{ settings.color_palette.cream_light }}",
         "accent_color": "{{ settings.color_palette.accent }}",
         "radius": 0,
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "dm_font_tabs": "button",
+        "dm_font_heading": "heading"
       }
     },
     "dm_reviews": {
@@ -1206,10 +1224,12 @@
         "label_verified": "Verified Purchases",
         "label_recent": "Most Recent",
         "load_more_label": "Load More",
-        "background": "{{ settings.color_palette.cream_light }}",
-        "accent_color": "{{ settings.color_palette.accent }}",
+        "background": "{{ settings.color_palette.white }}",
+        "accent_color": "#9B1B31",
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "dm_font_average": "heading",
+        "dm_font_title": "subheading"
       }
     },
     "dm_faq": {
@@ -1880,7 +1900,8 @@
         "text_color": "",
         "accent_color": "{{ settings.color_palette.accent }}",
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "dm_font_label": "subheading"
       }
     }
   },
