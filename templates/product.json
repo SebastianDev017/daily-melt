@@ -782,8 +782,8 @@
         "gap": 48,
         "enable_sticky_add_to_cart": true,
         "background_color": "{{ settings.color_palette.white }}",
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     },
     "dm_description": {
@@ -889,8 +889,8 @@
         "image_count": 4,
         "radius": 0,
         "background": "{{ settings.color_palette.cream_light }}",
-        "padding_top": 56,
-        "padding_bottom": 56
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "dm_how_to_use": {
@@ -941,8 +941,8 @@
         "background_start": "{{ settings.color_palette.white }}",
         "background_end": "{{ settings.color_palette.white }}",
         "accent_color": "{{ settings.color_palette.accent }}",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "dm_consistency": {
@@ -1005,8 +1005,8 @@
         "card_text_color": "{{ settings.color_palette.foreground }}",
         "accent_color": "{{ settings.color_palette.accent }}",
         "radius": 0,
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "dm_ingredients": {
@@ -1090,8 +1090,8 @@
         "panel_background": "{{ settings.color_palette.cream_light }}",
         "accent_color": "{{ settings.color_palette.accent }}",
         "radius": 0,
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "dm_reviews": {
@@ -1201,8 +1201,8 @@
         "load_more_label": "Load More",
         "background": "{{ settings.color_palette.cream_light }}",
         "accent_color": "{{ settings.color_palette.accent }}",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "dm_faq": {
@@ -1811,8 +1811,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 72,
-        "padding-block-end": 72
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     },
     "dm_certifications": {
@@ -1872,8 +1872,8 @@
         "background": "{{ settings.color_palette.cream_light }}",
         "text_color": "",
         "accent_color": "{{ settings.color_palette.accent }}",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
