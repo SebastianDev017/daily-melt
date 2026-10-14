@@ -14,7 +14,7 @@
 <div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
 <div
   class="dm-tabs section section--page-width"
-  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-radius: {{ ss.radius }}px; --dm-panel-bg: {{ ss.panel_background }}; --dm-accent: {{ ss.accent_color }};"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-radius: {{ ss.radius }}px; --dm-panel-bg: {{ ss.panel_background }}; --dm-accent: {{ ss.accent_color }};"
 >
   <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
   <dm-tabs class="dm-tabs__inner">
@@ -49,7 +49,7 @@
 
 {% stylesheet %}
   .dm-tabs {
-    padding-block: var(--dm-pt) var(--dm-pb);
+    padding-block: calc(var(--dm-pt) * var(--dm-space, 1)) calc(var(--dm-pb) * var(--dm-space, 1));
   }
 
   .dm-tabs__inner {
@@ -74,7 +74,7 @@
   }
 
   .dm-tabs__text {
-    max-width: 40rem;
+    max-width: 62ch;
   }
 
   .dm-tabs__text p {

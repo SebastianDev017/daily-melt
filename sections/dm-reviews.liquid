@@ -35,7 +35,7 @@
 <div
   id="reviews"
   class="dm-reviews section section--page-width"
-  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-accent: {{ ss.accent_color }};"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-accent: {{ ss.accent_color }};"
 >
   <script src="{{ 'dm-pdp.js' | asset_url }}" type="module"></script>
   <div class="dm-reviews__inner">
@@ -113,7 +113,7 @@
 
 {% stylesheet %}
   .dm-reviews {
-    padding-block: var(--dm-pt) var(--dm-pb);
+    padding-block: calc(var(--dm-pt) * var(--dm-space, 1)) calc(var(--dm-pb) * var(--dm-space, 1));
     scroll-margin-top: 80px;
   }
 
@@ -122,9 +122,7 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
-    max-width: 1080px;
     width: 100%;
-    margin-inline: auto;
   }
 
   .dm-reviews__heading {
@@ -230,6 +228,20 @@
 
   .dm-reviews__body--app .dm-reviews__list {
     border-bottom: 0;
+  }
+
+  @media screen and (min-width: 1200px) {
+    .dm-reviews__list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(32px, 4vw, 96px);
+      align-items: start;
+    }
+
+    .dm-reviews__list .dm-review {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
   }
 
   .dm-reviews__empty {

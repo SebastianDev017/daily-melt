@@ -16,7 +16,7 @@
 <div class="section-background"{% if section_bg != blank %} style="background: {{ section_bg }};"{% endif %}></div>
 <div
   class="dm-steps section section--page-width"
-  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-cols: {{ ss.columns }};{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-cols: {{ ss.columns }};{% if ss.accent_color != blank %} --dm-accent: {{ ss.accent_color }};{% endif %}"
 >
   <div class="dm-steps__inner">
     {%- if ss.heading != blank or ss.text != blank -%}
@@ -44,7 +44,7 @@
 
 {% stylesheet %}
   .dm-steps {
-    padding-block: var(--dm-pt) var(--dm-pb);
+    padding-block: calc(var(--dm-pt) * var(--dm-space, 1)) calc(var(--dm-pb) * var(--dm-space, 1));
   }
 
   .dm-steps__inner {
@@ -68,7 +68,7 @@
   }
 
   .dm-steps__text {
-    max-width: 40rem;
+    max-width: 62ch;
   }
 
   .dm-steps__text p {
@@ -89,7 +89,7 @@
     justify-content: center;
   }
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: 990px) {
     .dm-steps__inner {
       gap: 56px;
     }

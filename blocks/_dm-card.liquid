@@ -10,7 +10,7 @@
   {%- if bs.show_image -%}
     <div class="dm-card__media">
       {%- if bs.image != blank -%}
-        {{ bs.image | image_url: width: 900 | image_tag: widths: '400, 600, 900', sizes: '(min-width: 750px) 33vw, 100vw', loading: 'lazy', class: 'dm-card__image' }}
+        {{ bs.image | image_url: width: 900 | image_tag: widths: '400, 600, 900', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 40vw, 100vw', loading: 'lazy', class: 'dm-card__image' }}
       {%- else -%}
         {{ 'image' | placeholder_svg_tag: 'dm-card__image dm-card__image--placeholder' }}
       {%- endif -%}
@@ -191,6 +191,19 @@
 
   .dm-card__more-text p {
     margin: 0;
+  }
+
+  /* Tablet: one card per row, image beside the text */
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .dm-card {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    }
+
+    .dm-card__media {
+      aspect-ratio: auto;
+      min-height: 100%;
+    }
   }
 {% endstylesheet %}
 

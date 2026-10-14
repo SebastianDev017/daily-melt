@@ -11,7 +11,7 @@
 <div class="section-background"{% if ss.background != blank %} style="background: {{ ss.background }};"{% endif %}></div>
 <div
   class="dm-media-grid section section--page-width dm-media-grid--{{ ss.panel_style }} dm-media-grid--content-{{ ss.content_position }} dm-media-grid--mobile-{{ ss.mobile_order }} dm-media-grid--count-{{ image_count }}"
-  style="--dm-pt: {{ ss.padding_top }}px; --dm-pb: {{ ss.padding_bottom }}px; --dm-radius: {{ ss.radius }}px;{% if ss.panel_background != blank %} --dm-panel-bg: {{ ss.panel_background }};{% endif %}"
+  style="--dm-pt: {{ ss.padding_top | divided_by: 16.0 }}rem; --dm-pb: {{ ss.padding_bottom | divided_by: 16.0 }}rem; --dm-radius: {{ ss.radius }}px;{% if ss.panel_background != blank %} --dm-panel-bg: {{ ss.panel_background }};{% endif %}"
 >
   <div class="dm-media-grid__inner">
     <div
@@ -32,7 +32,7 @@
         -%}
         <div class="dm-media-grid__item">
           {%- if image != blank -%}
-            {{ image | image_url: width: 1400 | image_tag: widths: '400, 600, 800, 1000, 1400', sizes: '(min-width: 750px) 25vw, 50vw', loading: 'lazy', class: 'dm-media-grid__image' }}
+            {{ image | image_url: width: 1400 | image_tag: widths: '400, 600, 800, 1000, 1400', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', class: 'dm-media-grid__image' }}
           {%- else -%}
             {{ 'image' | placeholder_svg_tag: 'dm-media-grid__image dm-media-grid__image--placeholder' }}
           {%- endif -%}
@@ -44,7 +44,7 @@
 
 {% stylesheet %}
   .dm-media-grid {
-    padding-block: var(--dm-pt) var(--dm-pb);
+    padding-block: calc(var(--dm-pt) * var(--dm-space, 1)) calc(var(--dm-pb) * var(--dm-space, 1));
   }
 
   .dm-media-grid__inner {
@@ -73,7 +73,7 @@
     flex-direction: column;
     gap: 18px;
     width: 100%;
-    max-width: 34rem;
+    max-width: min(38rem, 62ch);
   }
 
   .dm-media-grid__content .button,
@@ -101,7 +101,7 @@
 
   .dm-media-grid__item {
     position: relative;
-    min-height: 180px;
+    min-width: 0;
     overflow: hidden;
     border-radius: var(--dm-radius);
     background: rgb(var(--color-foreground-rgb) / 0.08);
@@ -109,6 +109,11 @@
 
   .dm-media-grid--count-1 .dm-media-grid__item {
     aspect-ratio: 4 / 5;
+  }
+
+  .dm-media-grid--count-2 .dm-media-grid__item,
+  .dm-media-grid--count-3 .dm-media-grid__item:first-child {
+    aspect-ratio: 4 / 3;
   }
 
   .dm-media-grid--count-4 .dm-media-grid__item,
@@ -132,7 +137,7 @@
     order: -1;
   }
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: 990px) {
     .dm-media-grid__inner {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: stretch;
@@ -147,7 +152,7 @@
     }
 
     .dm-media-grid__panel {
-      padding: 56px 48px;
+      padding: clamp(40px, 4vw, 88px) clamp(32px, 3.6vw, 80px);
     }
 
     .dm-media-grid--plain .dm-media-grid__panel {
@@ -157,13 +162,13 @@
     .dm-media-grid--count-1 .dm-media-grid__item,
     .dm-media-grid--count-2 .dm-media-grid__item {
       aspect-ratio: auto;
-      min-height: 280px;
+      min-height: clamp(280px, 24vw, 520px);
     }
 
     .dm-media-grid--count-4 .dm-media-grid__item,
     .dm-media-grid--count-3 .dm-media-grid__item:not(:first-child) {
       aspect-ratio: auto;
-      min-height: 240px;
+      min-height: clamp(240px, 18vw, 420px);
     }
   }
 {% endstylesheet %}

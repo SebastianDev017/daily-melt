@@ -603,6 +603,24 @@
     font-weight: 400;
   }
 
+  /* Narrow phones: keep "Add to cart | price" on one line */
+  @media screen and (max-width: 419px) {
+    .dm-atc-price s {
+      display: none;
+    }
+
+    .dm-atc-price {
+      margin-inline-start: 0.5em;
+      padding-inline-start: 0.5em;
+    }
+
+    .dm-purchase .add-to-cart-button {
+      padding-inline: 12px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+  }
+
   .sticky-add-to-cart__variant {
     overflow: hidden;
     text-overflow: ellipsis;
